@@ -1,3 +1,9 @@
 # atelier
+This is an application for displaying production information for...
 
-add texts to test out git flow
+npm install packages
+
+set up express sever and babel
+
+set up db if needed
+
