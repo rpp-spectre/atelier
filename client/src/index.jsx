@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ReviewSection from './review-components/ReviewIndex.jsx';
 import QSection from './components-questions/qindex.jsx';
+import ProductSection from './product-components/Overview.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,9 +11,11 @@ class App extends React.Component {
 
   render() {
     return <div>
+      <ProductSection />
       <ReviewSection />
       <QSection />
     </div>
+
 //others will also put their sections in here
   }
 };
