@@ -16,6 +16,7 @@ function Reviews(props) {
       <button data-testid='counter' onClick={() => setCount(count + 1)}>Yes</button>
       <span>({count})</span>
     </label>
+    <hr />
   </div>
 }
 
