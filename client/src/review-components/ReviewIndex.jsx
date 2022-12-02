@@ -2,16 +2,21 @@ import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import ReviewList from './ReviewList.jsx';
 import ReviewForm from './ReviewForm.jsx';
+import Review from './Reviews.jsx';
 
 function ReviewSection(props) {
-  const [reviewCount, setReviewCount] = useState(2);
+  let totalReviewsArray = [<Review />, <Review />, <Review />, <Review />, <Review />];
+  const [reviewCount, setReviewCount] = useState(totalReviewsArray.length);
   const [addReviews, setAddReviews]  = useState(false);
+  const [showReviewCount, sliceReviewArray] = useState(2);
+  let shownReviewsArray = totalReviewsArray.slice(0, showReviewCount);
 
-  let moreReviews = <button onClick= {() => {setAddReviews(true)}}>Add A Review +</button>;
+  let addReviewButton = <button onClick={() => {setAddReviews(true)}}>Add A Review +</button>;
   if (addReviews === true) {
-    moreReviews = <ReviewForm />
+    addReviewButton = <ReviewForm />
   }
 
+  let moreReviewButton = <button onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;
 
   return (
   <div>
@@ -22,8 +27,9 @@ function ReviewSection(props) {
         <option value='helpful'>helpful</option>
       </select>
     </h3>
-    <ReviewList />
-    {moreReviews}
+    <ReviewList props={shownReviewsArray}/>
+    {moreReviewButton}
+    {addReviewButton}
     </div>
   );
 }

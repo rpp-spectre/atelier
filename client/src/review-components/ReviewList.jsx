@@ -7,11 +7,13 @@ import Reviews from './Reviews.jsx';
 //load more button here?
 
 function ReviewList(props) {
-  return <div>
-    <p>Individual Review tiles go here</p>
-    <Reviews />
-    <Reviews />
-  </div>
+  return props.props.map((element) => {
+    return <div>{element}</div>
+  })
+  // return <div>
+  //   <Reviews />
+  //   <Reviews />
+  // </div>
 };
 
 export default ReviewList;
