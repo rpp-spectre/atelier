@@ -10,7 +10,7 @@ var Qlist = () =>{
 
   useEffect(()=>{
     (async()=> {
-      let response = await axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rpp/qa/questions?product_id=1', {
+      let response = await axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rpp/qa/questions?product_id=71697', {
         headers: {
           'Authorization': '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'
         }
