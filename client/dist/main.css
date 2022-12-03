@@ -2,3 +2,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.searchbox {
+  width: 400px;
+}
+
