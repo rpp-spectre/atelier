@@ -17,6 +17,9 @@ function ReviewSection(props) {
   }
 
   let moreReviewButton = <button onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;
+  if (shownReviewsArray.length === totalReviewsArray.length) {
+    moreReviewButton = null;
+  }
 
   return (
   <div>
@@ -27,7 +30,9 @@ function ReviewSection(props) {
         <option value='helpful'>helpful</option>
       </select>
     </h3>
-    <ReviewList props={shownReviewsArray}/>
+    <div className='review'>
+      <ReviewList props={shownReviewsArray}/>
+    </div>
     {moreReviewButton}
     {addReviewButton}
     </div>

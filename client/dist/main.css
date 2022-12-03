@@ -6,3 +6,14 @@ aside {
   background-color: lightgrey;
 }
 
+.review {
+  height: 700px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: start;
+}
+
+.thumbnail {
+  max-height: 100px;
+  max-width: 100px;
+}

@@ -36,6 +36,7 @@ function Reviews(props) {
     {reviewTitleElement}
     <p>{shownText}{seeMoreButton}</p>
     <h4>{'\u2713'} I recommend this product</h4>
+    <img className='thumbnail' src='https://marinmagazine.com/wp-content/uploads/2017/10/MM_1117_WinterFashion-770x961.jpg' alt='outfit image'/>
     <aside>
       <h4>Response from seller</h4>
       <p>Thanks for your review!</p>
