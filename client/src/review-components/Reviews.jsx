@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
+import ImageModal from './imageModal.jsx';
 
 //include date, username, likes
 
@@ -7,6 +8,7 @@ function Reviews(props) {
   const [count, setCount] = useState(0);
   const [paragraphLimit, setLimit] = useState(250);
   const [showSeeMore, setShowSeeMore] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   let paragraphText = `This will be the text of the review.It will include if people liked the product and what they thought.
   This is an extra sentence to test "see more" functionality.
@@ -29,6 +31,10 @@ function Reviews(props) {
       </div>
   }
 
+  let modal = <ImageModal onClose={() => {setShowModal(false)}} img='https://marinmagazine.com/wp-content/uploads/2017/10/MM_1117_WinterFashion-770x961.jpg'/>
+  if (!showModal) {
+    modal = null;
+  }
 
   return <div>
     <div>Star Rating</div>
@@ -36,7 +42,10 @@ function Reviews(props) {
     {reviewTitleElement}
     <p>{shownText}{seeMoreButton}</p>
     <h4>{'\u2713'} I recommend this product</h4>
-    <img className='thumbnail' src='https://marinmagazine.com/wp-content/uploads/2017/10/MM_1117_WinterFashion-770x961.jpg' alt='outfit image'/>
+    <img onClick={() => {setShowModal(true)}}
+      className='thumbnail'
+      src='https://marinmagazine.com/wp-content/uploads/2017/10/MM_1117_WinterFashion-770x961.jpg' alt='outfit image'/>
+    {modal}
     <aside>
       <h4>Response from seller</h4>
       <p>Thanks for your review!</p>

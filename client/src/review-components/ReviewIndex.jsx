@@ -35,6 +35,7 @@ function ReviewSection(props) {
     </div>
     {moreReviewButton}
     {addReviewButton}
+    <hr />
     </div>
   );
 }
