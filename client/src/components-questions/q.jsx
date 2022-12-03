@@ -3,19 +3,17 @@ import ReactDom from 'react-dom/client';
 import axios from 'axios';
 // import 'regenerator-runtime/runtime.js';
 // require("dotenv").config();
-import Q from './q.jsx';
 
 
 
-var Qlist = () =>{
+var Q = () =>{
 
   return (<div>
-    this is question list
-
-      <Q />
+    Q:
+    A:
 
 
   </div>);
 };
 
-export default Qlist;
+export default Q;
