@@ -3,13 +3,13 @@ import ReactDom from 'react-dom/client';
 import axios from 'axios';
 import 'regenerator-runtime/runtime.js';
 // require("dotenv").config();
-import Q from './q.jsx';
+import Answer from './a.jsx';
 
 
 
-var Qlist = () =>{
-  const[questions,setQuestions]=useState([]);
-  // const[key,setKey]=useState('');
+var Alist = () =>{
+  const[answers,setAnswers]=useState([]);
+
 
   useEffect(()=>{
     (async()=>{
@@ -31,4 +31,4 @@ var Qlist = () =>{
   </div>);
 };
 
-export default Qlist;
+export default Alist;
