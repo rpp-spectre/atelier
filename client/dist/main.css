@@ -6,7 +6,17 @@ aside {
   background-color: lightgrey;
 }
 
+.ratings {
+  float: left;
+  padding: 20px;
+}
+
 .review {
+  padding: 10px;
+}
+
+#review-list {
+  padding: 10px;
   height: 700px;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;

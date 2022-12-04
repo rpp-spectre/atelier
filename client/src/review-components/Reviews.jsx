@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import ImageModal from './imageModal.jsx';
+import Stars from './Stars.jsx';
 
 //include date, username, likes
 
@@ -37,7 +38,7 @@ function Reviews(props) {
   }
 
   return <div>
-    <div>Star Rating</div>
+    <div><Stars rating='5'/></div>
     <span className='username'>Username and Date</span>
     {reviewTitleElement}
     <p>{shownText}{seeMoreButton}</p>

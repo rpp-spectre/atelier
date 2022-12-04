@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import ReviewList from './ReviewList.jsx';
 import ReviewForm from './ReviewForm.jsx';
 import Review from './Reviews.jsx';
+import Ratings from './Ratings.jsx';
 
 function ReviewSection(props) {
   let totalReviewsArray = [<Review />, <Review />, <Review />, <Review />, <Review />];
@@ -23,18 +24,22 @@ function ReviewSection(props) {
 
   return (
   <div>
-    <h3>{reviewCount} reviews, sorted by
-      <select>
-        <option value='newest'>newest</option>
-        <option value='relevance'>relevance</option>
-        <option value='helpful'>helpful</option>
-      </select>
-    </h3>
+    <h2>Reviews and Ratings</h2>
+    <Ratings />
     <div className='review'>
+      <h3>{reviewCount} reviews, sorted by
+        <select>
+          <option value='newest'>newest</option>
+          <option value='relevance'>relevance</option>
+          <option value='helpful'>helpful</option>
+        </select>
+      </h3>
+      <div id='review-list'>
       <ReviewList props={shownReviewsArray}/>
+      {moreReviewButton}
+      {addReviewButton}
+      </div>
     </div>
-    {moreReviewButton}
-    {addReviewButton}
     <hr />
     </div>
   );

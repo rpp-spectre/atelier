@@ -12,7 +12,7 @@ class ReviewForm extends React.Component {
         <label>
         Submit a review:
         <div>
-          <textarea placeholder='Write your review' rows='5' cols='50' maxlength='1000' minlength='50'/>
+          <textarea placeholder='Write your review' rows='5' cols='50' maxLength='1000' minLength='50'/>
         </div>
         </label>
         <div>
