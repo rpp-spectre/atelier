@@ -4,7 +4,7 @@ import PortalReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 
 
-const Addform = (props)=>{
+const Addqform = (props)=>{
   // if(!props.show) {
   //   return null;
   // }
@@ -37,8 +37,45 @@ const Addform = (props)=>{
         </div>
         <div className='modal-body'>
            <form>
-            <label></label>
-            <textarea></textarea>
+             <label>
+               Your Question:
+               <textarea
+               cols="48"
+               rows="8"
+               name="question"
+               placeholder="..."
+               required
+               autoComplete="off"
+               // value ={}
+               // onChange = {(e)=>{ setContent(e.target.value); }}
+             />
+             </label>
+             <label>
+              Your Nickname:
+
+              <input
+              type="text"
+              name="nickname"
+              placeholder="your nickname"
+              required
+              autoComplete="off"
+              // value ={}
+              // onChange = {(e)=>{ setTitle(e.target.value); }}
+              />
+             </label>
+             <label>
+              Your Email:
+
+              <input
+              type="text"
+              name="email"
+              placeholder="abc@abc.com"
+              required
+              autoComplete="off"
+              // value ={}
+              // onChange = {(e)=>{ setTitle(e.target.value); }}
+              />
+             </label>
            </form>
         </div>
         <div className='model-footer'>
@@ -51,4 +88,4 @@ const Addform = (props)=>{
   );
 };
 
-export default Addform;
+export default Addqform;
