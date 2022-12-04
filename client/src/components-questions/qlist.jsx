@@ -14,15 +14,15 @@ var Qlist = () =>{
   useEffect(()=>{
     (async()=>{
       let response = await axios.get("http://localhost:3000/QUESTIONS");
-      console.log('response', response.data.results[0]);
+      // console.log('response', response.data.results[0]);
       setQuestions(response.data.results);
     })()
   },[]);
 
   return (<div>
-    this is question list
+
        {questions.map((question)=>{
-        console.log(questions);
+        // console.log(questions);
         return <Q question={question} key = {question.question_id} />
       })}
 

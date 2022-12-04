@@ -13,20 +13,20 @@ var Alist = () =>{
 
   useEffect(()=>{
     (async()=>{
-      let response = await axios.get("http://localhost:3000/QUESTIONS");
-      console.log('response', response.data.results[0]);
-      setQuestions(response.data.results);
+      let response = await axios.get("http://localhost:3000/questions/640996/answers");
+      // console.log('response', response.data.results[0]);
+      setAnswers(response.data.results);
     })()
   },[]);
 
   return (<div>
-    this is question list
-       {questions.map((question)=>{
-        console.log(questions);
-        return <Q question={question} key = {question.question_id} />
+
+       {answers.map((answer)=>{
+        // console.log('answers',answers);
+        return <Answer answer={answer} key = {answer.answer_id} />
       })}
 
-     {/* {questions} */}
+     {/* {answers} */}
 
   </div>);
 };

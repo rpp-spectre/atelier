@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import ReacDom from 'react-dom/client';
 
-const Answer = ()=>{
+const Answer = ({answer})=>{
   return (
     <div>
-      Answer
+      A: {answer.body}
     </div>
   );
 };
