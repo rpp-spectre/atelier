@@ -100,6 +100,31 @@ aside {
   grid-area: 1/-1;
 }
 
-#empty-star {
+.rating {
+  display: inline-flex;
+}
+
+.rating-bar {
+  width: fit-content;
+  display: grid;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#grey-bar {
+  border-color: grey;
+  background-color: grey;
+  width: 200px;
+  height: 5px;
   grid-area: 1/-1;
+  align-self: left;
+
+}
+
+#green-bar {
+  border-color: darkgreen;
+  background-color: darkgreen;
+  height: 5px;
+  grid-area: 1/-1;
+  margin-left: 0;
 }

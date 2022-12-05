@@ -17,5 +17,3 @@ function Stars(props) {
 };
 
 export default Stars;
-
-//or use overlay and change width to percentage?
