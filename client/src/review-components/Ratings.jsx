@@ -7,6 +7,7 @@ function Ratings(props) {
   <div className='ratings'>
     <h1>3.5 <Stars rating='3.5'/></h1>
 
+
     <div>100% of reviews recommend this product</div>
     <div>Rating breakdown bars</div>
   </div>

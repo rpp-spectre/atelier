@@ -38,7 +38,7 @@ function Reviews(props) {
   }
 
   return <div>
-    <div><Stars rating='5'/></div>
+    <div><Stars rating='2.5'/></div>
     <span className='username'>Username and Date</span>
     {reviewTitleElement}
     <p>{shownText}{seeMoreButton}</p>

@@ -4,14 +4,15 @@ import ReactDOM from 'react-dom/client';
 //to use in any component, pass the rating into props as rating='<Float>'
 
 function Stars(props) {
-  let filled = Math.round(Number.parseFloat(props.rating));
-  let empty = 5 - filled;
-  let starArray = ['\u2605', '\u2605', '\u2605', '\u2605', '\u2605'];
-  starArray.fill('\u2606', filled);
-  let starString = starArray.join('');
+  let percentage = Number.parseFloat(props.rating)/5 * 100;
+  let filledStars = ['\u2605', '\u2605', '\u2605', '\u2605', '\u2605'].join('');
+  let emptyStars = ['\u2606', '\u2606', '\u2606', '\u2606', '\u2606'].join('');
 
   return (
-    <span>{starString}</span>
+    <div className='stars'>
+      <div id='empty-star'>{emptyStars}</div>
+      <div id='half-star' style={{width:percentage+'%'}}>{filledStars}</div>
+    </div>
   )
 };
 

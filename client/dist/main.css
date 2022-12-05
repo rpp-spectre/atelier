@@ -57,3 +57,18 @@ aside {
 .username {
   float: right;
 }
+
+.stars {
+  display: grid;
+  width: fit-content;
+}
+
+#half-star {
+  grid-area: 1/-1;
+  box-sizing: content-box;
+  overflow: hidden;
+}
+
+#empty-star {
+  grid-area: 1/-1;
+}
