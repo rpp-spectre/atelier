@@ -19,3 +19,13 @@ test('increments counter by one when helpful button is clicked', () => {
 
   expect(num).toBeInTheDocument();
 });
+
+/*tests to write:
+- only 2 reviews showed to start
+- if 2 or less reviews, more reviews button not rendered
+- after all reviews shown, button not rendered
+
+- when text is less than 250 characters, does not show see more button
+- when text is more than 250 characters, shows see more button
+- when see more button is clicked, all text appears and see more button is gone
+*/

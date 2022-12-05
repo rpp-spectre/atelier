@@ -2,7 +2,73 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+aside {
+  background-color: lightgrey;
+}
+
+.ratings {
+  float: left;
+  padding: 20px;
+}
+
+.review {
+  padding: 10px;
+}
+
+#review-list {
+  padding: 10px;
+  height: 700px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: start;
+}
+
 .searchbox {
   width: 400px;
 }
 
+.thumbnail {
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.expandedImage {
+  max-height: 500px;
+  max-width: 500px;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  width: 500px;
+  background-color: white;
+}
+
+.username {
+  float: right;
+}
+
+.stars {
+  display: grid;
+  width: fit-content;
+}
+
+#half-star {
+  grid-area: 1/-1;
+  box-sizing: content-box;
+  overflow: hidden;
+}
+
+#empty-star {
+  grid-area: 1/-1;
+}

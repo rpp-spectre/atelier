@@ -11,8 +11,16 @@ class ReviewForm extends React.Component {
       <form>
         <label>
         Submit a review:
-        <textarea placeholder='Write your review' />
+        <div>
+          <textarea placeholder='Write your review' rows='5' cols='50' maxLength='1000' minLength='50'/>
+        </div>
         </label>
+        <div>
+          <label>
+            Upload an image:
+            <input type='file' accept='image/jpeg, image/png' multiple/>
+          </label>
+        </div>
         <div>
           <input type='checkbox' />
           <label>I recommend this product</label>
