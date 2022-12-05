@@ -4,7 +4,6 @@ import axios from 'axios';
 import 'regenerator-runtime/runtime.js';
 // require("dotenv").config();
 import Q from './q.jsx';
-import Qmore from './qmore.jsx';
 
 
 
@@ -16,7 +15,7 @@ var Qlist = () =>{
     if (NoQ >= questions.length) {
       return null;
     } else {
-      return <Qmore onClick={()=>{setNoQ(NoQ+2)}} />;
+      return <button onClick={()=>{setNoQ(NoQ+2)}}>LOAD MORE QUESTIONS</button>;
     }
   };
 

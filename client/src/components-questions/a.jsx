@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReacDom from 'react-dom/client';
-import Aphotos from './aphotos.jsx';
+import Aphotos from './photos/aphotos.jsx';
 
 const Answer = ({answer})=>{
 
