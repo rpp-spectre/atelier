@@ -7,12 +7,15 @@ import Qmore from './qmore.jsx';
 import Alist from './alist.jsx';
 
 const Qsection = ()=>{
-  return (<div  data-testid="Qindex">
-    QUESTIONS & ANSWERS
+  return (<div  data-testid="Qindex" className="question">
+    <h2>QUESTIONS & ANSWERS</h2>
     <Qsearch />
+    <div className='question-list'>
     <Qlist />
     <Alist />
-    <Qmore />
+    </div>
+
+
     <Qadd />
   </div>);
 };

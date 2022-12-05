@@ -4,12 +4,22 @@ import axios from 'axios';
 import 'regenerator-runtime/runtime.js';
 // require("dotenv").config();
 import Q from './q.jsx';
+import Qmore from './qmore.jsx';
 
 
 
 var Qlist = () =>{
   const[questions,setQuestions]=useState([]);
-  // const[key,setKey]=useState('');
+  const[NoQ,setNoQ]=useState(2);
+
+  let load = ()=>{
+    if (NoQ >= questions.length) {
+      return null;
+    } else {
+      return <Qmore onClick={()=>{setNoQ(NoQ+2)}} />;
+    }
+  };
+
 
   useEffect(()=>{
     (async()=>{
@@ -21,12 +31,12 @@ var Qlist = () =>{
 
   return (<div>
 
-       {questions.map((question)=>{
+       {questions.slice(0,NoQ).map((question)=>{
         // console.log(questions);
         return <Q question={question} key = {question.question_id} />
       })}
 
-     {/* {questions} */}
+     {load()}
 
   </div>);
 };

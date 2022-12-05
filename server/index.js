@@ -1,5 +1,5 @@
 const express = require("express");
-// const controllerQ = require('./controllers/questions');
+const controllerQ = require('./controllers/questions');
 
 
 const app = express();

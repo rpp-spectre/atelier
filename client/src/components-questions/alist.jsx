@@ -9,7 +9,15 @@ import Answer from './a.jsx';
 
 var Alist = () =>{
   const[answers,setAnswers]=useState([]);
+  const[NoA,setNoA]=useState(2);
 
+  let load = ()=>{
+    if (NoA === answers.length) {
+      return null;
+    } else {
+      return <h3 onClick={()=>{setNoA(answers.length)}}>LOAD MORE ANSWERS</h3>;
+    }
+  };
 
   useEffect(()=>{
     (async()=>{
@@ -21,14 +29,15 @@ var Alist = () =>{
 
   return (<div>
 
-       {answers.map((answer)=>{
+       {answers.slice(0,NoA).map((answer)=>{
         // console.log('answers',answers);
         return <Answer answer={answer} key = {answer.answer_id} />
       })}
+      {/* <h3 onClick={()=>{setNoA(answers.length)}}>LOAD MORE ANSWERS</h3> */}
+      {load()}
 
-     {/* {answers} */}
-
-  </div>);
+  </div>
+  );
 };
 
 export default Alist;
