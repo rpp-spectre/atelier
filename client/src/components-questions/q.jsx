@@ -9,7 +9,7 @@ import Alist from './alist.jsx';
 
 var Q = ({question}) =>{
   return (<div>
-    Q: {question.question_body}
+    Q: {question.question_body} Helpful? Yes (0) | Add Answer
     <Alist />
 
 
