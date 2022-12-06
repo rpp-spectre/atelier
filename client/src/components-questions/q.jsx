@@ -3,14 +3,14 @@ import ReactDom from 'react-dom/client';
 import axios from 'axios';
 // import 'regenerator-runtime/runtime.js';
 // require("dotenv").config();
+import Alist from './alist.jsx';
 
 
 
-var Q = () =>{
-
+var Q = ({question}) =>{
   return (<div>
-    Q:
-    A:
+    Q: {question.question_body} Helpful? Yes (0) | Add Answer
+    <Alist />
 
 
   </div>);
