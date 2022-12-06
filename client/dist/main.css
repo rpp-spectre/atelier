@@ -6,6 +6,9 @@ aside {
   background-color: lightgrey;
 }
 
+.underline {
+  border-bottom: 3px solid grey;
+}
 .ratings {
   float: left;
   padding: 20px;

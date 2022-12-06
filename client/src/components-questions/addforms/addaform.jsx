@@ -1,49 +1,33 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import PortalReactDOM from 'react-dom';
-import { CSSTransition } from 'react-transition-group';
+// import { CSSTransition } from 'react-transition-group';
 
 
-const Addqform = (props)=>{
-  // if(!props.show) {
-  //   return null;
-  // }
-  const closeOnEscapeKeyDown = e => {
-    if ((e.charCode || e.keyCode) === 27) {
-      props.onClose();
-    }
-  };
-
-  useEffect(() => {
-    document.body.addEventListener("keydown", closeOnEscapeKeyDown);
-    return function cleanup() {
-      document.body.removeEventListener("keydown", closeOnEscapeKeyDown);
-    };
-  }, []);
+const Addaform = (props)=>{
+  if(!props.show) {
+    return null;
+  }
 
 
-  return ReactDOM.createPortal(
-    <CSSTransition
-      in={props.show}
-      unmountOnExit
-      timeout={{ enter: 0, exit: 300 }}
-    >
+  return (
+
     <div className='modal'>
       <div className='modal-content'>
         <div className='modal-header'>
           <h4 className='modal-title'>
-            Ask Your Question
+            Submit Your Answer
           </h4>
-          About [the product]
+          [Product Name]: [Question Body]
         </div>
         <div className='modal-body'>
            <form>
              <label>
-               Your Question:
+               Your Answer:
                <textarea
-               cols="48"
-               rows="8"
-               name="question"
+               cols="50"
+               rows="20"
+               name="answer"
                placeholder="..."
                required
                autoComplete="off"
@@ -58,25 +42,30 @@ const Addqform = (props)=>{
               <input
               type="text"
               name="nickname"
-              placeholder="your nickname"
+              placeholder="Example: jackson11!"
               required
               autoComplete="off"
               // value ={}
               // onChange = {(e)=>{ setTitle(e.target.value); }}
               />
+              <br />
+              For privacy reasons, do not use your full name or email address
              </label>
+             <br />
              <label>
               Your Email:
 
               <input
               type="text"
               name="email"
-              placeholder="abc@abc.com"
+              placeholder="Example: jack@email.com"
               required
               autoComplete="off"
               // value ={}
               // onChange = {(e)=>{ setTitle(e.target.value); }}
               />
+              <br />
+              For authentication reasons, you will not be emailed
              </label>
            </form>
         </div>
@@ -85,9 +74,9 @@ const Addqform = (props)=>{
         </div>
       </div>
     </div>
-    </CSSTransition>,
-    document.getElementById("root")
+
+
   );
 };
 
-export default Addqform;
+export default Addaform;

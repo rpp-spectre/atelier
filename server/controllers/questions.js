@@ -17,7 +17,6 @@ exports.getQuestions = (req, res) =>{
 };
 
 exports.getAnswers = (req, res) =>{
-  console.log('params', req.params);
   let qid=req.params.qid;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${qid}/answers`, {
   headers: {
