@@ -85,13 +85,11 @@ aside {
 }
 
 #grey-bar {
-  border-color: grey;
-  background-color: grey;
+  border-color: lightgrey;
+  background-color: lightgrey;
   width: 200px;
   height: 5px;
   grid-area: 1/-1;
-  align-self: left;
-
 }
 
 #green-bar {
