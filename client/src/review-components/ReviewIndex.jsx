@@ -4,6 +4,7 @@ import ReviewList from './ReviewList.jsx';
 import ReviewForm from './ReviewForm.jsx';
 import Review from './Reviews.jsx';
 import Ratings from './Ratings.jsx';
+import ProductBreakdown from './ProductBreakdown.jsx';
 
 function ReviewSection(props) {
   let totalReviewsArray = [<Review />, <Review />, <Review />, <Review />, <Review />];
@@ -25,7 +26,12 @@ function ReviewSection(props) {
   return (
   <div>
     <h2>Reviews and Ratings</h2>
+    <div className='rating-product-breakdown'>
     <Ratings />
+    <ProductBreakdown />
+    <ProductBreakdown />
+    <ProductBreakdown />
+    </div>
     <div className='review'>
       <h3>{reviewCount} reviews, sorted by
         <select>
@@ -34,13 +40,14 @@ function ReviewSection(props) {
           <option value='helpful'>helpful</option>
         </select>
       </h3>
-      <div id='review-list'>
-      <ReviewList props={shownReviewsArray}/>
-      {moreReviewButton}
-      {addReviewButton}
+        <div id='review-list'>
+          <ReviewList props={shownReviewsArray}/>
+        </div>
+        <div id='review-buttons'>
+          {moreReviewButton}
+          {addReviewButton}
+        </div>
       </div>
-    </div>
-    <hr />
     </div>
   );
 }
