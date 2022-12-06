@@ -4,8 +4,8 @@ import PortalReactDOM from 'react-dom';
 // import { CSSTransition } from 'react-transition-group';
 
 
-const Addqform2 = (props)=>{
-  if(!props.show) {
+const Addqform2 = ({onClose, show})=>{
+  if(!show) {
     return null;
   }
 
@@ -70,7 +70,7 @@ const Addqform2 = (props)=>{
            </form>
         </div>
         <div className='model-footer'>
-          <button onClick={props.onClose} className='button'>Submit</button>
+          <button onClick={onClose} className='button'>Submit</button>
         </div>
       </div>
     </div>

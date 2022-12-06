@@ -24,16 +24,19 @@ var Qlist = () =>{
     (async()=>{
       let response = await axios.get("http://localhost:3000/QUESTIONS");
       // console.log('response', response.data.results[0]);
-      let questions=response.data.results;
+      let qs=response.data.results;
       let ordered=[];
-      ordered.push(questions[0]);
-      for(var i=1; i< questions.length; i ++) {
-        if (questions[i].question_helpfulness > questions[i-1].question_helpfulness){
-          ordered.unshift(questions[i]);
+      questions.sort(function(a, b) {
+        if(a[question_helpfulness]> b[question_helpfulness]){
+          return 1;
         }
-      }
-
-      setQuestions(response.data.results);
+        if(a[question_helpfulness]< b[question_helpfulness]){
+          return -1;
+        }
+        return 0;
+      });
+      setQuestions(qs);
+      // setQuestions(response.data.results);
     })()
   },[]);
 
