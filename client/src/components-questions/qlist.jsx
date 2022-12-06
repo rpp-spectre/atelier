@@ -31,7 +31,7 @@ var Qlist = () =>{
   return (<div>
 
        {questions.slice(0,NoQ).map((question)=>{
-        // console.log(questions);
+
         return <Q question={question} key = {question.question_id} />
       })}
 

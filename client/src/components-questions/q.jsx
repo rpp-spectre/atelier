@@ -9,8 +9,12 @@ import Alist from './alist.jsx';
 
 var Q = ({question}) =>{
   return (<div>
-    Q: {question.question_body} Helpful? Yes (0) | Add Answer
-    <Alist />
+
+
+    <h3>Q: {question.question_body}</h3> Helpful? Yes (0) | Add Answer
+    <br />
+    <br />
+    <Alist qid={question.question_id}/>
 
 
   </div>);

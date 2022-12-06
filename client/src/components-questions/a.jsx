@@ -20,7 +20,9 @@ const Answer = ({answer})=>{
       by {answer.answer_name} {answer.date} | Helpful ({answer.helpfulness}) Report
       <br />
        {photo()}
+       <br />
     </div>
+
   );
 };
 

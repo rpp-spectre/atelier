@@ -11,7 +11,6 @@ const Qsection = ()=>{
     <Qsearch />
     <div className='question-list'>
     <Qlist />
-    <Alist />
     </div>
 
 

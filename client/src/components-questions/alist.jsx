@@ -7,7 +7,7 @@ import Answer from './a.jsx';
 
 
 
-var Alist = () =>{
+var Alist = ({qid}) =>{
   const[answers,setAnswers]=useState([]);
   const[NoA,setNoA]=useState(2);
 
@@ -21,7 +21,8 @@ var Alist = () =>{
 
   useEffect(()=>{
     (async()=>{
-      let response = await axios.get("http://localhost:3000/questions/640996/answers");
+      // let response = await axios.get("http://localhost:3000/questions/640996/answers");
+      let response = await axios.get(`http://localhost:3000/questions/${qid}/answers`);
       // console.log('response', response.data.results[0]);
       setAnswers(response.data.results);
     })()
