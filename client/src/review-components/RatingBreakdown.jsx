@@ -7,8 +7,8 @@ function RatingBreakdown(props) {
     <div className='rating'>
       {props.star} stars
     <span className='rating-bar'>
-      <hr id='grey-bar'/>
-      <hr id='green-bar' style={{width: percentage + '%'}}/>
+      <hr className='grey-bar'/>
+      <hr className='green-bar' style={{width: percentage + '%'}}/>
     </span>
      ({props.ratings})
     </div>

@@ -40,10 +40,10 @@ function ReviewSection(props) {
           <option value='helpful'>helpful</option>
         </select>
       </h3>
-        <div id='review-list'>
+        <div className='review-list'>
           <ReviewList props={shownReviewsArray}/>
         </div>
-        <div id='review-buttons'>
+        <div className='review-buttons'>
           {moreReviewButton}
           {addReviewButton}
         </div>

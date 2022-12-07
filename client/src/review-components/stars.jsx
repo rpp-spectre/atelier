@@ -10,8 +10,8 @@ function Stars(props) {
 
   return (
     <div className='stars'>
-      <div id='empty-star'>{emptyStars}</div>
-      <div id='half-star' style={{width:percentage+'%'}}>{filledStars}</div>
+      <div className='empty-star'>{emptyStars}</div>
+      <div className='half-star' style={{width:percentage+'%'}}>{filledStars}</div>
     </div>
   )
 };
