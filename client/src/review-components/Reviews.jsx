@@ -17,7 +17,7 @@ function Reviews(props) {
   Ut mi neque, viverra in elit sit amet, dapibus pharetra elit. Aenean eget euismod diam, a imperdiet tellus. Praesent ac.`;
 
   let shownText = paragraphText.substring(0, paragraphLimit);
-  let seeMoreButton = <span>...<button onClick={() => {setLimit(paragraphText.length); setShowSeeMore(false)}}>See More</button></span>;
+  let seeMoreButton = <span>...<button onClick={() => {setLimit(paragraphText.length); setShowSeeMore(false)}}>Show More</button></span>;
 
   if (!showSeeMore || paragraphText.length <= 250) {
     seeMoreButton = null;
@@ -39,7 +39,7 @@ function Reviews(props) {
 
   return <div>
     <div><Stars rating='2.5'/></div>
-    <span className='username'>Username and Date</span>
+    <span className='username'>Username {(new Date()).toDateString().substring(4)}</span>
     {reviewTitleElement}
     <p>{shownText}{seeMoreButton}</p>
     <h4>{'\u2713'} I recommend this product</h4>
