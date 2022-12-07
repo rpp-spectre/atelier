@@ -1,7 +1,8 @@
 var path = require("path");
-
+var webpack = require("webpack");
 var src_dir = path.join(__dirname, "/client/src");
 var dist_dir = path.join(__dirname, "/client/dist");
+const dotenv = require('dotenv').config({ path: __dirname + '/server/.env' })
 
 module.exports = {
   mode:"development",
@@ -10,6 +11,12 @@ module.exports = {
     filename: "bundle.js",
     path: dist_dir
   },
+  devtool: "source-map",
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.parsed),
+    }),
+  ].filter(Boolean),
   module: {
     rules: [
      {
@@ -18,6 +25,10 @@ module.exports = {
       use: {
         loader: "babel-loader"
       }
+     },
+     {
+      test: /\.(css|scss)$/,
+      use: ["style-loader", "css-loader"],
      }
     ]
   }

@@ -4,3 +4,4 @@ node_modules
 .env
 qlist-test.jsx
 qmore*.jsx
+*bundle.js.map
