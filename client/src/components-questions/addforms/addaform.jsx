@@ -4,7 +4,7 @@ import PortalReactDOM from 'react-dom';
 // import { CSSTransition } from 'react-transition-group';
 
 
-const Addqform2 = ({onClose, show})=>{
+const Addaform = ({onClose, show})=>{
   if(!show) {
     return null;
   }
@@ -16,18 +16,18 @@ const Addqform2 = ({onClose, show})=>{
       <div className='modal-content'>
         <div className='modal-header'>
           <h4 className='modal-title'>
-            Add Your Question
+            Submit Your Answer
           </h4>
-          About [product]
+          [Product Name]: [Question Body]
         </div>
         <div className='modal-body'>
            <form>
              <label>
-               Your Question:
+               Your Answer:
                <textarea
-               cols="48"
-               rows="8"
-               name="question"
+               cols="50"
+               rows="20"
+               name="answer"
                placeholder="..."
                required
                autoComplete="off"
@@ -79,4 +79,4 @@ const Addqform2 = ({onClose, show})=>{
   );
 };
 
-export default Addqform2;
+export default Addaform;

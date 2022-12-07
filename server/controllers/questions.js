@@ -17,8 +17,8 @@ exports.getQuestions = (req, res) =>{
 };
 
 exports.getAnswers = (req, res) =>{
-
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/640996/answers', {
+  let qid=req.params.qid;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${qid}/answers`, {
   headers: {
     'Authorization': process.env.API_KEY
   }
