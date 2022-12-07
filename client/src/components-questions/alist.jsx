@@ -23,8 +23,17 @@ var Alist = ({qid}) =>{
     (async()=>{
       // let response = await axios.get("http://localhost:3000/questions/640996/answers");
       let response = await axios.get(`http://localhost:3000/questions/${qid}/answers`);
-      // console.log('response', response.data.results[0]);
-      setAnswers(response.data.results);
+      let as = response.data.results;
+      as.sort((a,b)=>{
+        if (a['helpfulness'] > b['helpfulness']) {
+          return -1;
+        }
+        if(a['helpfulness'] < b['helpfulness']) {
+          return 1;
+        }
+        return 0;
+      });
+      setAnswers(as);
     })()
   },[]);
 

@@ -25,13 +25,12 @@ var Qlist = () =>{
       let response = await axios.get("http://localhost:3000/QUESTIONS");
       // console.log('response', response.data.results[0]);
       let qs=response.data.results;
-      let ordered=[];
-      questions.sort(function(a, b) {
-        if(a[question_helpfulness]> b[question_helpfulness]){
-          return 1;
-        }
-        if(a[question_helpfulness]< b[question_helpfulness]){
+      qs.sort(function(a, b) {
+        if(a['question_helpfulness']> b['question_helpfulness']){
           return -1;
+        }
+        if(a['question_helpfulness']< b['question_helpfulness']){
+          return 1;
         }
         return 0;
       });

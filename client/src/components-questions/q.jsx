@@ -5,14 +5,18 @@ import axios from 'axios';
 // require("dotenv").config();
 import Alist from './alist.jsx';
 import Answeradd from './addforms/answeradd.jsx';
+import Qhcounter from './counter/qhcounter.jsx';
 
 
 
 var Q = ({question}) =>{
+  const qcounter = question.question_helpfulness;
+  // const [qcounter, setQcounter] = useState([question.question_helpfulness]);
   return (<div>
 
 
-    <h3>Q: {question.question_body}</h3> Helpful? Yes ( {question.question_helpfulness}) | <Answeradd />
+    {/* <h3>Q: {question.question_body}</h3> Helpful? Yes ( {qcounter}) | <Answeradd /> */}
+    <h3>Q: {question.question_body}</h3> Helpful? <Qhcounter qcounter={qcounter}/> | <Answeradd />
     <br />
     <br />
     <Alist qid={question.question_id}/>
