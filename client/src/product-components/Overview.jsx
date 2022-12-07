@@ -54,7 +54,7 @@ class Overview extends React.Component {
       method: 'get',
       url: '/products/71697',
       baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp',
-      headers: {Authorization: process.env.AUTH_SECRET}
+      headers: {Authorization: process.env.API_KEY}
     };
 
     axios(productConfig)
@@ -82,7 +82,7 @@ class Overview extends React.Component {
       method: 'get',
       url: '/products/71697/styles',
       baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp',
-      headers: {Authorization: process.env.AUTH_SECRET}
+      headers: {Authorization: process.env.API_KEY}
     }
 
     axios(styleConfig)

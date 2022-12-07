@@ -2,7 +2,7 @@ var path = require("path");
 var webpack = require("webpack");
 var src_dir = path.join(__dirname, "/client/src");
 var dist_dir = path.join(__dirname, "/client/dist");
-const dotenv = require('dotenv').config({ path: __dirname + '/server/.env' })
+const dotenv = require('dotenv').config({ path: __dirname + '/.env' })
 
 module.exports = {
   mode:"development",
