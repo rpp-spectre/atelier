@@ -170,3 +170,7 @@ aside {
 .searchbox {
   width: 400px;
 }
+
+.question button {
+  margin: 20px;
+}
