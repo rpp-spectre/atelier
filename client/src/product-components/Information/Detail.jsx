@@ -8,9 +8,13 @@ class Detail extends React.Component {
   render() {
     return (
       <div className="Detail">
-        Detail:<br/>
-        Slogan: {this.props.slogan} <br/>
-        Description: {this.props.description} <br/>
+        Slogan: {this.props.slogan} <br/><br/>
+        Description: {this.props.description} <br/><br/>
+        Features: {this.props.features.map((item) => {
+          return (
+            <div key={item.feature}>{item.feature}: {item.value}</div>
+          )
+        })} <br/>
       </div>
     )
   }

@@ -7,9 +7,9 @@ class Title extends React.Component {
 
   render() {
     return (
-      <div className="Title">
-        Title: {this.props.name} + [styleName]
-      </div>
+      <h2 className="Title">
+        Title: {this.props.name}
+      </h2>
     )
   }
 }
