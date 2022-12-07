@@ -32,8 +32,9 @@ const Addqform = (props)=>{
       <div className='modal-content'>
         <div className='modal-header'>
           <h4 className='modal-title'>
-            Add a Question
+            Ask Your Question
           </h4>
+          About [the product]
         </div>
         <div className='modal-body'>
            <form>
@@ -50,6 +51,7 @@ const Addqform = (props)=>{
                // onChange = {(e)=>{ setContent(e.target.value); }}
              />
              </label>
+             <br />
              <label>
               Your Nickname:
 
