@@ -48,7 +48,6 @@ function ReviewSection(props) {
       setReviewCount(result.data.count);
       let resultArray = [];
       result.data.results.forEach((element) => {
-        console.log(element);
         resultArray.push(<Review data={element}/>);
       });
       setReviewsArray(resultArray);
