@@ -1,36 +1,33 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import Stars from './Stars.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 
-function Ratings(props) {
+let Ratings = (props) => {
+  let ratingsData = props.data.ratings;
+  let recommendData = props.data.recommended;
 
-  let testData = {
-    fiveStar: 10,
-    fourStar: 6,
-    threeStar: 4,
-    twoStar: 1,
-    oneStar: 2,
-  }
-
-  let weightedTotal = testData.oneStar * 1 + testData.twoStar * 2 + testData.threeStar * 3 + testData.fourStar * 4 + testData.fiveStar * 5;
+  let weightedTotal = Number.parseInt(ratingsData['1']) * 1 + Number.parseInt(ratingsData['2']) * 2 + Number.parseInt(ratingsData['3']) * 3 + Number.parseInt(ratingsData['4']) * 4 + Number.parseInt(ratingsData['5']) * 5;
   let numberOfReviews = 0;
-  Object.values(testData).forEach((element) => {
-    numberOfReviews += element;
+  Object.values(ratingsData).forEach((element) => {
+    numberOfReviews += Number.parseInt(element);
   })
 
   let averageRating = Math.round(weightedTotal / numberOfReviews * 10) / 10;
 
-  let ratingBars = Object.values(testData).map((element, index) => {
+  let ratingBars = Object.values(ratingsData).reverse().map((element, index) => {
     return <div key={index}>
       <RatingBreakdown star={Math.abs(index - 5)} ratings={element} totalRatings={numberOfReviews} />
       </div>
   })
 
+  let recommendations = Number.parseInt(recommendData.true)/ (Number.parseInt(recommendData.false) + Number.parseInt(recommendData.true));
+  let recommendPercent = Math.round(recommendations * 100);
+
   return (
   <div className='ratings'>
     <h1>{averageRating} <Stars rating={averageRating}/></h1>
-    <div>100% of reviews recommend this product</div>
+    <div>{recommendPercent}% of reviews recommend this product</div>
     {ratingBars}
   </div>
   )
