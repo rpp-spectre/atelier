@@ -12,7 +12,6 @@ import './product.css';
 const axios = require('axios');
 
 
-
 class Overview extends React.Component {
   constructor(props) {
     super(props);
@@ -50,14 +49,8 @@ class Overview extends React.Component {
 
 
   getProduct() {
-    var productConfig = {
-      method: 'get',
-      url: '/products/71697',
-      baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp',
-      headers: {Authorization: process.env.API_KEY}
-    };
 
-    axios(productConfig)
+    axios.get('/products/71697')
     .then((response) => {
       // console.log(response.data, '===========getProduct response data')
       var productData = {
@@ -78,14 +71,8 @@ class Overview extends React.Component {
 
 
   getStyle() {
-    var styleConfig = {
-      method: 'get',
-      url: '/products/71697/styles',
-      baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp',
-      headers: {Authorization: process.env.API_KEY}
-    }
 
-    axios(styleConfig)
+    axios.get('/products/71697/styles')
     .then((response) => {
       // console.log(response.data.results, '===========getStyle response data')
       this.setState({styleList: response.data.results});
