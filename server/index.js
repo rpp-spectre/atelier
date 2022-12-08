@@ -9,10 +9,9 @@ const app = express();
 app.use(express.static('./client/dist'));
 app.use(express.json());
 
+//Product Overview
 app.get('/products/:id', product.products);
 app.get('/products/:id/styles', product.styles);
-
-//Product Overview
 
 //Reviews
 app.get('/reviews', reviews.getReviews);
