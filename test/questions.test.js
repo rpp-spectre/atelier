@@ -53,8 +53,9 @@ describe("Question and Answer Component" ,() => {
 describe("Question list Component" ,() => {
 
   test('componenent loaded', () =>{
-    const renderer = new ShallowRenderer();
-    renderer.render(<Qlist />);
+    // const renderer = new ShallowRenderer();
+    // renderer.render(<Qlist />);
+    render(<Qlist />);
 	  // render(<Q />);
 	  // let ql = screen.getByTestId("tqlist");
     // expect(ql).toBeInTheDocument();

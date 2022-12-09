@@ -3,6 +3,9 @@ import ReactDom from 'react-dom/client';
 
 const Qhcounter = ({qcounter}) =>{
   const [qhcounter, setQhcounter] = useState(qcounter);
+
+
+
   return (
     <>
     <span className ='underline' onClick={()=>{setQhcounter(qhcounter+1)}}>Yes </span>( {qhcounter})
