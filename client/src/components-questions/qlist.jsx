@@ -7,7 +7,7 @@ import Q from './q.jsx';
 
 var Qlist = ({noQ, questions}) =>{
 
-  return (<div>
+  return (<div data-testid='tqlist'>
 
        {questions.slice(0,noQ).map((question)=>{
 

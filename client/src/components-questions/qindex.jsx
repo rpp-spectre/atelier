@@ -38,11 +38,11 @@ const Qsection = ()=>{
     })()
   },[]);
 
-  return (<div  data-testid="Qindex" className="question">
+  return (<div data-testid="Qindex" className="question">
     <h2>QUESTIONS & ANSWERS</h2>
-    <Qsearch />
+    <Qsearch questions={questions}/>
     <div className='question-list'>
-    <Qlist noQ={noQ} questions={questions}/>
+    {/* <Qlist noQ={noQ} questions={questions}/> */}
     </div>
     {load()}
 
