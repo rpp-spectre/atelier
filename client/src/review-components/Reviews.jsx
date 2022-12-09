@@ -6,15 +6,13 @@ import Stars from './Stars.jsx';
 //include date, username, likes
 
 function Reviews(props) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(props.data.helpfulness);
   const [paragraphLimit, setLimit] = useState(250);
   const [showSeeMore, setShowSeeMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [modalImage, setImage] = useState('');
 
-  let paragraphText = `This will be the text of the review.It will include if people liked the product and what they thought.
-  This is an extra sentence to test "see more" functionality.
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus tortor sit amet tellus feugiat, at cursus tortor euismod.
-  Ut mi neque, viverra in elit sit amet, dapibus pharetra elit. Aenean eget euismod diam, a imperdiet tellus. Praesent ac.`;
+  let paragraphText = props.data.body;
 
   let shownText = paragraphText.substring(0, paragraphLimit);
   let seeMoreButton = <span>...<button onClick={() => {setLimit(paragraphText.length); setShowSeeMore(false)}}>Show More</button></span>;
@@ -23,7 +21,7 @@ function Reviews(props) {
     seeMoreButton = null;
   };
 
-  let reviewTitle = 'Review title that is over 60 characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+  let reviewTitle = props.data.summary;
   let reviewTitleElement = <h3>{reviewTitle}</h3>;
   if (reviewTitle.length > 60) {
     reviewTitleElement = <div>
@@ -32,30 +30,41 @@ function Reviews(props) {
       </div>
   }
 
-  let modal = <ImageModal onClose={() => {setShowModal(false)}} img='https://marinmagazine.com/wp-content/uploads/2017/10/MM_1117_WinterFashion-770x961.jpg'/>
+  let images = props.data.photos.map((element, index) => {
+    return <img key={index} onClick={() => {setShowModal(true); setImage(element.url)}} className='thumbnail' src={element.url} alt='outfit image'/>
+  })
+
+  let modal = <ImageModal onClose={() => {setShowModal(false)}} img={modalImage}/>;
   if (!showModal) {
     modal = null;
   }
 
+  let isRecommended = <h4>{'\u2713'} I recommend this product</h4>;
+  if (props.data.recommend === false) {
+    isRecommended = null;
+  }
+
+  let sellerResponse = <aside><h4>Response from seller</h4><p>{props.data.response}</p></aside>
+  if (props.data.response === null) {
+    sellerResponse = null;
+  }
+
   return <div>
-    <div><Stars rating='2.5'/></div>
-    <span className='username'>Username {(new Date()).toDateString().substring(4)}</span>
+    <div><Stars rating={props.data.rating}/></div>
+    <span className='username'>{props.data.reviewer_name} {(new Date(props.data.date)).toDateString().substring(4)}</span>
     {reviewTitleElement}
     <p>{shownText}{seeMoreButton}</p>
-    <h4>{'\u2713'} I recommend this product</h4>
-    <img onClick={() => {setShowModal(true)}}
-      className='thumbnail'
-      src='https://marinmagazine.com/wp-content/uploads/2017/10/MM_1117_WinterFashion-770x961.jpg' alt='outfit image'/>
+    {isRecommended}
+    {images}
     {modal}
-    <aside>
-      <h4>Response from seller</h4>
-      <p>Thanks for your review!</p>
-    </aside>
-    <label>
-      Helpful?
-      <button data-testid='counter' onClick={() => setCount(count + 1)}>Yes</button>
-      <span>({count})</span>
-    </label>
+    {sellerResponse}
+    <div>
+      <label>
+        Helpful?
+        <button data-testid='counter' onClick={() => setCount(count + 1)}>Yes</button>
+        <span>({count})</span>
+      </label>
+    </div>
     <hr />
   </div>
 }

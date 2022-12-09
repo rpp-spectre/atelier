@@ -8,7 +8,7 @@ class Star extends React.Component {
   render() {
     return (
       <div className="Star">
-        Star
+        Star {'\u2606'}
       </div>
     )
   }

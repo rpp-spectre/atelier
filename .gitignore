@@ -5,3 +5,4 @@ node_modules
 qlist-test.jsx
 qmore*.jsx
 *bundle.js.map
+coverage

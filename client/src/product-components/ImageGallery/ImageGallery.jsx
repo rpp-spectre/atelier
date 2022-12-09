@@ -17,7 +17,7 @@ class ImageGallery extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='ImageGallery'>
         {this.props.photos.map((photo, index) => {
           return (
             <img className="photo" key={index} src={photo.url} alt="ProductIMG" />

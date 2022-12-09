@@ -30,7 +30,7 @@ aside {
   padding-right: 5px;
 }
 
-#grey-bar {
+.grey-bar {
   border-color: lightgrey;
   background-color: lightgrey;
   width: 200px;
@@ -38,7 +38,7 @@ aside {
   grid-area: 1/-1;
 }
 
-#green-bar {
+.green-bar {
   border-color: darkgreen;
   background-color: darkgreen;
   height: 5px;
@@ -79,13 +79,13 @@ aside {
   width: fit-content;
 }
 
-#half-star {
+.half-star {
   grid-area: 1/-1;
   box-sizing: content-box;
   overflow: hidden;
 }
 
-#empty-star {
+.empty-star {
   grid-area: 1/-1;
 }
 
@@ -94,7 +94,7 @@ aside {
   padding: 10px;
 }
 
-#review-list {
+.review-list {
   padding: 10px;
   height: 600px;
   overflow-y: scroll;
@@ -102,7 +102,7 @@ aside {
   scroll-snap-align: start;
 }
 
-#review-buttons {
+.review-buttons {
   padding-top: 20px;
   margin-left: 340px;
 }
@@ -173,4 +173,21 @@ aside {
 
 .question button {
   margin: 20px;
+}
+/*Product Section CSS */
+.photo {
+  height: 70px;
+  width: 70px;
+  margin: 5px;
+}
+
+.stylePhoto {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.styleLable {
+  margin: 5px;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Stars from '../../review-components/stars.jsx';
 
 class StarRating extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class StarRating extends React.Component {
   render() {
     return (
       <div className="StarRating">
-        StarRating: {this.props.rating} &emsp;
+        <Stars rating={this.props.rating}/>
         <label style={{textDecorationLine: 'underline'}}>Read all {this.props.reviews} Reviews</label>
       </div>
     )
