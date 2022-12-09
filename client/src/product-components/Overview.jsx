@@ -25,11 +25,11 @@ class Overview extends React.Component {
       features: [{feature: 'default', value: 'default'}],
 
       photos: [{url: ''}],
-      rating: 0,
+      rating: '2.5',
       reviews: 0,
 
-      styleList: [{style_id: '', name: 'default', photos: [{thumbnail_url: ''}]}],
-      currentStyle: {skus: {}},
+      styleList: [{style_id: '', name: '', photos: [{thumbnail_url: ''}]}],
+      // currentStyle: {skus: {}},
       sizeList: [{quantity: 0}]
     };
   }
@@ -75,12 +75,18 @@ class Overview extends React.Component {
     axios.get('/products/71697/styles')
     .then((response) => {
       // console.log(response.data.results, '===========getStyle response data')
-      this.setState({styleList: response.data.results});
-      this.setState({currentStyle: response.data.results[0]});
-      this.setState({price: response.data.results[0].original_price});
-      this.setState({photos: response.data.results[0].photos});
+      this.setState({
+        styleList: response.data.results,
+        // currentStyle: response.data.results[0],
+        price: response.data.results[0].original_price,
+        photos: response.data.results[0].photos,
+        sizeList: this.getSizeList(response.data.results[0].skus)
+      });
+      // this.setState({currentStyle: response.data.results[0]});
+      // this.setState({price: response.data.results[0].original_price});
+      // this.setState({photos: response.data.results[0].photos});
 
-      this.setState({sizeList: this.getSizeList(response.data.results[0].skus)});
+      // this.setState({sizeList: this.getSizeList(response.data.results[0].skus)});
     })
     .catch((error) => {
       console.log(error);
@@ -112,12 +118,12 @@ class Overview extends React.Component {
           <ImageGallery photos={this.state.photos}/><br/>
           </div><br/>
           <div className="Container-right">
-          <StarRating rating={this.state.rating} reviews={this.state.reviews}/>
+          <StarRating rating={this.state.rating} reviews={this.state.reviews}/><br/>
           <Category category={this.state.category}/>
           <Title name={this.state.name}/>
           <Price price={this.state.price}/><br/>
-          <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)} currentStyle={this.state.currentStyle}/><br/>
-          <AddToCart currentStyle={this.state.currentStyle} sizeList={this.state.sizeList}/><br/>
+          <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)}/><br/>
+          <AddToCart sizeList={this.state.sizeList}/><br/>
           <Star />
           </div><br/>
         </div>
