@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client';
 import ImageModal from './imageModal.jsx';
 import Stars from './Stars.jsx';
 
-//include date, username, likes
-
 function Reviews(props) {
   const [count, setCount] = useState(props.data.helpfulness);
   const [paragraphLimit, setLimit] = useState(250);
@@ -61,7 +59,7 @@ function Reviews(props) {
     <div>
       <label>
         Helpful?
-        <button data-testid='counter' onClick={() => setCount(count + 1)}>Yes</button>
+        <button onClick={() => setCount(count + 1)}>Yes</button>
         <span>({count})</span>
       </label>
     </div>
