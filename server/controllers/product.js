@@ -20,6 +20,7 @@ exports.products = (req, res) => {
   })
   .catch((error) => {
     console.log(error);
+    res.json(error);
   });
 
 }
@@ -42,6 +43,7 @@ exports.styles = (req, res) => {
   })
   .catch((error) => {
     console.log(error);
+    res.json(error);
   });
 
 }
