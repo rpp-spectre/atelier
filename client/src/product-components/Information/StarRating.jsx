@@ -1,5 +1,5 @@
 import React from "react";
-import Stars from '../../review-components/stars.jsx';
+import Stars from '../../review-components/Stars.jsx';
 
 class StarRating extends React.Component {
   constructor(props) {
