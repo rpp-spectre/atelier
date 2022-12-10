@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react';
 import ReactDom from 'react-dom/client';
 import axios from 'axios';
 import Qlist from './qlist.jsx';
+import Qadd from './addforms/qadd.jsx';
 import 'regenerator-runtime/runtime.js';
 // require("dotenv").config();
 
@@ -62,7 +63,7 @@ var Qsearch = () =>{
 
   return (<>
 
-    <form>
+    <form data-testid="searchForm">
 
           <input
             type="text"
@@ -80,6 +81,7 @@ var Qsearch = () =>{
     <Qlist noQ={noQ} questions={questions}/>
     </div>
     {load()}
+    <Qadd />
   </>);
 };
 
