@@ -60,6 +60,13 @@ aside {
   grid-area: 1/-1;
 }
 
+.char-details {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  font-size:small;
+}
+
 /* pointer midpoint is -2% of margin, so code will require percentage-2% */
 .pointer {
   grid-area: 1/-1;
