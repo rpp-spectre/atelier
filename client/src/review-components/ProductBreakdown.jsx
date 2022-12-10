@@ -23,7 +23,6 @@ function ProductBreakdown(props) {
     </div>
       <div className='pointer' style={{marginLeft: percentage +'%'}}>{'\u25BC'}</div>
     </div>
-    {/* if statements based on characteristics?? */}
     <div className='char-details'>
       <div>{charDetails[props.data[0]][0]}</div>
       <div>{charDetails[props.data[0]][1]}</div>
