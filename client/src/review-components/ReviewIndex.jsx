@@ -6,6 +6,7 @@ import ReviewForm from './ReviewForm.jsx';
 import Review from './Reviews.jsx';
 import Ratings from './Ratings.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
+import ProductBreakdownList from './ProductBreakdownList.jsx';
 
 function ReviewSection(props) {
   const [totalReviewsArray, setReviewsArray] = useState([]);
@@ -17,7 +18,7 @@ function ReviewSection(props) {
 
   let addReviewButton = <button onClick={() => {setAddReviews(true)}}>Add A Review +</button>;
   if (addReviews === true) {
-    addReviewButton = <ReviewForm />
+    addReviewButton = <ReviewForm onClose={() => {setAddReviews(false)}}/>
   }
 
   let moreReviewButton = <button onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;
@@ -27,12 +28,17 @@ function ReviewSection(props) {
 
   let reviewTiles = <ReviewList props={shownReviewsArray}/>
   if (totalReviewsArray.length === 0) {
-    reviewTiles = null;
+    reviewTiles = <div>There are no reviews yet.</div>;
   }
 
   let ratingSection = <Ratings data={reviewMeta}/>
   if (!reviewMeta) {
     ratingSection = null;
+  }
+
+  let productBreakdownSection = <ProductBreakdownList data={reviewMeta}/>
+  if (!reviewMeta) {
+    productBreakdownSection = null;
   }
 
   useEffect(() => {
@@ -59,9 +65,7 @@ function ReviewSection(props) {
     <h2>Reviews and Ratings</h2>
     <div className='rating-product-breakdown'>
     {ratingSection}
-    <ProductBreakdown />
-    <ProductBreakdown />
-    <ProductBreakdown />
+    {productBreakdownSection}
     </div>
     <div className='review'>
       <h3>{reviewCount} reviews, sorted by
