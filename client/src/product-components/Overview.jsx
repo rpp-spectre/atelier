@@ -30,7 +30,8 @@ class Overview extends React.Component {
 
       styleList: [{style_id: '', name: '', photos: [{thumbnail_url: ''}]}],
       // currentStyle: {skus: {}},
-      sizeList: [{quantity: 0}]
+      sizeList: [{quantity: 0}],
+      sizeOutOfStock: true
     };
   }
 
@@ -41,10 +42,23 @@ class Overview extends React.Component {
       // console.log(sizeArr[i], sizeObj[sizeArr[i]], '===========mark');
       var obj =  sizeObj[sizeArr[i]];
       obj['sku'] =  sizeArr[i];
-      sizeList.push(obj);
+      if (obj.quantity !== 0) {
+        sizeList.push(obj);
+      }
     }
     // console.log(sizeObj, sizeList, '=============sizeList');
     return sizeList;
+  }
+
+  getSizeStock(sizeObj) {
+    var stock = 0;
+    for (var i in sizeObj) {
+      stock += sizeObj[i].quantity;
+    }
+    if (stock <= 0) {
+      return true;
+    }
+    return false;
   }
 
 
@@ -74,14 +88,32 @@ class Overview extends React.Component {
 
     axios.get('/products/71697/styles')
     .then((response) => {
-      // console.log(response.data.results, '===========getStyle response data')
+      console.log(response.data.results, '===========getStyle response data')
       this.setState({
         styleList: response.data.results,
         // currentStyle: response.data.results[0],
         price: response.data.results[0].original_price,
-        photos: response.data.results[0].photos,
-        sizeList: this.getSizeList(response.data.results[0].skus)
+        photos: response.data.results[0].photos
       });
+
+      var stock = this.getSizeStock(response.data.results[0].skus);
+      // var stock = true;
+      // var testData = {
+      //   '123': {size: 'XS', quantity: 6},
+      //   '124': {size: 'S', quantity: 0}
+      // };
+      if (stock) {
+        this.setState({
+          sizeOutOfStock: true,
+          sizeList: [{size: "OUT OF STOCK", quantity: 0}]
+        });
+      } else {
+        this.setState({
+          sizeOutOfStock: false,
+          sizeList: this.getSizeList(response.data.results[0].skus)
+          // sizeList: this.getSizeList(testData)
+        });
+      }
       // this.setState({currentStyle: response.data.results[0]});
       // this.setState({price: response.data.results[0].original_price});
       // this.setState({photos: response.data.results[0].photos});
@@ -123,7 +155,7 @@ class Overview extends React.Component {
           <Title name={this.state.name}/>
           <Price price={this.state.price}/><br/>
           <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)}/><br/>
-          <AddToCart sizeList={this.state.sizeList}/><br/>
+          <AddToCart sizeList={this.state.sizeList} sizeOutOfStock={this.state.sizeOutOfStock}/><br/>
           <Star />
           </div><br/>
         </div>
