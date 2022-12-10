@@ -1,4 +1,5 @@
 import React from "react";
+const axios = require('axios');
 
 class AddToCart extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class AddToCart extends React.Component {
       quantityList: [],
       quantityValue: '0',
       showButton: true,
-      selectedIndex: 0
+      selectedIndex: 0,
     };
   }
 
@@ -47,6 +48,18 @@ class AddToCart extends React.Component {
     });
   }
 
+  handleAddToCart() {
+    axios.post('/cart', {
+      sku_id: this.props.sizeList[this.state.selectedIndex].sku,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   render() {
     // console.log(this.state.quantityList, '================this.state.quantityList');
     // console.log(this.props.sizeList, '================this.props.sizeList');
@@ -78,8 +91,7 @@ class AddToCart extends React.Component {
         </div><br/>
 
         <div className="AddToCart">
-          {/* Size: {this.state.size} &emsp; Quantity: {this.state.quantity} <br/> */}
-          {this.state.showButton ? (<button> Add To Cart </button>) : null}
+          {this.state.showButton ? (<button onClick={this.handleAddToCart.bind(this)}> Add To Cart </button>) : null}
         </div>
 
       </div>
