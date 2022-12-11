@@ -5,13 +5,13 @@ import Addqform2 from './addqform2.jsx';
 const Qadd = ()=>{
   const [show, setShow] = useState(false);
 
-  return (<div>
+  return (<>
     {/* <form>
   <button onClick={()=>{}}>ADD A QUESTION +</button>
 </form> */}
     <button onClick={()=>{setShow(true)}}> ADD A QUESTION </button>
     <Addqform2 onClose={()=>{setShow(false)}} show={show} />
-  </div>);
+  </>);
 };
 
 export default Qadd;

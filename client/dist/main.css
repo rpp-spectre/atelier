@@ -188,6 +188,9 @@ aside {
   width: 400px;
 }
 
+.question button {
+  margin: 20px;
+}
 /*Product Section CSS */
 .photo {
   height: 70px;

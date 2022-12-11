@@ -12,14 +12,14 @@ import Qhcounter from './counter/qhcounter.jsx';
 var Q = ({question}) =>{
   const qcounter = question.question_helpfulness;
   // const [qcounter, setQcounter] = useState([question.question_helpfulness]);
-  return (<div>
+  return (<div role="question">
 
 
     {/* <h3>Q: {question.question_body}</h3> Helpful? Yes ( {qcounter}) | <Answeradd /> */}
     <h3>Q: {question.question_body}</h3> Helpful? <Qhcounter qcounter={qcounter}/> | <Answeradd />
     <br />
     <br />
-    <Alist qid={question.question_id}/>
+    <Alist qid={question.question_id} />
 
 
   </div>);
