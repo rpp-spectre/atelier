@@ -24,11 +24,11 @@ const Answer = ({answer})=>{
   let date = pdate.toLocaleDateString("en-US", options);
 
   return (
-    <div>
+    <div role="answer">
       A: {answer.body}
       <br />
       {/* by {answer.answer_name} {answer.date} | Helpful ({acounter}) Report */}
-      by {answer.answer_name} {date} | <Ahcounter acounter={acounter} /> Report
+      by {answer.answerer_name} {date} | <Ahcounter acounter={acounter} /> Report
       <br />
        {photo()}
        <br />

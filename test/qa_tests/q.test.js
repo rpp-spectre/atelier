@@ -1,6 +1,6 @@
 import {cleanup,fireEvent,render,screen,configure} from '@testing-library/react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import Qsearch from '../../client/src/components-questions/qsearch.jsx';
+import Q from '../../client/src/components-questions/q.jsx';
 import '@testing-library/jest-dom';
 
 afterEach(cleanup) // Resets the DOM after each test suite
@@ -63,51 +63,19 @@ var noQ = 1;
     }
 ];
 
-describe("Search Component" ,() => {
+describe("Q Component" ,() => {
 
 
-    test('search box loaded', () =>{
-      render(<Qsearch />);
-      const sf = screen.getByTestId("searchForm");
-      const sn = screen.getByRole("textbox");
+    test('question loaded', () =>{
+      render(<Q question={questions[0]} />);
+
+      const sn = screen.getByRole("question");
       expect(sn).toBeInTheDocument();
-      expect(sf).toBeInTheDocument();
+      const heading = screen.getAllByRole("heading", {level:3});
+      expect(heading[0]).toBeInTheDocument();
     })
 
-    test('Add a question loaded', () =>{
-      render(<Qsearch />);
-      const sb = screen.getByRole("button");
-      expect(sb).toBeInTheDocument();
-      expect(sb).toHaveTextContent("ADD A QUESTION");
-    })
-    //write a test for options rendering
-    // test('show load more questions button if there are more questions', () =>{
-    //   // questions.length=5;
-    //   render(<Qsearch />);
-    //   // const lb = screen.getByRole("button", {testid:"load"});
-    //   console.log(noQ);
-    //   // console.log(questions.length);
-    //   console.log(noQ >= questions.length);
 
-    //   // const sc = screen.queryByTestId("load");
-    //   const sc = screen.queryByText("test");
-    //   // console.log(sc);
-    //   expect(sc).toBeInTheDocument();
-    //   expect(sc).toHaveTextContent("LOAD MORE QUESTIONS");
-    //   // const
-    //   // expect(sb).toHaveTextContent("Load");
-    // })
-
-
-
-  // test('componenent text loaded', () =>{
-	//   render(<Qsection />);
-	//   const qa = screen.getByTestId("Qindex");
-  //   expect(qa).toHaveTextContent("QUESTIONS");
-  // });
-
-  //write a test for sorting
-  //write a test for axios
 
 
 });

@@ -14,11 +14,11 @@ var Qsearch = () =>{
   const[questions,setQuestions]=useState([]);
   const[initqs,setInitqs]=useState([]);
 
-  let load = ()=>{
+  let load = (noQ,questions)=>{
     if (noQ >= questions.length) {
       return null;
     } else {
-      return <button onClick={()=>{setNoQ(noQ+2)}}>LOAD MORE QUESTIONS</button>;
+      return <button data-testid="load" onClick={()=>{setNoQ(noQ+2)}}>LOAD MORE QUESTIONS</button>;
     }
   };
 
@@ -80,7 +80,7 @@ var Qsearch = () =>{
     <div className='question-list'>
     <Qlist noQ={noQ} questions={questions}/>
     </div>
-    {load()}
+    {load(noQ, questions)}
     <Qadd />
   </>);
 };
