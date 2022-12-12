@@ -99,7 +99,7 @@ class Overview extends React.Component {
       var stock = this.getSizeStock(response.data.results[0].skus);
       // var stock = true;
       // var testData = {
-      //   '123': {size: 'XS', quantity: 6},
+      //   '123': {size: 'XS', quantity: 0},
       //   '124': {size: 'S', quantity: 0}
       // };
       if (stock) {
