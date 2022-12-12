@@ -41,7 +41,7 @@ class AddToCart extends React.Component {
       });
     } else {
       var quantityArr = this.QuantityMaxList(event.target.value);
-      console.log('in handleSizeChange', event.target.options.selectedIndex, event.target.value);
+      // console.log('in handleSizeChange', event.target.options.selectedIndex, event.target.value);
       this.setState({
         sizeValue: event.target.value,
         quantityList: quantityArr,
@@ -67,18 +67,19 @@ class AddToCart extends React.Component {
     .catch(function (error) {
       console.log(error);
     });
+
   }
 
   render() {
     // console.log(this.state.quantityList, '================this.state.quantityList');
-    console.log(this.props.sizeList, this.state.selectedIndex, '================this.props.sizeList');
+    // console.log(this.props.sizeList, this.state.selectedIndex, '================this.props.sizeList');
     //console.log(this.props.sizeList, this.state.selectedIndex, 'in render');
     return (
       <div>
-        <div className="SizeSelector">
+        <div  className="SizeSelector">
           Size:
           <select value={this.state.sizeValue} disabled={this.props.sizeOutOfStock} onChange={this.handleSizeChange.bind(this)}>
-            <option value={'SelectSize'}>Select Size</option>
+            <option value={'SelectSize'}>{this.props.sizeOutOfStock ? 'OUT OF STOCK' : 'Select Size'}</option>
             {
               this.props.sizeList.map((item, index) => {
                 return (
@@ -98,18 +99,11 @@ class AddToCart extends React.Component {
                 )
               })
             }
-            {/* <option value={'-'}> - </option> */}
-            {/* {
-              this.QuantityMaxList(this.props.sizeList[this.state.selectedIndex].quantity).map((quantity, index) => {
-                return (
-                  <option key={index} value={quantity}>{quantity}</option>
-                )
-            })} */}
           </select>
         </div><br/>
 
         <div className="AddToCart">
-          {this.state.showButton ? (<button onClick={this.handleAddToCart.bind(this)}> Add To Cart </button>) : null}
+          {!this.props.sizeOutOfStock ? (<button onClick={this.handleAddToCart.bind(this)}> Add To Cart </button>) : null}
         </div>
 
       </div>
