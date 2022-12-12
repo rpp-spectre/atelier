@@ -178,9 +178,9 @@ aside {
 
 .question-list {
   padding: 10px;
-  height: 500px;
+  max-height: 500px;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y auto;
   scroll-snap-align: start;
 }
 
