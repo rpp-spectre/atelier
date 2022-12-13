@@ -31,11 +31,29 @@ exports.getAnswers = (req, res) =>{
   });
 };
 
-exports.changeHelpful = (req, res) =>{
+exports.changeQHelpful = (req, res) =>{
   let qid = req.params.qid;
-  console.log('qid', qid);
+  // console.log('qid', qid);
   let apiCH = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${qid}/helpful`;
   axios.put(apiCH, `question_id=${qid}`, {
+  headers: {
+    'Authorization': process.env.API_KEY
+  }
+  })
+  .then((result)=>{
+    // console.log(result);
+    res.send('helpfulness updated');
+  })
+  .catch((error) =>{
+    res.send(error);
+  });
+};
+
+exports.changeAHelpful = (req, res) =>{
+  let aid = req.params.aid;
+  console.log('aid', aid);
+  let apiCH = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${aid}/helpful`;
+  axios.put(apiCH, `question_id=${aid}`, {
   headers: {
     'Authorization': process.env.API_KEY
   }
