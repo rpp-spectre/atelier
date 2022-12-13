@@ -16,7 +16,7 @@ const App =()=>{
   // console.log('pid', pid);
   // render() {
     return (<div>
-      <Link to='/71697'>home again</Link>
+      {/* <Link to='/71697'>home again</Link> */}
       <ProductSection />
       <ReviewSection />
       <Qsection pid = {pid} />

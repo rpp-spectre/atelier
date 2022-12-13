@@ -22,7 +22,7 @@ const Addqform2 = ({onClose, show,pid, product})=>{
           <h4 className='modal-title'>
             Add Your Question
           </h4>
-          About {product}
+          About the {product}
         </div>
         <div className='modal-body'>
            <form onSubmit={(e)=>{
@@ -37,10 +37,11 @@ const Addqform2 = ({onClose, show,pid, product})=>{
                  });
            }}>
              <label>
-               Your Question:
+             &#42; Your Question:
                <textarea
-               cols="48"
-               rows="8"
+               cols="50"
+               rows="20"
+               maxLength='1000'
                name="body"
                placeholder="..."
                required
@@ -51,11 +52,12 @@ const Addqform2 = ({onClose, show,pid, product})=>{
              </label>
              <br />
              <label>
-              Your Nickname:
+             &#42; Your Nickname:
 
               <input
               type="text"
               name="name"
+              maxLength='60'
               placeholder="Example: jackson11!"
               required
               autoComplete="off"
@@ -67,11 +69,12 @@ const Addqform2 = ({onClose, show,pid, product})=>{
              </label>
              <br />
              <label>
-              Your Email:
+             &#42; Your Email:
 
               <input
               type="text"
               name="email"
+              maxLength='60'
               placeholder="Example: jack@email.com"
               required
               autoComplete="off"
