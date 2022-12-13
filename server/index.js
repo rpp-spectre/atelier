@@ -12,6 +12,7 @@ app.use(express.static('./client/dist'));
 app.use(express.json());
 app.use(cors());
 
+
 //Product Overview
 app.get('/products/:id', product.products);
 app.get('/products/:id/styles', product.styles);

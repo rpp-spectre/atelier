@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import PortalReactDOM from 'react-dom';
+import axios from 'axios';
 // import { CSSTransition } from 'react-transition-group';
 
 
-const Addqform2 = ({onClose, show})=>{
+const Addqform2 = ({onClose, show,pid, product})=>{
+  const [body, setBody] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   if(!show) {
     return null;
   }
@@ -18,21 +22,31 @@ const Addqform2 = ({onClose, show})=>{
           <h4 className='modal-title'>
             Add Your Question
           </h4>
-          About [product]
+          About {product}
         </div>
         <div className='modal-body'>
-           <form>
+           <form onSubmit={(e)=>{
+            //  e.preventDefault();
+             axios.post(`http://localhost:3000/questions?body=${'body'}&name=${name}&email=${email}&product_id=${pid}`)
+               .then((result) =>{
+                console.log('test');
+                 console.log(result);
+                 })
+               .catch(err=>{
+                 throw err;
+                 });
+           }}>
              <label>
                Your Question:
                <textarea
                cols="48"
                rows="8"
-               name="question"
+               name="body"
                placeholder="..."
                required
                autoComplete="off"
-               // value ={}
-               // onChange = {(e)=>{ setContent(e.target.value); }}
+               value ={body}
+               onChange = {(e)=>{ setBody(e.target.value); }}
              />
              </label>
              <br />
@@ -41,12 +55,12 @@ const Addqform2 = ({onClose, show})=>{
 
               <input
               type="text"
-              name="nickname"
+              name="name"
               placeholder="Example: jackson11!"
               required
               autoComplete="off"
-              // value ={}
-              // onChange = {(e)=>{ setTitle(e.target.value); }}
+              value ={name}
+              onChange = {(e)=>{ setName(e.target.value); }}
               />
               <br />
               For privacy reasons, do not use your full name or email address
@@ -61,17 +75,18 @@ const Addqform2 = ({onClose, show})=>{
               placeholder="Example: jack@email.com"
               required
               autoComplete="off"
-              // value ={}
-              // onChange = {(e)=>{ setTitle(e.target.value); }}
+              value ={email}
+              onChange = {(e)=>{ setEmail(e.target.value); }}
               />
               <br />
               For authentication reasons, you will not be emailed
              </label>
+             <div className='model-footer'>
+               <button  type="submit" className='button'>Submit</button>
+             </div>
            </form>
         </div>
-        <div className='model-footer'>
-          <button onClick={onClose} className='button'>Submit</button>
-        </div>
+
       </div>
     </div>
 

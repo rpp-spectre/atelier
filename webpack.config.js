@@ -9,8 +9,15 @@ module.exports = {
   entry: `${src_dir}/index.jsx`,
   output:{
     filename: "bundle.js",
-    path: dist_dir
+    path: dist_dir,
+    publicPath: "/"
   },
+  // devServer: {
+  //   port: 3000,
+  //   hot: true,
+  //   historyApiFallback: true
+  // },
+  //added for routing, commented out for now
   devtool: "source-map",
   plugins: [
     new webpack.DefinePlugin({

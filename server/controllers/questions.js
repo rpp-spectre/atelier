@@ -5,13 +5,14 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 exports.getQuestions = (req, res) =>{
   let apiGetQ = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=';
-  axios.get(apiGetQ+'71698', {
+  let pid = req.query.product_id;
+  axios.get(apiGetQ+pid, {
   headers: {
     'Authorization': process.env.API_KEY
   }
   })
   .then((result)=>{
-    console.log(result.data);
+    // console.log(result.data);
     res.send(result.data);
   });
 };
