@@ -8,11 +8,12 @@ import 'regenerator-runtime/runtime.js';
 
 
 
-var Qsearch = () =>{
+var Qsearch = ({pid}) =>{
   const [term, setTerm] = useState('');
   const[noQ,setNoQ]=useState(2);
   const[questions,setQuestions]=useState([]);
   const[initqs,setInitqs]=useState([]);
+  const[product, setProduct] = useState('');
 
   let load = (noQ,questions)=>{
     if (noQ >= questions.length) {
@@ -42,7 +43,7 @@ var Qsearch = () =>{
 
   useEffect(()=>{
     (async()=>{
-      let response = await axios.get("http://localhost:3000/QUESTIONS");
+      let response = await axios.get(`http://localhost:3000/QUESTIONS?product_id=${pid}`);
       // console.log('response', response.data.results[0]);
       let qs=response.data.results;
       qs.sort(function(a, b) {
@@ -56,6 +57,11 @@ var Qsearch = () =>{
       });
       setQuestions(qs);
       setInitqs(qs);
+      let presponse = await axios.get(`http://localhost:3000/products/${pid}`);
+      // console.log('response', response.data.results[0]);
+      let product=presponse.data;
+      setProduct(product.name);
+
 
     })()
   },[]);
@@ -81,7 +87,7 @@ var Qsearch = () =>{
     <Qlist noQ={noQ} questions={questions}/>
     </div>
     {load(noQ, questions)}
-    <Qadd />
+    <Qadd pid={pid} product={product} />
   </>);
 };
 

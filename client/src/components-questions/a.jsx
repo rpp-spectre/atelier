@@ -28,7 +28,7 @@ const Answer = ({answer})=>{
       A: {answer.body}
       <br />
       {/* by {answer.answer_name} {answer.date} | Helpful ({acounter}) Report */}
-      by {answer.answerer_name} {date} | <Ahcounter acounter={acounter} /> Report
+      by {answer.answerer_name} {date} | <Ahcounter acounter={acounter} aid={answer.answer_id} /> Report
       <br />
        {photo()}
        <br />

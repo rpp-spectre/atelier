@@ -16,7 +16,7 @@ var Q = ({question}) =>{
 
 
     {/* <h3>Q: {question.question_body}</h3> Helpful? Yes ( {qcounter}) | <Answeradd /> */}
-    <h3>Q: {question.question_body}</h3> Helpful? <Qhcounter qcounter={qcounter}/> | <Answeradd />
+    <h3>Q: {question.question_body}</h3> Helpful? <Qhcounter qcounter={qcounter} qid={question.question_id} /> | <Answeradd />
     <br />
     <br />
     <Alist qid={question.question_id} />

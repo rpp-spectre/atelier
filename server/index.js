@@ -12,6 +12,7 @@ app.use(express.static('./client/dist'));
 app.use(express.json());
 app.use(cors());
 
+
 //Product Overview
 app.get('/products/:id', product.products);
 app.get('/products/:id/styles', product.styles);
@@ -24,5 +25,7 @@ app.get('/reviewsMeta', reviews.getReviewMeta);
 app.get('/questions', controllerQ.getQuestions);
 app.post('/questions', controllerQ.addQuestion);
 app.get('/questions/:qid/answers', controllerQ.getAnswers);
+app.put('/questions/:qid/helpful', controllerQ.changeQHelpful);
+app.put('/answers/:aid/helpful', controllerQ.changeAHelpful);
 
 app.listen(3000);
