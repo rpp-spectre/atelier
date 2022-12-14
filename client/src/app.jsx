@@ -12,8 +12,9 @@ import { HashRouter as Router, Link, Switch, Routes, Route, useParams } from 're
 //   };
 const App =()=>{
   const params = useParams();
-  const pid = params.id;
-  // console.log('pid', pid);
+  const pid = undefined || params.id;
+
+  console.log('pid', pid);
   // render() {
     return (<div>
       {/* <Link to='/71697'>home again</Link> */}
