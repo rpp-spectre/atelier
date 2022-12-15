@@ -1,0 +1,169 @@
+.Overview {
+  display: flex;
+  flex-direction: column;
+  /* border-style:solid;
+  border-color: black; */
+  align-items: center;
+  margin: 3%;
+}
+
+.Container-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* border-style:solid;
+  border-color: black; */
+  width:100%;
+}
+
+/* .Container-left {
+  border-style:solid;
+  border-color: black;
+
+} */
+
+.Container-right {
+  /* border-style:solid;
+  border-color: black; */
+  margin: 2%;
+}
+
+.Container-bottom {
+  width: 60%;
+  /* border-style:solid;
+  border-color: black; */
+  justify-content: center;
+  margin:3%;
+}
+
+.StarRating {
+  display: flex;
+  flex-direction: row;
+  color: rgb(63, 62, 62);
+  font-size: small;
+}
+
+.Reviews {
+  color: gray;
+  font-size: small;
+  align-self: center;
+  text-decoration: underline;
+}
+
+.Category {
+  color: rgb(74, 73, 73);
+  font-size: small;
+}
+
+.Price {
+  color: rgb(74, 73, 73);
+  font-size: small;
+}
+
+.Detail {
+  /* border-style:solid;
+  border-color: black; */
+  display: flex;
+  flex-direction: row;
+}
+
+.SloganAndDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 1%;
+  padding: 1%;
+  border-right: solid black;
+  width:70%;
+}
+
+.Slogan {
+  color: rgb(70, 68, 68);
+  margin-bottom: 5%;
+  font-weight: bold;
+}
+
+.Description {
+  font-size:smaller;
+  color: grey;
+}
+
+.Features {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 1%;
+  padding: 1%;
+  font-size:smaller;
+  color: grey;
+}
+
+.SizeAndQuantity {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.Size {
+  margin-right: 5%;
+  /* border: solid black; */
+  width: 65%;
+  height: 40px;
+}
+
+.SizeSelector {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  font-size: medium;
+  color: rgb(54, 52, 52);
+  border: solid grey;
+}
+
+.Quantity {
+  /* border: solid black; */
+  width: 30%;
+}
+
+.QuantitySelector {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  font-size: medium;
+  color: rgb(54, 52, 52);
+  border: solid grey;
+}
+
+.Cart {
+  width: 100%;
+  height: 40px;
+  margin-top: 7%;
+  display: flex;
+  flex-direction: row;
+}
+
+.AddToCart {
+  margin-right: 5%;
+  width: 75%;
+  height: 40px;
+  font-size: medium;
+  color:  rgb(54, 52, 52);
+  border: solid grey;
+}
+
+.Star {
+  width: 20%;
+  height: 40px;
+  border: solid grey;
+  font-size: medium;
+  color:  rgb(54, 52, 52);
+  text-align: center;
+  padding-top: 2%;
+}
+
+.StyleImage {
+  margin-top: 3%;
+  margin-bottom:2%;
+}
+
+

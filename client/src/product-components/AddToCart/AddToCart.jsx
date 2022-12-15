@@ -75,38 +75,41 @@ class AddToCart extends React.Component {
     // console.log(this.props.sizeList, this.state.selectedIndex, '================this.props.sizeList');
     //console.log(this.props.sizeList, this.state.selectedIndex, 'in render');
     return (
-      <div>
-        <div  className="SizeSelector">
-          Size:
-          <select value={this.state.sizeValue} disabled={this.props.sizeOutOfStock} onChange={this.handleSizeChange.bind(this)}>
-            <option value={'SelectSize'}>{this.props.sizeOutOfStock ? 'OUT OF STOCK' : 'Select Size'}</option>
-            {
-              this.props.sizeList.map((item, index) => {
-                return (
-                  <option key={index} value={item.size}>{item.size}</option>
-                )
-            })}
-          </select>
-        </div><br/>
+      <div className='SizeQuantityCart'>
+        <div className='SizeAndQuantity'>
+          <div className="Size">
+            <select className="SizeSelector" value={this.state.sizeValue} disabled={this.props.sizeOutOfStock} onChange={this.handleSizeChange.bind(this)}>
+              <option value={'SelectSize'}>{this.props.sizeOutOfStock ? 'OUT OF STOCK' : 'Select Size'}</option>
+              {
+                this.props.sizeList.map((item, index) => {
+                  return (
+                    <option key={index} value={item.size}>{item.size}</option>
+                  )
+              })}
+            </select>
+          </div>
 
-        <div className="QuantitySelector">
-          Quantity:
-          <select value={this.state.quantityValue} onChange={this.handleQuantityChange.bind(this)}>
-            {this.state.sizeValue === 'SelectSize' ?  (<option value={'-'}> - </option>) :
-              this.QuantityMaxList(this.props.sizeList[this.state.selectedIndex].quantity).map((quantity, index) => {
-                return (
-                  <option key={index} value={quantity}>{quantity}</option>
-                )
-              })
-            }
-          </select>
-        </div><br/>
-
-        <div className="AddToCart">
-          {!this.props.sizeOutOfStock ? (<button onClick={this.handleAddToCart.bind(this)}> Add To Cart </button>) : null}
+          <div className="Quantity">
+            <select className="QuantitySelector" value={this.state.quantityValue} onChange={this.handleQuantityChange.bind(this)}>
+              {this.state.sizeValue === 'SelectSize' ?  (<option value={'-'}> - </option>) :
+                this.QuantityMaxList(this.props.sizeList[this.state.selectedIndex].quantity).map((quantity, index) => {
+                  return (
+                    <option key={index} value={quantity}>{quantity}</option>
+                  )
+                })
+              }
+            </select>
+          </div>
         </div>
 
+        <div className="Cart">
+          {!this.props.sizeOutOfStock ? (<button className='AddToCart' onClick={this.handleAddToCart.bind(this)}> Add To Cart </button>) : null}
+          <div className="Star">
+            {'\u2606'}
+          </div>
+        </div>
       </div>
+
 
     )
   }
