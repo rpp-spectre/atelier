@@ -1,56 +1,99 @@
 import React from "react";
+import './ImageGallery.css';
 
 class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
+    // this.showNum = Math.min(this.props.photos.length, 7);
+    this.state = {
+      slideIndex: 0,
+      startIndex: 0,
+      // showNum: Math.min(this.props.photos.length, 7)
+    }
   }
 
-  plusSlides() {
+  plusSlides(n) {
+    var newIndex = this.state.slideIndex + n;
+    if (newIndex >= this.props.photos.length) {
+      newIndex =  this.props.photos.length - 1;
+    } else if (newIndex < 0) {
+      newIndex = 0;
+    }
+
+    var newStartIndex = this.state.startIndex;
+    if (newIndex - this.props.showNum() + 1 >= 0) {
+      newStartIndex = newIndex - this.props.showNum() + 1;
+    }
+
+    this.setState({
+        slideIndex: newIndex,
+        startIndex: newStartIndex
+    })
 
   }
 
-  currentSlide() {
-
+  currentSlide(index) {
+    this.setState({slideIndex: index});
   }
 
+  handleArrowUp() {
+    var newstartIndex = Math.max(this.state.startIndex-3, 0);
+    this.setState({
+      startIndex: newstartIndex
+    });
+  }
+
+  handleArrowDown() {
+    var newstartIndex = Math.min(this.state.startIndex+3, this.props.photos.length-1);
+    this.setState({
+      startIndex: newstartIndex
+    });
+  }
 
 
   render() {
+    // console.log('this.props', this.props.photos.length)
     return (
-      <div className='ImageGallery'>
-        {this.props.photos.map((photo, index) => {
-          return (
-            <img className="photo" key={index} src={photo.url} alt="ProductIMG" />
-          )
-        })}
-      </div>
-      // <div className="container">
-      //     <div class="mySlides">
-      //       <div class="numbertext">1 / 6</div>
-      //       <img src="img_woods_wide.jpg" style="width:100%">
-      //     </div>
-      //     {this.props.photos.map((photo, index) => {
-      //       return (
-      //         <div className="mySlides" key={index}>
-      //           <div className="numbertext">{index+1} / {this.props.photos.length}</div>
-      //           <img src={photo.url} />
-      //         </div>
-      //       )
-      //     })}
-
-      //     <a className="prev" onClick={() => this.plusSlides(-1)}>❮</a>
-      //     <a className="next" onClick={() => plusSlides(1)}>❯</a>
-
-      //     <div className="row">
-      //       {this.props.photos.map((photo, index) => {
-      //         return (
-      //           <div className="column" key={index}>
-      //             <img className="demo cursor" src={photo.thumbnail_url} onClick={() => this.currentSlide(1)} alt="Default"/>
-      //           </div>
-      //         )
-      //       })}
-      //     </div>
+      // <div className='ImageGallery'>
+      //   {this.props.photos.map((photo, index) => {
+      //     return (
+      //       <img className="photo" key={index} src={photo.url} alt="ProductIMG" />
+      //     )
+      //   })}
       // </div>
+
+
+      <div className="container">
+          {this.props.photos.map((photo, index) => {
+            if (index !== this.state.slideIndex) {
+              return
+            }
+            return (
+              <div className="mySlides" key={index}>
+                <div className="numbertext">{index+1} / {this.props.photos.length}</div>
+                <img className="slideImage" src={photo.url} />
+              </div>
+            )
+          })}
+
+          {this.state.slideIndex === 0 ? null : <a className="prev" onClick={() => this.plusSlides(-1)}>❮</a>}
+          {this.state.slideIndex === this.props.photos.length - 1 ? null : <a className="next" onClick={() => this.plusSlides(1)}>❯</a>}
+
+          <div className="row">
+            {this.state.startIndex !== 0 ? <div className='upArrow column' onClick={this.handleArrowUp.bind(this)}><i className="arrow up"></i></div> : null}
+            {this.props.photos.map((photo, index) => {
+              if (index < this.state.startIndex || index >= this.state.startIndex+this.props.showNum()) {
+                return;
+              }
+              return (
+                <div className="column" key={index} >
+                  <img src={photo.thumbnail_url} className={(this.state.slideIndex === index)? "demo cursor active" : "demo cursor"} onClick={() => this.currentSlide(index)} alt="Default"/>
+                </div>
+              )
+            })}
+            {this.state.startIndex + this.props.showNum() < this.props.photos.length ? <div className='downArrow column' onClick={this.handleArrowDown.bind(this)}><i className="arrow down"></i></div> : null}
+          </div>
+      </div>
     )
   }
 }
