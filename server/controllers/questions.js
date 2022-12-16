@@ -49,18 +49,37 @@ exports.changeQHelpful = (req, res) =>{
   });
 };
 
+
 exports.changeAHelpful = (req, res) =>{
   let aid = req.params.aid;
   console.log('aid', aid);
   let apiCH = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${aid}/helpful`;
-  axios.put(apiCH, `question_id=${aid}`, {
+  axios.put(apiCH, `answer_id=${aid}`, {
+    headers: {
+      'Authorization': process.env.API_KEY
+    }
+  })
+  .then((result)=>{
+    // console.log(result);
+    res.send('helpfulness updated');
+  })
+  .catch((error) =>{
+    res.send(error);
+  });
+};
+
+exports.areport = (req, res) =>{
+  let aid = req.params.aid;
+  // console.log('aid', aid);
+  let apiAR = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${aid}/report`;
+  axios.put(apiAR, `answer_id=${aid}`, {
   headers: {
     'Authorization': process.env.API_KEY
   }
   })
   .then((result)=>{
     // console.log(result);
-    res.send('helpfulness updated');
+    res.send('reported');
   })
   .catch((error) =>{
     res.send(error);

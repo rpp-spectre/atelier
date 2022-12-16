@@ -16,6 +16,7 @@ app.use(cors());
 //Product Overview
 app.get('/products/:id', product.products);
 app.get('/products/:id/styles', product.styles);
+app.post('/cart', product.cart);
 
 //Reviews
 app.get('/reviews', reviews.getReviews);
@@ -27,5 +28,6 @@ app.post('/questions', controllerQ.addQuestion);
 app.get('/questions/:qid/answers', controllerQ.getAnswers);
 app.put('/questions/:qid/helpful', controllerQ.changeQHelpful);
 app.put('/answers/:aid/helpful', controllerQ.changeAHelpful);
+app.put('/answers/:aid/report', controllerQ.areport);
 
 app.listen(3000);
