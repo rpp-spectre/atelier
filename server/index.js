@@ -16,6 +16,7 @@ app.use(cors());
 //Product Overview
 app.get('/products/:id', product.products);
 app.get('/products/:id/styles', product.styles);
+app.post('/cart', product.cart);
 
 //Reviews
 app.get('/reviews', reviews.getReviews);
