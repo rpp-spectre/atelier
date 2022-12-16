@@ -25,7 +25,7 @@ const Answer = ({answer})=>{
   let date = pdate.toLocaleDateString("en-US", options);
 
   return (
-    <div role="answer">
+    <div role="document">
       A: {answer.body}
       <br />
       {/* by {answer.answer_name} {answer.date} | Helpful ({acounter}) Report */}

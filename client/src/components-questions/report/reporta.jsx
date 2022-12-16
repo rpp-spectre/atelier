@@ -18,7 +18,7 @@ const Reporta = ({aid}) =>{
   return(
     <>
    <span className = "underline" onClick = {
-    () => {handleClick()}
+    () => {handleClick(); window.location.reload(false)}
    } >
    Report{aid}
    </span>

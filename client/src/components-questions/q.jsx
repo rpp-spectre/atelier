@@ -12,7 +12,7 @@ import Qhcounter from './counter/qhcounter.jsx';
 var Q = ({question}) =>{
   const qcounter = question.question_helpfulness;
   // const [qcounter, setQcounter] = useState([question.question_helpfulness]);
-  return (<div role="question">
+  return (<div role="document">
 
 
     {/* <h3>Q: {question.question_body}</h3> Helpful? Yes ( {qcounter}) | <Answeradd /> */}

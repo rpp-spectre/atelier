@@ -64,7 +64,7 @@ describe("Answer Component" ,() => {
     test('answer loaded', () =>{
       render(<Answer answer={answers[0]} />);
 
-      const sn = screen.getByRole("answer");
+      const sn = screen.getByRole("document");
       expect(sn).toBeInTheDocument();
       expect(sn).toHaveTextContent("KL", {exact:false});
     })
