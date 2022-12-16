@@ -47,3 +47,26 @@ exports.styles = (req, res) => {
   });
 
 }
+
+
+
+exports.cart = (req, res) => {
+
+  var cartConfig = {
+    method: 'post',
+    url: `/cart`,
+    baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp',
+    headers: {Authorization: process.env.API_KEY},
+    data: req.body
+  }
+
+  axios(cartConfig)
+  .then((response) => {
+    res.json(response.data);
+  })
+  .catch((error) => {
+    console.log(error);
+    res.json(error);
+  });
+
+}
