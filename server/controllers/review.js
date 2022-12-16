@@ -6,7 +6,7 @@ const AtelierAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 exports.getReviews = (req, res) => {
   axios({
     method: 'get',
-    url: AtelierAPI + 'reviews?product_id=71698',
+    url: AtelierAPI + 'reviews?product_id=71810',
     headers: {'authorization': process.env.API_KEY}
   })
   .then((result) => {
@@ -16,12 +16,12 @@ exports.getReviews = (req, res) => {
     console.log(err);
     res.send(err);
   });
-}
+};
 
 exports.getReviewMeta = (req, res) => {
   axios({
     method: 'get',
-    url: AtelierAPI + 'reviews/meta?product_id=71698',
+    url: AtelierAPI + 'reviews/meta?product_id=71810',
     headers: {'authorization': process.env.API_KEY}
   })
   .then((result) => {
@@ -31,17 +31,19 @@ exports.getReviewMeta = (req, res) => {
     console.log(err);
     res.send(err);
   });
-}
+};
 
-// exports.getReviews = (req, res) =>{
-
-//   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=71698', {
-//   headers: {
-//     'Authorization': process.env.API_KEY
-//   }
-//   })
-//   .then((result)=>{
-//     // console.log(result.data);
-//     res.send(result.data);
-//   });
-// };
+exports.postReview = (req, res) =>{
+  axios({
+    method: 'post',
+    url: AtelierAPI + 'reviews/meta?product_id=1',
+    headers: {'authorization': process.env.API_KEY}
+  })
+  .then((result) => {
+    res.send(result.data);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.send(err);
+  });
+};

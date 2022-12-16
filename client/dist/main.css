@@ -126,6 +126,7 @@ aside {
 
 .review-form {
   padding: 5px;
+  margin-left: 10px;
 }
 
 /* Modal */
@@ -170,6 +171,12 @@ aside {
   border-bottom: 1px solid #eee;
 }
 
+.form-view {
+  height: 600px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: start;
+}
 /* Question Section CSS */
 
 .question {

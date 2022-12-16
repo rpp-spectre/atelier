@@ -1,13 +1,45 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import Stars from './Stars.jsx';
 
 function ReviewForm(props) {
+  let charDetails = {
+    Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
+    Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+    Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+    Length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+    Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs loose']
+  }
+
+  const [formData, setFormData] = useState([]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(e.value);
+  }
+
+  let radioForm = Object.entries(charDetails).map((characteristic, index) => {
+    return <div key={index} className='review-form'>
+      <label>{characteristic[0]}*</label><br></br>
+      <div className='review-char'>
+      {characteristic[1].map((description, index) => {
+        return <input key={index} type='radio' id={index + 1} name={characteristic[0]} value={index + 1}></input>
+      })}
+      </div>
+      <div className='review-char'>
+      {characteristic[1].map((description, index) => {
+        return <label key={index} htmlFor={index + 1}>{description}</label>
+      })}
+      </div>
+    </div>
+  })
+
   return (
     <div className ='modal'>
     <div className='modal-content'>
-      <div className='modal-body'>
-      <form>
+      <div className='modal-body, form-view'>
+      <form className='review-form' onSubmit={handleSubmit}>
       <label>
       Write Your Review:
       </label>
@@ -25,23 +57,7 @@ function ReviewForm(props) {
         <input type='radio' id='no' name='recommend' value='no'/>
         <label htmlFor='no'>No</label><br></br>
       </div>
-      <div className='review-form'>
-        <label>Quality*</label><br></br>
-        <div className='review-char'>
-        <input type='radio' id='1' name='quality' value='1'/>
-        <input type='radio' id='2' name='quality' value='2'/>
-        <input type='radio' id='3' name='quality' value='3'/>
-        <input type='radio' id='4' name='quality' value='4'/>
-        <input type='radio' id='5' name='quality' value='5'/>
-        </div>
-        <div className='review-char'>
-        <label htmlFor='1'>Poor</label>
-        <label htmlFor='2'>Below Average</label>
-        <label htmlFor='3'>What I expected</label>
-        <label htmlFor='4'>Pretty Great</label>
-        <label htmlFor='5'>Perfect</label>
-        </div>
-      </div>
+      {radioForm}
       <div className='review-form'>
         <label>
         Review Summary:* <br></br>
