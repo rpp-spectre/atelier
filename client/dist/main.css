@@ -96,6 +96,31 @@ aside {
   grid-area: 1/-1;
 }
 
+.hoverStar-rating {
+  display: inline-block;
+  position: relative;
+}
+
+#starButton {
+  background: none;
+  border: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.on::before {
+  content:'★';
+  color: black;
+  position: absolute;
+}
+
+/* .off {
+  background-color: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+} */
+
 /* Review Tiles */
 .review {
   padding: 10px;

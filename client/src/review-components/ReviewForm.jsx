@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import Stars from './Stars.jsx';
+import HoverStars from './HoverStars.jsx';
 
 function ReviewForm(props) {
   let charDetails = {
@@ -12,11 +12,38 @@ function ReviewForm(props) {
     Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs loose']
   }
 
-  const [formData, setFormData] = useState([]);
+  const [formData, setFormData] = useState({
+    product_id: 0,
+    rating: 0,
+    summary: '',
+    body: '',
+    recommend: true,
+    name: '',
+    email: '',
+    photos: [],
+    characteristics: {}
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(e.value);
+    console.log(formData);
+  }
+
+  function handleChange(e) {
+    const value = e.target.value;
+
+    if (e.target.className === 'characteristics') {
+      //needs to be for characteristic ID - will need to pass down from props
+      setFormData({...formData,
+        characteristics: {...formData.characteristics,
+        [e.target.name]: value}
+      })
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: value
+      });
+    }
   }
 
   let radioForm = Object.entries(charDetails).map((characteristic, index) => {
@@ -24,7 +51,7 @@ function ReviewForm(props) {
       <label>{characteristic[0]}*</label><br></br>
       <div className='review-char'>
       {characteristic[1].map((description, index) => {
-        return <input key={index} type='radio' id={index + 1} name={characteristic[0]} value={index + 1}></input>
+        return <input key={index} className='characteristics' onChange={handleChange} type='radio' id={index + 1} name={characteristic[0]} value={index + 1}></input>
       })}
       </div>
       <div className='review-char'>
@@ -47,27 +74,27 @@ function ReviewForm(props) {
       <div className='review-form'>
         <label>
           Overall Rating*
-          <Stars rating='0'/>
+          <HoverStars selectRating={handleChange}/>
         </label>
       </div>
       <div className='review-form'>
         <label>I recommend this product*</label><br></br>
-        <input type='radio' id='yes' name='recommend' value='yes'/>
+        <input onChange={handleChange} type='radio' id='yes' name='recommend' defaultValue={true}/>
         <label htmlFor='yes'>Yes</label><br></br>
-        <input type='radio' id='no' name='recommend' value='no'/>
+        <input onChange={handleChange} type='radio' id='no' name='recommend' defaultValue={false}/>
         <label htmlFor='no'>No</label><br></br>
       </div>
       {radioForm}
       <div className='review-form'>
         <label>
         Review Summary:* <br></br>
-        <textarea placeholder='Example: Best purchase ever!' rows='1' cols='60' maxLength='60'/>
+        <textarea onChange={handleChange} placeholder='Example: Best purchase ever!' rows='1' cols='60' maxLength='60' name='summary' defaultValue={formData.summary}/>
         </label>
       </div>
       <div className='review-form'>
         <label>
         Review Body:* <br></br>
-        <textarea placeholder='Why did you like the product or not?' rows='5' cols='60' maxLength='1000' minLength='50'/>
+        <textarea onChange={handleChange} placeholder='Why did you like the product or not?' rows='5' cols='60' maxLength='1000' minLength='50' name='body' defaultValue={formData.body}/>
         <div style={{fontSize: '8pt'}}>Minimum required characters left: [##]</div>
         </label>
       </div>
@@ -80,13 +107,13 @@ function ReviewForm(props) {
       <div className='review-form'>
       <label>
           What is your nickname?*<br></br>
-          <input type='text' placeholder='jackson11!' cols='60' maxLength='60'/>
+          <input onChange={handleChange} type='text' placeholder='jackson11!' cols='60' maxLength='60' name='name' defaultValue={formData.nickname}/>
         </label>
       </div>
       <div className='review-form'>
       <label>
           What is your email?*<br></br>
-          <input type='text' placeholder='Example: jackson11@email.com'maxLength='60'/>
+          <input onChange={handleChange} type='text' placeholder='Example: jackson11@email.com'maxLength='60' name='email' defaultValue={formData.email}/>
           <div style={{fontSize: '8pt'}}>For authentication reasons, you will not be emailed</div>
         </label>
       </div>

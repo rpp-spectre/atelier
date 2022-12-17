@@ -7,6 +7,7 @@ import Review from './Reviews.jsx';
 import Ratings from './Ratings.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import ProductBreakdownList from './ProductBreakdownList.jsx';
+import HoverStars from './HoverStars.jsx';
 
 function ReviewSection(props) {
   const [totalReviewsArray, setReviewsArray] = useState([]);
