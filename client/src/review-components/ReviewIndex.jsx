@@ -19,7 +19,7 @@ function ReviewSection(props) {
 
   let addReviewButton = <button onClick={() => {setAddReviews(true)}}>Add A Review +</button>;
   if (addReviews === true) {
-    addReviewButton = <ReviewForm onClose={() => {setAddReviews(false)}}/>
+    addReviewButton = <ReviewForm data={reviewMeta} onClose={() => {setAddReviews(false)}}/>
   }
 
   let moreReviewButton = <button onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;

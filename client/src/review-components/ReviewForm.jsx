@@ -12,12 +12,16 @@ function ReviewForm(props) {
     Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs loose']
   }
 
+  let charArray = Object.keys(props.data.characteristics).map((element, index) => {
+    return [element, props.data.characteristics[element].id, charDetails[element]]
+  })
+
   const [formData, setFormData] = useState({
-    product_id: 0,
+    product_id: props.data.product_id,
     rating: 0,
     summary: '',
     body: '',
-    recommend: true,
+    recommend: false,
     name: '',
     email: '',
     photos: [],
@@ -33,7 +37,6 @@ function ReviewForm(props) {
     const value = e.target.value;
 
     if (e.target.className === 'characteristics') {
-      //needs to be for characteristic ID - will need to pass down from props
       setFormData({...formData,
         characteristics: {...formData.characteristics,
         [e.target.name]: value}
@@ -46,16 +49,16 @@ function ReviewForm(props) {
     }
   }
 
-  let radioForm = Object.entries(charDetails).map((characteristic, index) => {
+  let radioForm = charArray.map((characteristic, index) => {
     return <div key={index} className='review-form'>
       <label>{characteristic[0]}*</label><br></br>
       <div className='review-char'>
-      {characteristic[1].map((description, index) => {
-        return <input key={index} className='characteristics' onChange={handleChange} type='radio' id={index + 1} name={characteristic[0]} value={index + 1}></input>
+      {characteristic[2].map((description, index) => {
+        return <input key={index} className='characteristics' onChange={handleChange} type='radio' id={index + 1} name={characteristic[1]} value={index + 1}></input>
       })}
       </div>
       <div className='review-char'>
-      {characteristic[1].map((description, index) => {
+      {characteristic[2].map((description, index) => {
         return <label key={index} htmlFor={index + 1}>{description}</label>
       })}
       </div>
