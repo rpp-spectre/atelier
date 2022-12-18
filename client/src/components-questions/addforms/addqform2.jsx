@@ -12,6 +12,16 @@ const Addqform2 = ({onClose, show,pid, product})=>{
   if(!show) {
     return null;
   }
+  var handleSubmit=()=>{
+    axios.post(`http://localhost:3000/questions?body=${body}&name=${name}&email=${email}&product_id=${pid}`)
+    .then((result) =>{
+     console.log('in forms');
+      console.log(result);
+      })
+    .catch(err=>{
+      throw err;
+      });
+  };
 
 
   return (
@@ -26,15 +36,8 @@ const Addqform2 = ({onClose, show,pid, product})=>{
         </div>
         <div className='modal-body'>
            <form onSubmit={(e)=>{
-            //  e.preventDefault();
-             axios.post(`http://localhost:3000/questions?body=${'body'}&name=${name}&email=${email}&product_id=${pid}`)
-               .then((result) =>{
-                console.log('test');
-                 console.log(result);
-                 })
-               .catch(err=>{
-                 throw err;
-                 });
+
+            handleSubmit();
            }}>
              <label>
              &#42; Your Question:
@@ -43,7 +46,7 @@ const Addqform2 = ({onClose, show,pid, product})=>{
                rows="20"
                maxLength='1000'
                name="body"
-               placeholder="..."
+               placeholder="Why did you like the product or not"
                required
                autoComplete="off"
                value ={body}
@@ -72,7 +75,7 @@ const Addqform2 = ({onClose, show,pid, product})=>{
              &#42; Your Email:
 
               <input
-              type="text"
+              type="email"
               name="email"
               maxLength='60'
               placeholder="Example: jack@email.com"
@@ -86,6 +89,7 @@ const Addqform2 = ({onClose, show,pid, product})=>{
              </label>
              <div className='model-footer'>
                <button  type="submit" className='button'>Submit</button>
+               <button onClick={()=>{onClose()}}> Cancel</button>
              </div>
            </form>
         </div>

@@ -21,6 +21,10 @@ const Answer = ({answer})=>{
     year: 'numeric'
    };
 
+  var answerer = () =>{
+     return ((answer.answerer_name === "Seller") ? <b>Seller</b> : answer.answerer_name);
+  };
+
   let pdate = new Date(answer.date);
   let date = pdate.toLocaleDateString("en-US", options);
 
@@ -29,7 +33,7 @@ const Answer = ({answer})=>{
       A: {answer.body}
       <br />
       {/* by {answer.answer_name} {answer.date} | Helpful ({acounter}) Report */}
-      by {answer.answerer_name} {date} | <Ahcounter acounter={acounter} aid={answer.answer_id} /> <Reporta aid={answer.answer_id} />
+      by {answerer()} {date} | <Ahcounter acounter={acounter} aid={answer.answer_id} /> <Reporta aid={answer.answer_id} />
       <br />
        {photo()}
        <br />

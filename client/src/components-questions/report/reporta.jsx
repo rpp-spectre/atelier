@@ -1,26 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDom from 'react-dom/client';
 import axios from 'axios';
 
 const Reporta = ({aid}) =>{
+
+  const [rep, setRep] = useState('Report');
+  const [showr, setShowr] = useState(true);
+
+
   const handleClick = () =>{
-    let apiRA = `http://localhost:3000/answers/${aid}/report`;
-    axios.put(apiRA)
-     .then((result)=>{
-     console.log(result);
-   // res.send('helpfulness updated');
-     })
-     .catch((error) =>{
-       throw(error);
-       });
+    if (showr) {
+      let apiRA = `http://localhost:3000/answers/${aid}/report`;
+      axios.put(apiRA)
+       .then((result)=>{
+       console.log(result);
+       setShowr(false);
+       setRep('Reported');
+       })
+       .catch((error) =>{
+         throw(error);
+         });
+    }
+
   }
 
   return(
     <>
-   <span className = "underline" onClick = {
-    () => {handleClick(); window.location.reload(false)}
+   <span className='underline' onClick = {
+    () => {handleClick()}
    } >
-   Report{aid}
+   {rep}
    </span>
    </>
   );

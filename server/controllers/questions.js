@@ -105,11 +105,13 @@ exports.addQuestion = (req, res) =>{
   }
   )
   .then((response) => {
-    // console.log(response.data);
+    console.log('in controller');
+    console.log('controller data',response.config.data);
     res.send(response.data);
   })
   .catch((error) => {
-    // console.log(error);
+    // console.log(response.config.data);
+    console.log(error);
     res.send(error);
   });
 };
