@@ -78,7 +78,7 @@ class AddToCart extends React.Component {
       <div className='SizeQuantityCart'>
         <div className='SizeAndQuantity'>
           <div className="Size">
-            <select className="SizeSelector" value={this.state.sizeValue} disabled={this.props.sizeOutOfStock} onChange={this.handleSizeChange.bind(this)}>
+            <select className="SizeSelector" data-testid='SizeSelector' value={this.state.sizeValue} disabled={this.props.sizeOutOfStock} onChange={this.handleSizeChange.bind(this)}>
               <option value={'SelectSize'}>{this.props.sizeOutOfStock ? 'OUT OF STOCK' : 'Select Size'}</option>
               {
                 this.props.sizeList.map((item, index) => {
@@ -90,7 +90,7 @@ class AddToCart extends React.Component {
           </div>
 
           <div className="Quantity">
-            <select className="QuantitySelector" value={this.state.quantityValue} onChange={this.handleQuantityChange.bind(this)}>
+            <select className="QuantitySelector" data-testid='QuantitySelector' value={this.state.quantityValue} onChange={this.handleQuantityChange.bind(this)}>
               {this.state.sizeValue === 'SelectSize' ?  (<option value={'-'}> - </option>) :
                 this.QuantityMaxList(this.props.sizeList[this.state.selectedIndex].quantity).map((quantity, index) => {
                   return (

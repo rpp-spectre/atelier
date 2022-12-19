@@ -88,7 +88,7 @@ class Overview extends React.Component {
 
     axios.get('/products/71701/styles')
     .then((response) => {
-      console.log(response.data.results, '===========getStyle response data')
+      // console.log(response.data.results, '===========getStyle response data')
       this.setState({
         styleList: response.data.results,
         // currentStyle: response.data.results[0],
