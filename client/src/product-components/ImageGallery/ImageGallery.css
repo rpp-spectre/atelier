@@ -6,25 +6,26 @@
 .container {
   position: relative;
   /* width: 30%; */
-  width:40vw;
-  border-style: dashed;
-  border-color: black;
+  /* width:40vw; */
+  width: 100%;
+  /* border-style: dashed;
+  border-color: black; */
 }
 
 /* Hide the images by default */
 .mySlides {
   display:block;
   width: 100%;
-  border-style: dashed;
-  border-color: black;
+  /* border-style: dashed;
+  border-color: black; */
 }
 
 .slideImage {
   width:40vw;
   height: 70vh;
   object-fit: cover;
-  border-style: dashed;
-  border-color: black;
+  /* border-style: dashed;
+  border-color: black; */
 
 }
 
@@ -113,8 +114,8 @@
   left: 2%;
   width: 12%;
   height: 60%;
-  border-style: dashed;
-  border-color: black;
+  /* border-style: dashed;
+  border-color: black; */
 }
 
 /* Six columns side by side */
@@ -123,8 +124,8 @@
   /* height: 15%; */
   width:4vw;
   height: 7vh;
-  border-style: dashed;
-  border-color: black;
+  /* border-style: dashed;
+  border-color: black; */
 }
 
 /* Add a transparency effect for thumnbail images */
@@ -134,8 +135,8 @@
   width:4vw;
   height: 7vh;
   object-fit: cover;
-  border-style: dashed;
-  border-color: black;
+  /* border-style: dashed;
+  border-color: black; */
 }
 
 .active,

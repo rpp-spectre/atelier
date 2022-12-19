@@ -14,11 +14,11 @@ class ImageGallery extends React.Component {
 
   plusSlides(n) {
     var newIndex = this.state.slideIndex + n;
-    if (newIndex >= this.props.photos.length) {
-      newIndex =  this.props.photos.length - 1;
-    } else if (newIndex < 0) {
-      newIndex = 0;
-    }
+    // if (newIndex >= this.props.photos.length) {
+    //   newIndex =  this.props.photos.length - 1;
+    // } else if (newIndex < 0) {
+    //   newIndex = 0;
+    // }
 
     var newStartIndex = this.state.startIndex;
     if (newIndex - this.props.showNum() + 1 >= 0) {
@@ -50,6 +50,20 @@ class ImageGallery extends React.Component {
     });
   }
 
+  openFullScreen() {
+    // document.getElementById('slideImage').requestFullscreen({ navigationUI: "show" });
+
+    // let elem = document.getElementById('container');
+
+    // if (!document.fullscreenElement) {
+    //   elem.requestFullscreen({ navigationUI: "show" }).catch((err) => {
+    //     alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+    //   });
+    // } else {
+    //   document.exitFullscreen();
+    // }
+  }
+
 
   render() {
     // console.log('this.props', this.props.photos.length)
@@ -63,7 +77,7 @@ class ImageGallery extends React.Component {
       // </div>
 
 
-      <div className="container">
+      <div className="container" id='container'>
           {this.props.photos.map((photo, index) => {
             if (index !== this.state.slideIndex) {
               return
@@ -71,7 +85,7 @@ class ImageGallery extends React.Component {
             return (
               <div className="mySlides" key={index}>
                 <div className="numbertext">{index+1} / {this.props.photos.length}</div>
-                <img className="slideImage" src={photo.url} />
+                <img className="slideImage" id="slideImage" onClick={this.openFullScreen.bind(this)} src={photo.url} />
               </div>
             )
           })}
@@ -80,7 +94,7 @@ class ImageGallery extends React.Component {
           {this.state.slideIndex === this.props.photos.length - 1 ? null : <a className="next" onClick={() => this.plusSlides(1)}>❯</a>}
 
           <div className="row">
-            {this.state.startIndex !== 0 ? <div className='upArrow column' onClick={this.handleArrowUp.bind(this)}><i className="arrow up"></i></div> : null}
+            {this.state.startIndex !== 0 ? <div data-testid="upArrow" className='upArrow column' onClick={this.handleArrowUp.bind(this)}><i className="arrow up"></i></div> : null}
             {this.props.photos.map((photo, index) => {
               if (index < this.state.startIndex || index >= this.state.startIndex+this.props.showNum()) {
                 return;
@@ -91,7 +105,7 @@ class ImageGallery extends React.Component {
                 </div>
               )
             })}
-            {this.state.startIndex + this.props.showNum() < this.props.photos.length ? <div className='downArrow column' onClick={this.handleArrowDown.bind(this)}><i className="arrow down"></i></div> : null}
+            {this.state.startIndex + this.props.showNum() < this.props.photos.length ? <div data-testid="downArrow" className='downArrow column' onClick={this.handleArrowDown.bind(this)}><i className="arrow down"></i></div> : null}
           </div>
       </div>
     )
