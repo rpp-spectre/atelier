@@ -64,7 +64,7 @@ class Overview extends React.Component {
 
   getProduct() {
 
-    axios.get('/products/71697')
+    axios.get('/products/71701')
     .then((response) => {
       // console.log(response.data, '===========getProduct response data')
       var productData = {
@@ -86,9 +86,9 @@ class Overview extends React.Component {
 
   getStyle() {
 
-    axios.get('/products/71697/styles')
+    axios.get('/products/71701/styles')
     .then((response) => {
-      console.log(response.data.results, '===========getStyle response data')
+      // console.log(response.data.results, '===========getStyle response data')
       this.setState({
         styleList: response.data.results,
         // currentStyle: response.data.results[0],
@@ -144,10 +144,9 @@ class Overview extends React.Component {
   render() {
     return (
       <div className="Overview" data-testid="overview">
-        ==========================Product Overview=========================<br/><br/>
         <div className="Container-top">
           <div className="Container-left">
-          <ImageGallery photos={this.state.photos}/><br/>
+          <ImageGallery photos={this.state.photos} showNum={() => Math.min(this.state.photos.length, 7)}/><br/>
           </div><br/>
           <div className="Container-right">
           <StarRating rating={this.state.rating} reviews={this.state.reviews}/><br/>
@@ -156,13 +155,12 @@ class Overview extends React.Component {
           <Price price={this.state.price}/><br/>
           <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)}/><br/>
           <AddToCart sizeList={this.state.sizeList} sizeOutOfStock={this.state.sizeOutOfStock}/><br/>
-          <Star />
+          {/* <Star /> */}
           </div><br/>
         </div>
         <div className="Container-bottom">
         <Detail slogan={this.state.slogan} description={this.state.description} features={this.state.features}/>
         </div><br/>
-        ==========================Product Overview=========================<br/><br/>
       </div>
     )
   }

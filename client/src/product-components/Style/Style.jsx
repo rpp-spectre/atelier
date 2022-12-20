@@ -36,15 +36,22 @@ class Style extends React.Component {
     // console.log(this.props.styleList, '====================styleList');
     return (
       <div className="Style">
-        Style > &ensp;{this.state.styleName === '' ? this.props.styleList[0].name : this.state.styleName}<br/>
-        {this.props.styleList.map((style, index) => {
-          return (
-            <label key={style.style_id} className="styleLable">
-              <img className="stylePhoto" key={style.style_id} onClick={(e) => this.toggleCheckbox(e, style, index)} src={style.photos[0].thumbnail_url} alt="styleIMG" />
-              {this.state.checkedIndex === index ? <input type="checkbox" id="myCheck" checked={true} onChange={() => {}}></input> : null}
-            </label>
-          )
-        })}
+        <div className='StyleName'>
+          <label className='StyleLable'>Style ></label>&ensp;
+          <label>
+          {this.state.styleName === '' ? this.props.styleList[0].name : this.state.styleName}
+          </label>
+        </div>
+        <div className='StyleImage'>
+          {this.props.styleList.map((style, index) => {
+            return (
+              <label key={style.style_id} className="styleLable">
+                <img className="stylePhoto" key={style.style_id} onClick={(e) => this.toggleCheckbox(e, style, index)} src={style.photos[0].thumbnail_url} alt={style.name} />
+                {this.state.checkedIndex === index ? <input type="checkbox" id={style.style_id} checked={true} onChange={() => {}}></input> : null}
+              </label>
+            )
+          })}
+        </div>
       </div>
     )
   }
