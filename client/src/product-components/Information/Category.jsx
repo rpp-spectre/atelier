@@ -8,7 +8,7 @@ class Category extends React.Component {
   render() {
     return (
       <div className="Category">
-        Category: {this.props.category}
+        {this.props.category}
       </div>
     )
   }

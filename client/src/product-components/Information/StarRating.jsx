@@ -9,8 +9,8 @@ class StarRating extends React.Component {
   render() {
     return (
       <div className="StarRating">
-        <Stars rating={this.props.rating}/>
-        <label style={{textDecorationLine: 'underline'}}>Read all {this.props.reviews} Reviews</label>
+        <Stars rating={this.props.rating}/>&ensp;
+        <label className='Reviews'>Read all {this.props.reviews} Reviews</label>
       </div>
     )
   }
