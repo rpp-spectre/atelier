@@ -33,6 +33,10 @@ function ReviewForm(props) {
     console.log(formData);
   }
 
+  function handleUpload(e) {
+    console.log(e.target.files);
+  }
+
   function handleChange(e) {
     const value = e.target.value;
 
@@ -104,7 +108,7 @@ function ReviewForm(props) {
       <div className='review-form'>
         <label>
           Upload an image:
-          <input type='file' accept='image/jpeg, image/png' multiple/>
+          <input type='file' accept='image/jpeg, image/png' multiple onChange={handleUpload}/>
         </label>
       </div>
       <div className='review-form'>

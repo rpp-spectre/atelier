@@ -6,6 +6,10 @@ aside {
   background-color: lightgrey;
 }
 
+img {
+  padding: 10px;
+}
+
 .underline {
   border-bottom: 3px solid grey;
 }
@@ -113,13 +117,6 @@ aside {
   color: black;
   position: absolute;
 }
-
-/* .off {
-  background-color: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-} */
 
 /* Review Tiles */
 .review {
