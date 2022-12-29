@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import HoverStars from './HoverStars.jsx';
+import axios from 'axios';
 
 function ReviewForm(props) {
+
   let charDetails = {
     Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
     Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -31,6 +33,23 @@ function ReviewForm(props) {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(formData);
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/reviews',
+      data: formData,
+    })
+    .then((result) => {
+      console.log(result);
+      if (result.data === 'Created') {
+        alert('Thank you for your review!');
+        props.onClose();
+      } else {
+        alert('Something went wrong. Please try again later');
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   function handleUpload(e) {
@@ -43,7 +62,7 @@ function ReviewForm(props) {
     if (e.target.className === 'characteristics') {
       setFormData({...formData,
         characteristics: {...formData.characteristics,
-        [e.target.name]: value}
+        [e.target.name]: Number(value)}
       })
     } else {
       setFormData({

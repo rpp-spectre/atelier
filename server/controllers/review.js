@@ -36,14 +36,25 @@ exports.getReviewMeta = (req, res) => {
 exports.postReview = (req, res) =>{
   axios({
     method: 'post',
-    url: AtelierAPI + 'reviews/meta?product_id=1',
-    headers: {'authorization': process.env.API_KEY}
+    url: AtelierAPI + 'reviews/',
+    headers: {'authorization': process.env.API_KEY},
+    data: {
+      product_id: Number(req.body.product_id),
+      rating: Number(req.body.rating),
+      summary: req.body.summary,
+      body: req.body.body,
+      recommend: req.body.recommend === 'true',
+      name: req.body.name,
+      email: req.body.email,
+      photos: req.body.photos,
+      characteristics: JSON.parse(JSON.stringify(req.body.characteristics))
+    }
   })
   .then((result) => {
-    res.send(result.data);
+    res.sendStatus(201);
   })
   .catch((err) => {
-    console.log(err);
+    res.status(400);
     res.send(err);
   });
 };
