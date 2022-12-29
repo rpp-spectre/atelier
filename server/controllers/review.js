@@ -58,3 +58,20 @@ exports.postReview = (req, res) =>{
     res.send(err);
   });
 };
+
+exports.markHelpfulReview = (req, res) => {
+  console.log(req.body);
+
+  axios({
+    method: 'put',
+    url: AtelierAPI + `reviews/${req.body.reviewId}/helpful`,
+    headers: {'authorization': process.env.API_KEY}
+  })
+  .then((result) => {
+    res.sendStatus(204);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.send(err);
+  });
+};
