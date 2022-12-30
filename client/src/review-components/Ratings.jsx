@@ -5,13 +5,25 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 
 let Ratings = (props) => {
   let ratingsData = props.data.ratings;
-  let recommendData = props.data.recommended;
-
-  let weightedTotal = Number.parseInt(ratingsData['1']) * 1 + Number.parseInt(ratingsData['2']) * 2 + Number.parseInt(ratingsData['3']) * 3 + Number.parseInt(ratingsData['4']) * 4 + Number.parseInt(ratingsData['5']) * 5;
+  let weightedTotal = 0;
   let numberOfReviews = 0;
-  Object.values(ratingsData).forEach((element) => {
-    numberOfReviews += Number.parseInt(element);
-  })
+
+  for (var i = 1; i <= 5; i++) {
+    if (ratingsData[i] === undefined) {
+      ratingsData[i] = 0;
+    }
+    ratingsData[i] = Number.parseInt(ratingsData[i]);
+    weightedTotal += ratingsData[i] * i;
+    numberOfReviews += ratingsData[i];
+  }
+
+  let recommendData = props.data.recommended;
+    if (recommendData.true === undefined) {
+      recommendData.true = 0;
+    }
+    if (recommendData.false === undefined) {
+      recommendData.false = 0;
+    }
 
   let averageRating = Math.round(weightedTotal / numberOfReviews * 10) / 10;
 
