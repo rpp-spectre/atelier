@@ -1,13 +1,52 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import PortalReactDOM from 'react-dom';
+import Simage from './simage.jsx';
+import axios from 'axios';
 // import { CSSTransition } from 'react-transition-group';
 
 
-const Addaform = ({onClose, show})=>{
+const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
   if(!show) {
     return null;
   }
+
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [warning, setWarning] = useState(false);
+  const [body, setBody] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [photos, setPhotos] = useState([]);
+
+  const showWarning = () =>{
+    if(warning) {
+      return "You can only upload up to 5 images";
+    }
+  };
+
+  var uploadImage= (img) => {
+    let body = new FormData();
+    body.set('key', process.env.IMGAPI_KEY);
+    body.append('image', img);
+
+    return axios({
+      method: 'post',
+      url: 'https://api.imgbb.com/1/upload',
+      data: body
+    });
+  };
+
+  var handleSubmit=()=>{
+    console.log("submitted");
+    axios.post(`http://localhost:3000/questions/${qid}/answers?body=${body}&name=${name}&email=${email}&photos=${photos}`)
+    .then((result) =>{
+     console.log('in forms');
+      console.log(result);
+      })
+    .catch(err=>{
+      throw err;
+      });
+  };
 
 
   return (
@@ -18,60 +57,105 @@ const Addaform = ({onClose, show})=>{
           <h4 className='modal-title'>
             Submit Your Answer
           </h4>
-          [Product Name]: [Question Body]
+          [{product}]: [{qbody}]
         </div>
         <div className='modal-body'>
-           <form>
+           <form onSubmit={(e)=>{
+            console.log("in form ");
+            handleSubmit();
+            }}>
              <label>
                Your Answer:
                <textarea
                cols="50"
                rows="20"
-               name="answer"
+               maxLength="1000"
+               name="body"
                placeholder="..."
                required
                autoComplete="off"
-               // value ={}
-               // onChange = {(e)=>{ setContent(e.target.value); }}
-             />
+               value ={body}
+               onChange = {(e)=>{ setBody(e.target.value); }}
+              />
              </label>
              <br />
              <label>
-              Your Nickname:
-
+              What is Your Nickname:
               <input
               type="text"
-              name="nickname"
-              placeholder="Example: jackson11!"
+              name="name"
+              maxLength="60"
+              placeholder="Example: jack543!"
               required
               autoComplete="off"
-              // value ={}
-              // onChange = {(e)=>{ setTitle(e.target.value); }}
+              value ={name}
+              onChange = {(e)=>{ setName(e.target.value); }}
               />
               <br />
-              For privacy reasons, do not use your full name or email address
+              <span className ="notetext">For privacy reasons, do not use your full name or email address</span>
              </label>
              <br />
              <label>
               Your Email:
-
               <input
-              type="text"
+              type="email"
               name="email"
+              maxLength="60"
               placeholder="Example: jack@email.com"
               required
               autoComplete="off"
-              // value ={}
-              // onChange = {(e)=>{ setTitle(e.target.value); }}
+              value ={email}
+              onChange = {(e)=>{ setEmail(e.target.value); }}
               />
-              <br />
-              For authentication reasons, you will not be emailed
+             <br />
+              <span className ="notetext">For authentication reasons, you will not be emailed</span>
              </label>
+             <br />
+             <label>
+             Upload your photos:
+             <br />
+             <span className="notetext">{showWarning()}</span>
+
+              {/* {(selectedImages.length >0) && (
+
+                selectedImages.map((image) => {
+                  return (<Simage image={image} />);
+                });
+            )} */}
+            <div>
+            {(selectedImages.length>0) && (
+
+             selectedImages.map((image, i) => {
+              return (<Simage image={image} key={i} />)
+            })
+
+            )}
+             </div>
+          <br />
+
+      <br />
+      <input
+        type="file"
+        name="photos"
+        onChange={(event) => {
+          console.log(event.target.files[0]);
+          if(selectedImages.length <5)  {
+            setSelectedImages([...selectedImages,event.target.files[0]]);
+          } else {
+            setWarning(true);
+          }
+
+        }}
+      />
+             </label>
+             <div className='model-footer'>
+          <button onClick={onClose} className='button'>Cancel</button>
+          <button type="submit">Submit</button>
+        </div>
            </form>
         </div>
-        <div className='model-footer'>
-          <button onClick={onClose} className='button'>Submit</button>
-        </div>
+
+
       </div>
     </div>
 

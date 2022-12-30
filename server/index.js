@@ -26,6 +26,7 @@ app.get('/reviewsMeta', reviews.getReviewMeta);
 app.get('/questions', controllerQ.getQuestions);
 app.post('/questions', controllerQ.addQuestion);
 app.get('/questions/:qid/answers', controllerQ.getAnswers);
+app.post('/questions/:qid/answers', controllerQ.addAnswer);
 app.put('/questions/:qid/helpful', controllerQ.changeQHelpful);
 app.put('/answers/:aid/helpful', controllerQ.changeAHelpful);
 app.put('/answers/:aid/report', controllerQ.areport);

@@ -191,6 +191,15 @@ aside {
 .question button {
   margin: 20px;
 }
+
+.question img {
+  padding: 10px;
+}
+
+.notetext {
+  font-size: small;
+  font-style: italic;
+}
 /*Product Section CSS */
 .photo {
   height: 70px;

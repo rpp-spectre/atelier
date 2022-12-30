@@ -25,7 +25,6 @@ const Ahcounter = ({acounter, aid}) =>{
 
   return (
     <>
-
     Helpful? <span className ='underline' onClick={()=>{if(ah){setAhcounter(ahcounter+1)}; updateA()}}>Yes</span>({ahcounter})
     </>
   );

@@ -9,14 +9,14 @@ import Qhcounter from './counter/qhcounter.jsx';
 
 
 
-var Q = ({question}) =>{
+var Q = ({question, pid, product}) =>{
   const qcounter = question.question_helpfulness;
   // const [qcounter, setQcounter] = useState([question.question_helpfulness]);
   return (<div role="document">
 
 
     {/* <h3>Q: {question.question_body}</h3> Helpful? Yes ( {qcounter}) | <Answeradd /> */}
-    <h3>Q: {question.question_body}</h3> Helpful? <Qhcounter qcounter={qcounter} qid={question.question_id} /> | <Answeradd />
+    <h3>Q: {question.question_body}</h3> Helpful? <Qhcounter qcounter={qcounter} qid={question.question_id} /> | <Answeradd pid={pid} qid={question.question_id} qbody={question.question_body} product={product} />
     <br />
     <br />
     <Alist qid={question.question_id} />

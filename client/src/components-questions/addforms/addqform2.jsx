@@ -37,7 +37,6 @@ const Addqform2 = ({onClose, show,pid, product})=>{
         <div className='modal-body'>
            <form onSubmit={(e)=>{
 
-            handleSubmit();
            }}>
              <label>
              &#42; Your Question:
@@ -88,8 +87,9 @@ const Addqform2 = ({onClose, show,pid, product})=>{
               For authentication reasons, you will not be emailed
              </label>
              <div className='model-footer'>
-               <button  type="submit" className='button'>Submit</button>
                <button onClick={()=>{onClose()}}> Cancel</button>
+               <button  type="submit" className='button'>Submit</button>
+
              </div>
            </form>
         </div>

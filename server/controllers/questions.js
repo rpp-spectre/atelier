@@ -87,16 +87,48 @@ exports.areport = (req, res) =>{
 };
 
 exports.addQuestion = (req, res) =>{
-  let apiGetQ = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/';
+  let apiAddQ = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/';
   let body = req.query.body;
   let name = req.query.name;
   let email = req.query.email;
   let productId = req.query.product_id;
-  axios.post(apiGetQ, {
+  axios.post(apiAddQ, {
     "body": body,
     "name": name,
     "email": email,
     "product_id": parseInt(productId)
+    },
+    {
+    headers: {
+    'Authorization': process.env.API_KEY
+    }
+  }
+  )
+  .then((response) => {
+    console.log('in controller');
+    console.log('controller data',response.config.data);
+    res.send(response.data);
+  })
+  .catch((error) => {
+    // console.log(response.config.data);
+    console.log(error);
+    res.send(error);
+  });
+};
+
+exports.addAnswer = (req, res) =>{
+  let qid = req.params.qid;
+  console.log("qid", qid);
+  let apiAddA = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/'+qid+'/answers';
+  let body = req.query.body;
+  let name = req.query.name;
+  let email = req.query.email;
+  let photos = req.query.photos;
+  axios.post(apiAddA, {
+    "body": body,
+    "name": name,
+    "email": email,
+    "photos": Array.from(photos)
     },
     {
     headers: {
