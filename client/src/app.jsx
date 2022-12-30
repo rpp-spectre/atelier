@@ -6,25 +6,17 @@ import ProductSection from './product-components/Overview.jsx';
 import { HashRouter as Router, Link, Switch, Routes, Route, useParams } from 'react-router-dom'; // for handling passing route of product ID
 
 
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   };
-const App =()=>{
+const App = () => {
   const params = useParams();
   const pid = params.id || 71698;
 
   console.log('pid', pid);
-  // render() {
     return (<div>
       {/* <Link to='/71697'>home again</Link> */}
       <ProductSection />
       <ReviewSection />
       <Qsection pid = {pid} />
     </div>);
-
-// others will also put their sections in here
-  // }
 };
 
 

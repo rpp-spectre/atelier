@@ -7,6 +7,7 @@ import Review from './Reviews.jsx';
 import Ratings from './Ratings.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import ProductBreakdownList from './ProductBreakdownList.jsx';
+import HoverStars from './HoverStars.jsx';
 
 function ReviewSection(props) {
   const [totalReviewsArray, setReviewsArray] = useState([]);
@@ -18,7 +19,7 @@ function ReviewSection(props) {
 
   let addReviewButton = <button onClick={() => {setAddReviews(true)}}>Add A Review +</button>;
   if (addReviews === true) {
-    addReviewButton = <ReviewForm onClose={() => {setAddReviews(false)}}/>
+    addReviewButton = <ReviewForm data={reviewMeta} onClose={() => {setAddReviews(false)}}/>
   }
 
   let moreReviewButton = <button onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;
@@ -51,7 +52,7 @@ function ReviewSection(props) {
   useEffect(() => {
     (async() => {
       let result = await axios.get('http://localhost:3000/reviews');
-      setReviewCount(result.data.count);
+      setReviewCount(result.data.results.length);
       let resultArray = [];
       result.data.results.forEach((element) => {
         resultArray.push(<Review data={element}/>);
@@ -59,6 +60,29 @@ function ReviewSection(props) {
       setReviewsArray(resultArray);
     })()
   }, []);
+
+  function handleOptions(e) {
+    let sort = {
+      newest: 'newest',
+      helpful: 'helpful',
+      relevance: 'relevant'
+    };
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/sortReviews',
+      data: {data: sort[e.target.value]},
+    })
+    .then((result) => {
+      let resultArray = [];
+      result.data.results.forEach((element) => {
+        resultArray.push(<Review data={element}/>);
+      });
+      setReviewsArray(resultArray);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
   <div>
@@ -69,9 +93,9 @@ function ReviewSection(props) {
     </div>
     <div className='review'>
       <h3>{reviewCount} reviews, sorted by
-        <select>
-          <option value='newest'>newest</option>
+        <select onChange={handleOptions}>
           <option value='relevance'>relevance</option>
+          <option value='newest'>newest</option>
           <option value='helpful'>helpful</option>
         </select>
       </h3>
