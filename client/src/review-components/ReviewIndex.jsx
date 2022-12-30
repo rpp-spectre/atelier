@@ -52,7 +52,7 @@ function ReviewSection(props) {
   useEffect(() => {
     (async() => {
       let result = await axios.get('http://localhost:3000/reviews');
-      setReviewCount(result.data.count);
+      setReviewCount(result.data.results.length);
       let resultArray = [];
       result.data.results.forEach((element) => {
         resultArray.push(<Review data={element}/>);

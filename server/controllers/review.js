@@ -6,7 +6,7 @@ const AtelierAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 exports.getReviews = (req, res) => {
   axios({
     method: 'get',
-    url: AtelierAPI + 'reviews?product_id=71810',
+    url: AtelierAPI + 'reviews?product_id=71810&count=25&sort=newest',
     headers: {'authorization': process.env.API_KEY}
   })
   .then((result) => {

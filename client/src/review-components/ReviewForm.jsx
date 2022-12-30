@@ -4,7 +4,7 @@ import HoverStars from './HoverStars.jsx';
 import axios from 'axios';
 
 function ReviewForm(props) {
-
+  const [charCount, setCharCount] = useState(50);
   let charDetails = {
     Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
     Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -65,6 +65,11 @@ function ReviewForm(props) {
         [e.target.name]: Number(value)}
       })
     } else {
+      if (e.target.className === 'body') {
+        if (50 - e.target.value.length >= 0) {
+          setCharCount(50 - e.target.value.length)
+        }
+      }
       setFormData({
         ...formData,
         [e.target.name]: value
@@ -120,8 +125,8 @@ function ReviewForm(props) {
       <div className='review-form'>
         <label>
         Review Body:* <br></br>
-        <textarea onChange={handleChange} placeholder='Why did you like the product or not?' rows='5' cols='60' maxLength='1000' minLength='50' name='body' defaultValue={formData.body}/>
-        <div style={{fontSize: '8pt'}}>Minimum required characters left: [##]</div>
+        <textarea className='body' onChange={handleChange} placeholder='Why did you like the product or not?' rows='5' cols='60' maxLength='1000' minLength='50' name='body' defaultValue={formData.body}/>
+        <div style={{fontSize: '8pt'}}>Minimum required characters left: {charCount}</div>
         </label>
       </div>
       <div className='review-form'>
