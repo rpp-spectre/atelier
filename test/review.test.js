@@ -338,6 +338,7 @@ describe('Rating Breakdown', () => {
     expect(rating).toBeInTheDocument();
   });
 });
+//have sad path test here - when rating is missing a rating e.g. no 1 star reviews
 
 describe('Product Breakdown', () => {
   test('characteristics rating relating to product are displayed', () => {

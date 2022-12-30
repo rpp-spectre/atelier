@@ -25,7 +25,7 @@ exports.getReviews = (req, res) => {
 exports.getReviewMeta = (req, res) => {
   axios({
     method: 'get',
-    url: AtelierAPI + 'reviews/meta?product_id=71810',
+    url: AtelierAPI + 'reviews/meta?product_id=71900',
     headers: {'authorization': process.env.API_KEY}
   })
   .then((result) => {
