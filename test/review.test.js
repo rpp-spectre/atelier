@@ -3,16 +3,22 @@
  */
 
  import React from 'react';
- import {fireEvent, render, cleanup} from '@testing-library/react';
+ import {fireEvent, render, cleanup, renderHook, act} from '@testing-library/react';
  import Reviews from '../client/src/review-components/Reviews.jsx';
  import ReviewSection from '../client/src/review-components/ReviewIndex.jsx';
  import ReviewForm from '../client/src/review-components/ReviewForm.jsx';
  import ReviewList from '../client/src/review-components/ReviewList.jsx';
+ import Ratings from '../client/src/review-components/Ratings.jsx';
+ import ProductBreakdownList from '../client/src/review-components/ProductBreakdownList.jsx';
+ import HoverStars from '../client/src/review-components/HoverStars.jsx';
  import '@testing-library/jest-dom';
+ import axios from 'axios';
 
  afterEach(() => {
   cleanup();
 });
+
+jest.mock('axios');
 
 test('use jsdom in this test file', () => {
   const element = document.createElement('div');
@@ -209,18 +215,87 @@ describe('Review Features', () => {
 });
 
 describe('Review Form features', () => {
-  test('contains a checkbox for reviewer to recommend the product', () => {
-    const {getByText} = render(<ReviewForm />);
-    let checkbox = getByText('I recommend this product');
-    expect(checkbox).toBeInTheDocument();
+  test('contains a radio button for reviewer to recommend the product', () => {
+    var data = {
+      characteristics: {
+        Comfort: {id: 240985, value: '2.3333333333333333'},
+        Fit: {id: 240983, value: '2.9166666666666667'},
+        Length: {id: 240984, value: '3.0000000000000000'},
+        Quality: {id: 240986, value: '2.9166666666666667'},
+      },
+      product_id: "71810",
+      ratings: {1: '3', 2: '1', 3: '1', 4: '3', 5: '4'},
+      recommended: {false: '3', true: '9'}
+    }
+
+    const {getByLabelText} = render(<ReviewForm data={data}/>);
+    let radioButtons = getByLabelText('Yes');
+    expect(radioButtons).toBeInTheDocument();
   });
 
   test('user is able to submit reviews', () => {
-    const {getByDisplayValue} = render(<ReviewForm />);
+    var data = {
+      characteristics: {
+        Comfort: {id: 240985, value: '2.3333333333333333'},
+        Fit: {id: 240983, value: '2.9166666666666667'},
+        Length: {id: 240984, value: '3.0000000000000000'},
+        Quality: {id: 240986, value: '2.9166666666666667'},
+      },
+      product_id: "71810",
+      ratings: {1: '3', 2: '1', 3: '1', 4: '3', 5: '4'},
+      recommended: {false: '3', true: '9'}
+    }
+    const {getByDisplayValue} = render(<ReviewForm data={data}/>);
     let submit = getByDisplayValue('Submit Review');
     expect(submit).toBeInTheDocument();
   });
 
+  test('contains radio buttons to rate characteristics related to product', () => {
+    var data = {
+      characteristics: {
+        Comfort: {id: 240985, value: '2.3333333333333333'},
+        Fit: {id: 240983, value: '2.9166666666666667'},
+        Length: {id: 240984, value: '3.0000000000000000'},
+        Quality: {id: 240986, value: '2.9166666666666667'},
+      },
+      product_id: "71810",
+      ratings: {1: '3', 2: '1', 3: '1', 4: '3', 5: '4'},
+      recommended: {false: '3', true: '9'}
+    }
+    const {getByText} = render(<ReviewForm data={data}/>);
+    let comfort = getByText('Comfort*');
+    let fit = getByText('Fit*')
+    let length = getByText('Length*');
+    let quality = getByText('Quality*');
+
+    expect(comfort).toBeInTheDocument();
+    expect(fit).toBeInTheDocument();
+    expect(length).toBeInTheDocument();
+    expect(quality).toBeInTheDocument();
+  });
+
+  test('does not contains radio buttons for characterisitics unrelated to product', () => {
+    var data = {
+      characteristics: {
+        Comfort: {id: 240985, value: '2.3333333333333333'},
+        Fit: {id: 240983, value: '2.9166666666666667'},
+        Length: {id: 240984, value: '3.0000000000000000'},
+        Quality: {id: 240986, value: '2.9166666666666667'},
+      },
+      product_id: "71810",
+      ratings: {1: '3', 2: '1', 3: '1', 4: '3', 5: '4'},
+      recommended: {false: '3', true: '9'}
+    }
+    const {queryByText} = render(<ReviewForm data={data}/>);
+    let size = queryByText('Size');
+
+    expect(size).not.toBeInTheDocument();
+  });
+
+  // test('hovering stars on review form will shade in stars', () => {
+  //   const {result} = renderHook(() => HoverStars.setStarFill())
+  //   expect(result.current).toEqual(1);
+  // })
 });
 
 describe('Review List', () => {
@@ -244,12 +319,110 @@ describe('Review List', () => {
   });
 });
 
-test('only shows maximum two reviews in initial page rendering', () => {
-  // const {getByText, getByTestId} = render(<ReviewSection />);
-  // let num = getByText('(1)');
+describe('Rating Breakdown', () => {
+  test('average rating to one decimal place is displayed', () => {
+    var data = {
+      characteristics: {
+        Comfort: {id: 240985, value: '2.3333333333333333'},
+        Fit: {id: 240983, value: '2.9166666666666667'},
+        Length: {id: 240984, value: '3.0000000000000000'},
+        Quality: {id: 240986, value: '2.9166666666666667'},
+      },
+      product_id: "71810",
+      ratings: {1: '3', 2: '1', 3: '1', 4: '3', 5: '4'},
+      recommended: {false: '3', true: '9'}
+    }
+    const {getByText} = render(<Ratings data={data}/>);
 
-  // expect(num).toBeInTheDocument();
+    let rating = getByText('3.3');
+    expect(rating).toBeInTheDocument();
+  });
 });
+
+describe('Product Breakdown', () => {
+  test('characteristics rating relating to product are displayed', () => {
+    var data = {
+      characteristics: {
+        Comfort: {id: 240985, value: '2.3333333333333333'},
+        Fit: {id: 240983, value: '2.9166666666666667'},
+        Length: {id: 240984, value: '3.0000000000000000'},
+        Quality: {id: 240986, value: '2.9166666666666667'},
+      },
+      product_id: "71810",
+      ratings: {1: '3', 2: '1', 3: '1', 4: '3', 5: '4'},
+      recommended: {false: '3', true: '9'}
+    }
+    const {getByText} = render(<ProductBreakdownList data={data}/>);
+
+    let comfort = getByText('Comfort');
+    let fit = getByText('Fit')
+    let length = getByText('Length');
+    let quality = getByText('Quality');
+
+    expect(comfort).toBeInTheDocument();
+    expect(fit).toBeInTheDocument();
+    expect(length).toBeInTheDocument();
+    expect(quality).toBeInTheDocument();
+  });
+
+  test('characteristics rating relating to product are displayed', () => {
+    var data = {
+      characteristics: {
+        Comfort: {id: 240985, value: '2.3333333333333333'},
+        Fit: {id: 240983, value: '2.9166666666666667'},
+        Length: {id: 240984, value: '3.0000000000000000'},
+        Quality: {id: 240986, value: '2.9166666666666667'},
+      },
+      product_id: "71810",
+      ratings: {1: '3', 2: '1', 3: '1', 4: '3', 5: '4'},
+      recommended: {false: '3', true: '9'}
+    }
+    const {queryByText} = render(<ProductBreakdownList data={data}/>);
+
+    let size = queryByText('Size');
+
+    expect(size).not.toBeInTheDocument();
+  });
+});
+
+// describe('Reviews', () => {
+//   const renderComponent = () => (render(<ReviewSection />));
+//   test('only shows maximum two reviews in initial page rendering', async () => {
+//     const {getByText} = renderComponent();
+//     axios.get.mockResolvedValue({
+//       data: [
+//         {
+//           body: 'I love this product, it is just my aesthetic!',
+//           date: '2019-03-12T00:00:00.000Z',
+//           helpfulness: 6,
+//           photos: [],
+//           rating: 4,
+//           recommend: true,
+//           response: null,
+//           review_id: 123456,
+//           reviewer_name: 'testreviewer',
+//           summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit eleifend.'
+//         },
+//         {
+//           body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel faucibus massa. Vestibulum vitae justo quis elit aliquam elementum ut vitae est. Nulla et volutpat justo, eget hendrerit arcu. Suspendisse sed diam sit amet elit sodales facilisis non et est. Sed venenatis arcu sed dolor pulvinar mi.',
+//           date: '2019-03-12T00:00:00.000Z',
+//           helpfulness: 6,
+//           photos: [],
+//           rating: 4,
+//           recommend: true,
+//           response: null,
+//           review_id: 123456,
+//           reviewer_name: 'testreviewer',
+//           summary: 'It\'s so fetch!'
+//         }
+//       ]
+//     });
+
+//       let num = getByText('(1)');
+//       expect(num).toBeInTheDocument();
+
+//   });
+// });
 
 test('displays message that there are no reviews if there are no reviews', () => {
   // const {getByText, getByTestId} = render(<ReviewSection />);

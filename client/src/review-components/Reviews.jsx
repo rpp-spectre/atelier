@@ -2,13 +2,32 @@ import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import ImageModal from './imageModal.jsx';
 import Stars from './Stars.jsx';
+import axios from 'axios';
 
 function Reviews(props) {
-  const [count, setCount] = useState(props.data.helpfulness);
   const [paragraphLimit, setLimit] = useState(250);
   const [showSeeMore, setShowSeeMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [modalImage, setImage] = useState('');
+  const [clicked, setClicked] = useState('false');
+
+  function handleHelpfulClick(e) {
+    if (e.target.className === 'false') {
+      props.data.helpfulness++;
+      setClicked('true');
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/reviews/:review_id/helpful',
+        data: {reviewId: props.data.review_id},
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }
 
   let paragraphText = props.data.body;
 
@@ -59,8 +78,8 @@ function Reviews(props) {
     <div>
       <label>
         Helpful?
-        <button onClick={() => setCount(count + 1)}>Yes</button>
-        <span>({count})</span>
+        <button className={clicked} onClick={handleHelpfulClick}>Yes</button>
+        <span>({props.data.helpfulness})</span>
       </label>
     </div>
     <hr />
