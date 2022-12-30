@@ -32,7 +32,6 @@ function ReviewForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData);
     axios({
       method: 'post',
       url: 'http://localhost:3000/reviews',

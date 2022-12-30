@@ -11,11 +11,12 @@ import Review from './review-components/Reviews.jsx';
 const App = () => {
   const params = useParams();
   const pid = params.id || 71698;
-  console.log('pid', pid);
+  // console.log('pid', pid);
 
 //Review API calls
   const [reviewMeta, setReviewMeta] = useState(null);
   const [totalReviewsArray, setReviewsArray] = useState([]);
+  const [totalReviewsArrayCopy, setReviewsCopyArray] = useState([]);
   const [reviewCount, setReviewCount] = useState(totalReviewsArray.length);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const App = () => {
         resultArray.push(<Review data={element}/>);
       });
       setReviewsArray(resultArray);
+      setReviewsCopyArray(resultArray);
     })()
   }, []);
 
@@ -54,16 +56,28 @@ const App = () => {
         resultArray.push(<Review data={element}/>);
       });
       setReviewsArray(resultArray);
+      setReviewsCopyArray(resultArray);
     })
     .catch((err) => {
       console.log(err);
     })
   }
 
+  function handleFilter(e) {
+    console.log(e.target.className);
+    let resultArray = [];
+    totalReviewsArrayCopy.forEach((review) => {
+      if (review.props.data.rating === Number.parseInt(e.target.value)) {
+        resultArray.push(<Review data={review.props.data} />);
+      }
+    })
+    setReviewsArray(resultArray);
+  }
+
   return (<div>
     <Link to='/71697'>home again</Link>
     <ProductSection />
-    <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions}/>
+    <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions} handleFilter={handleFilter}/>
     <Qsection pid = {pid} />
   </div>);
 };

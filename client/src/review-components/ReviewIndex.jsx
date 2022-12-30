@@ -29,7 +29,7 @@ function ReviewSection(props) {
     reviewTiles = <div>There are no reviews yet.</div>;
   }
 
-  let ratingSection = <Ratings data={props.reviewMeta}/>
+  let ratingSection = <Ratings data={props.reviewMeta} handleFilter={props.handleFilter}/>
   if (!props.reviewMeta) {
     ratingSection = null;
   }
@@ -38,29 +38,6 @@ function ReviewSection(props) {
   if (!props.reviewMeta) {
     productBreakdownSection = null;
   }
-
-  // function handleOptions(e) {
-  //   let sort = {
-  //     newest: 'newest',
-  //     helpful: 'helpful',
-  //     relevance: 'relevant'
-  //   };
-  //   axios({
-  //     method: 'post',
-  //     url: 'http://localhost:3000/sortReviews',
-  //     data: {data: sort[e.target.value]},
-  //   })
-  //   .then((result) => {
-  //     let resultArray = [];
-  //     result.data.results.forEach((element) => {
-  //       resultArray.push(<Review data={element}/>);
-  //     });
-  //     setReviewsArray(resultArray);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-  // }
 
   return (
   <div>
