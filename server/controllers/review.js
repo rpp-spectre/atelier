@@ -4,9 +4,13 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 const AtelierAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 
 exports.getReviews = (req, res) => {
+  let sorting = 'relevant';
+  if (req.body.data) {
+    sorting = req.body.data;
+  };
   axios({
     method: 'get',
-    url: AtelierAPI + 'reviews?product_id=71810&count=25&sort=newest',
+    url: AtelierAPI + 'reviews?product_id=71810&count=25&sort=' + sorting,
     headers: {'authorization': process.env.API_KEY}
   })
   .then((result) => {
@@ -60,8 +64,6 @@ exports.postReview = (req, res) =>{
 };
 
 exports.markHelpfulReview = (req, res) => {
-  console.log(req.body);
-
   axios({
     method: 'put',
     url: AtelierAPI + `reviews/${req.body.reviewId}/helpful`,

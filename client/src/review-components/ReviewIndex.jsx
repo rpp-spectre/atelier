@@ -61,6 +61,29 @@ function ReviewSection(props) {
     })()
   }, []);
 
+  function handleOptions(e) {
+    let sort = {
+      newest: 'newest',
+      helpful: 'helpful',
+      relevance: 'relevant'
+    };
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/sortReviews',
+      data: {data: sort[e.target.value]},
+    })
+    .then((result) => {
+      let resultArray = [];
+      result.data.results.forEach((element) => {
+        resultArray.push(<Review data={element}/>);
+      });
+      setReviewsArray(resultArray);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
   <div>
     <h2>Reviews and Ratings</h2>
@@ -70,9 +93,9 @@ function ReviewSection(props) {
     </div>
     <div className='review'>
       <h3>{reviewCount} reviews, sorted by
-        <select>
-          <option value='newest'>newest</option>
+        <select onChange={handleOptions}>
           <option value='relevance'>relevance</option>
+          <option value='newest'>newest</option>
           <option value='helpful'>helpful</option>
         </select>
       </h3>

@@ -20,6 +20,7 @@ app.post('/cart', product.cart);
 
 //Reviews
 app.get('/reviews', reviews.getReviews);
+app.post('/sortReviews', reviews.getReviews);
 app.get('/reviewsMeta', reviews.getReviewMeta);
 app.post('/reviews', reviews.postReview);
 app.post('/reviews/:review_id/helpful', reviews.markHelpfulReview);

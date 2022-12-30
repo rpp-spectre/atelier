@@ -5,7 +5,6 @@ import Stars from './Stars.jsx';
 import axios from 'axios';
 
 function Reviews(props) {
-  const [count, setCount] = useState(props.data.helpfulness);
   const [paragraphLimit, setLimit] = useState(250);
   const [showSeeMore, setShowSeeMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +13,7 @@ function Reviews(props) {
 
   function handleHelpfulClick(e) {
     if (e.target.className === 'false') {
-      setCount(count + 1);
+      props.data.helpfulness++;
       setClicked('true');
       axios({
         method: 'post',
@@ -80,7 +79,7 @@ function Reviews(props) {
       <label>
         Helpful?
         <button className={clicked} onClick={handleHelpfulClick}>Yes</button>
-        <span>({count})</span>
+        <span>({props.data.helpfulness})</span>
       </label>
     </div>
     <hr />
