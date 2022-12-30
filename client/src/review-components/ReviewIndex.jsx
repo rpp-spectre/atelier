@@ -10,79 +10,57 @@ import ProductBreakdownList from './ProductBreakdownList.jsx';
 import HoverStars from './HoverStars.jsx';
 
 function ReviewSection(props) {
-  const [totalReviewsArray, setReviewsArray] = useState([]);
   const [showReviewCount, sliceReviewArray] = useState(2);
-  let shownReviewsArray = totalReviewsArray.slice(0, showReviewCount);
-  const [reviewCount, setReviewCount] = useState(totalReviewsArray.length);
+  let shownReviewsArray = props.totalReviewsArray.slice(0, showReviewCount);
   const [addReviews, setAddReviews]  = useState(false);
-  const [reviewMeta, setReviewMeta] = useState(null);
 
   let addReviewButton = <button onClick={() => {setAddReviews(true)}}>Add A Review +</button>;
   if (addReviews === true) {
-    addReviewButton = <ReviewForm data={reviewMeta} onClose={() => {setAddReviews(false)}}/>
+    addReviewButton = <ReviewForm data={props.reviewMeta} onClose={() => {setAddReviews(false)}}/>
   }
 
   let moreReviewButton = <button onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;
-  if (shownReviewsArray.length === totalReviewsArray.length) {
+  if (shownReviewsArray.length === props.totalReviewsArray.length) {
     moreReviewButton = null;
   }
 
   let reviewTiles = <ReviewList props={shownReviewsArray}/>
-  if (totalReviewsArray.length === 0) {
+  if (props.totalReviewsArray.length === 0) {
     reviewTiles = <div>There are no reviews yet.</div>;
   }
 
-  let ratingSection = <Ratings data={reviewMeta}/>
-  if (!reviewMeta) {
+  let ratingSection = <Ratings data={props.reviewMeta}/>
+  if (!props.reviewMeta) {
     ratingSection = null;
   }
 
-  let productBreakdownSection = <ProductBreakdownList data={reviewMeta}/>
-  if (!reviewMeta) {
+  let productBreakdownSection = <ProductBreakdownList data={props.reviewMeta}/>
+  if (!props.reviewMeta) {
     productBreakdownSection = null;
   }
 
-  useEffect(() => {
-    (async() => {
-      let result = await axios.get('http://localhost:3000/reviewsMeta');
-      setReviewMeta(result.data);
-    })()
-  }, []);
-
-  useEffect(() => {
-    (async() => {
-      let result = await axios.get('http://localhost:3000/reviews');
-      setReviewCount(result.data.results.length);
-      let resultArray = [];
-      result.data.results.forEach((element) => {
-        resultArray.push(<Review data={element}/>);
-      });
-      setReviewsArray(resultArray);
-    })()
-  }, []);
-
-  function handleOptions(e) {
-    let sort = {
-      newest: 'newest',
-      helpful: 'helpful',
-      relevance: 'relevant'
-    };
-    axios({
-      method: 'post',
-      url: 'http://localhost:3000/sortReviews',
-      data: {data: sort[e.target.value]},
-    })
-    .then((result) => {
-      let resultArray = [];
-      result.data.results.forEach((element) => {
-        resultArray.push(<Review data={element}/>);
-      });
-      setReviewsArray(resultArray);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
+  // function handleOptions(e) {
+  //   let sort = {
+  //     newest: 'newest',
+  //     helpful: 'helpful',
+  //     relevance: 'relevant'
+  //   };
+  //   axios({
+  //     method: 'post',
+  //     url: 'http://localhost:3000/sortReviews',
+  //     data: {data: sort[e.target.value]},
+  //   })
+  //   .then((result) => {
+  //     let resultArray = [];
+  //     result.data.results.forEach((element) => {
+  //       resultArray.push(<Review data={element}/>);
+  //     });
+  //     setReviewsArray(resultArray);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+  // }
 
   return (
   <div>
@@ -92,8 +70,8 @@ function ReviewSection(props) {
     {productBreakdownSection}
     </div>
     <div className='review'>
-      <h3>{reviewCount} reviews, sorted by
-        <select onChange={handleOptions}>
+      <h3>{props.reviewCount} reviews, sorted by
+        <select onChange={props.onSort}>
           <option value='relevance'>relevance</option>
           <option value='newest'>newest</option>
           <option value='helpful'>helpful</option>

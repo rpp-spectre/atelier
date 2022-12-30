@@ -10,7 +10,7 @@ exports.getReviews = (req, res) => {
   };
   axios({
     method: 'get',
-    url: AtelierAPI + 'reviews?product_id=71810&count=25&sort=' + sorting,
+    url: AtelierAPI + `reviews?product_id=${req.params.pid}&count=25&sort=` + sorting,
     headers: {'authorization': process.env.API_KEY}
   })
   .then((result) => {
@@ -25,7 +25,7 @@ exports.getReviews = (req, res) => {
 exports.getReviewMeta = (req, res) => {
   axios({
     method: 'get',
-    url: AtelierAPI + 'reviews/meta?product_id=71900',
+    url: AtelierAPI + `reviews/meta?product_id=${req.params.pid}`,
     headers: {'authorization': process.env.API_KEY}
   })
   .then((result) => {
