@@ -86,8 +86,10 @@ var Qsearch = ({pid}) =>{
     <div className='question-list'>
     <Qlist noQ={noQ} questions={questions} pid={pid} product={product} />
     </div>
+    <span className="buttons">
     {load(noQ, questions)}
     <Qadd pid={pid} product={product} />
+    </span>
   </>);
 };
 
