@@ -8,14 +8,10 @@ import axios from 'axios';
 import Review from './review-components/Reviews.jsx';
 
 
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   };
-const App =()=>{
+
+const App = () => {
   const params = useParams();
   const pid = params.id || 71698;
-  // console.log('pid', pid);
 
 //Review API calls
   const [reviewMeta, setReviewMeta] = useState(null);
@@ -25,14 +21,14 @@ const App =()=>{
 
   useEffect(() => {
     (async() => {
-      let result = await axios.get(`http://localhost:3000/reviewsMeta/${pid}`);
+      let result = await axios.get(`/reviewsMeta/${pid}`);
       setReviewMeta(result.data);
     })()
   }, []);
 
   useEffect(() => {
     (async() => {
-      let result = await axios.get(`http://localhost:3000/reviews/${pid}`);
+      let result = await axios.get(`/reviews/${pid}`);
       setReviewCount(result.data.results.length);
       let resultArray = [];
       result.data.results.forEach((element) => {
@@ -51,7 +47,7 @@ const App =()=>{
     };
     axios({
       method: 'post',
-      url: `http://localhost:3000/sortReviews/${pid}`,
+      url: `/sortReviews/${pid}`,
       data: {data: sort[e.target.value]},
     })
     .then((result) => {
@@ -67,7 +63,6 @@ const App =()=>{
   }
 
   function handleFilter(e) {
-    console.log(e.target.className);
     let resultArray = [];
     totalReviewsArrayCopy.forEach((review) => {
       if (review.props.data.rating === Number.parseInt(e.target.value)) {
@@ -77,13 +72,15 @@ const App =()=>{
     setReviewsArray(resultArray);
   }
 
+  function handleClickTracking(e) {
+    console.log(e);
+  }
 
   console.log('pid', pid);
-  // render() {
     return (<div>
       <Link to='/71697'>home again</Link>
       <ProductSection pid = {pid}/>
-      <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions} handleFilter={handleFilter}/>
+      <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions} handleFilter={handleFilter} handleClickTracking={handleClickTracking}/>
       <Qsection pid = {pid} />
     </div>);
 };

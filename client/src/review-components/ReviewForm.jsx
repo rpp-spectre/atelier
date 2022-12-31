@@ -34,7 +34,7 @@ function ReviewForm(props) {
     e.preventDefault();
     axios({
       method: 'post',
-      url: 'http://localhost:3000/reviews',
+      url: '/reviews',
       data: formData,
     })
     .then((result) => {
