@@ -48,7 +48,7 @@ function ReviewSection(props) {
     </div>
     <div className='review'>
       <h3>{props.reviewCount} reviews, sorted by
-        <select onChange={props.onSort}>
+        <select onClick={props.handleClickTracking} onChange={props.onSort}>
           <option value='relevance'>relevance</option>
           <option value='newest'>newest</option>
           <option value='helpful'>helpful</option>

@@ -128,7 +128,7 @@ class Overview extends React.Component {
   }
 
   getReviews() {
-    axios.get(`http://localhost:3000/reviews?product_id=${this.props.pid}`)
+    axios.get(`/reviews/${this.props.pid}`)
     .then(response => {
       // console.log(response, '=======review response');
       this.setState({
@@ -141,7 +141,7 @@ class Overview extends React.Component {
   }
 
   getRating() {
-    axios.get(`http://localhost:3000/reviewsMeta?product_id=${this.props.pid}`)
+    axios.get(`/reviewsMeta/${this.props.pid}`)
     .then(response => {
       // console.log(response, '=======review response');
       let ratingsData = response.data.ratings;
