@@ -43,7 +43,7 @@ var Qsearch = ({pid}) =>{
 
   useEffect(()=>{
     (async()=>{
-      let response = await axios.get(`http://localhost:3000/QUESTIONS?product_id=${pid}`);
+      let response = await axios.get(`/QUESTIONS?product_id=${pid}`);
       // console.log('response', response.data.results[0]);
       let qs=response.data.results;
       qs.sort(function(a, b) {
@@ -57,7 +57,7 @@ var Qsearch = ({pid}) =>{
       });
       setQuestions(qs);
       setInitqs(qs);
-      let presponse = await axios.get(`http://localhost:3000/products/${pid}`);
+      let presponse = await axios.get(`/products/${pid}`);
       // console.log('response', response.data.results[0]);
       let product=presponse.data;
       setProduct(product.name);

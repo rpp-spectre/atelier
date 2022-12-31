@@ -24,7 +24,7 @@ var Alist = ({qid}) =>{
   useEffect(()=>{
     (async()=>{
       // let response = await axios.get("http://localhost:3000/questions/640996/answers");
-      let response = await axios.get(`http://localhost:3000/questions/${qid}/answers`);
+      let response = await axios.get(`/questions/${qid}/answers`);
       let as = response.data.results;
       as.sort((a,b)=>{
         if (a['helpfulness'] > b['helpfulness']) {
