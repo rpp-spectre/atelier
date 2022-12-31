@@ -29,7 +29,7 @@ let Ratings = (props) => {
 
   let ratingBars = Object.values(ratingsData).reverse().map((element, index) => {
     return <div key={index}>
-      <RatingBreakdown star={Math.abs(index - 5)} ratings={element} totalRatings={numberOfReviews} />
+      <RatingBreakdown star={Math.abs(index - 5)} ratings={element} totalRatings={numberOfReviews} handleFilter={props.handleFilter}/>
       </div>
   })
 
