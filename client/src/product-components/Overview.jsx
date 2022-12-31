@@ -20,6 +20,7 @@ class Overview extends React.Component {
       name: 'default',
       category: 'default',
       price: 0,
+      salePrice: 0,
       slogan: 'default',
       description: 'default',
       features: [{feature: 'default', value: 'default'}],
@@ -64,7 +65,7 @@ class Overview extends React.Component {
 
   getProduct() {
 
-    axios.get('/products/71701')
+    axios.get(`/products/${this.props.pid}`)
     .then((response) => {
       // console.log(response.data, '===========getProduct response data')
       var productData = {
@@ -86,13 +87,14 @@ class Overview extends React.Component {
 
   getStyle() {
 
-    axios.get('/products/71701/styles')
+    axios.get(`/products/${this.props.pid}/styles`)
     .then((response) => {
       // console.log(response.data.results, '===========getStyle response data')
       this.setState({
         styleList: response.data.results,
         // currentStyle: response.data.results[0],
         price: response.data.results[0].original_price,
+        salePrice: response.data.results[0].sale_price,
         photos: response.data.results[0].photos
       });
 
@@ -125,17 +127,54 @@ class Overview extends React.Component {
     });
   }
 
+  getReviews() {
+    axios.get(`http://localhost:3000/reviews?product_id=${this.props.pid}`)
+    .then(response => {
+      // console.log(response, '=======review response');
+      this.setState({
+        reviews: response.data.results.length
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  getRating() {
+    axios.get(`http://localhost:3000/reviewsMeta?product_id=${this.props.pid}`)
+    .then(response => {
+      // console.log(response, '=======review response');
+      let ratingsData = response.data.ratings;
+      let weightedTotal = Number.parseInt(ratingsData['1']) * 1 + Number.parseInt(ratingsData['2']) * 2 + Number.parseInt(ratingsData['3']) * 3 + Number.parseInt(ratingsData['4']) * 4 + Number.parseInt(ratingsData['5']) * 5;
+      let numberOfReviews = 0;
+      Object.values(ratingsData).forEach((element) => {
+        numberOfReviews += Number.parseInt(element);
+      })
+
+      let averageRating = Math.round(weightedTotal / numberOfReviews * 10) / 10;
+
+      this.setState({
+        rating: averageRating
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
 
   componentDidMount() {
     this.getProduct();
     this.getStyle();
+    this.getReviews();
+    this.getRating();
   }
 
-  changeStyle(newPhotos, newSizeList, newPrice) {
+  changeStyle(newPhotos, newSizeList, newPrice, newSalePrice) {
     this.setState({
       photos: newPhotos,
       sizeList: this.getSizeList(newSizeList),
-      price: newPrice
+      price: newPrice,
+      salePrice: newSalePrice
     });
   }
 
@@ -152,7 +191,7 @@ class Overview extends React.Component {
           <StarRating rating={this.state.rating} reviews={this.state.reviews}/><br/>
           <Category category={this.state.category}/>
           <Title name={this.state.name}/>
-          <Price price={this.state.price}/><br/>
+          <Price price={this.state.price} salePrice={this.state.salePrice}/><br/>
           <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)}/><br/>
           <AddToCart sizeList={this.state.sizeList} sizeOutOfStock={this.state.sizeOutOfStock}/><br/>
           {/* <Star /> */}

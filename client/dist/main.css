@@ -202,7 +202,20 @@ img {
 /* Question Section CSS */
 
 .question {
+  display: flex;
+  flex-direction: column;
+  /* border-style:solid;
+  border-color: black; */
+  align-items: left;
+  margin: 3%;
   padding: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width:fit-content;
 }
 
 .question-list {
@@ -219,21 +232,15 @@ img {
 
 .question button {
   margin: 20px;
-}
-/*Product Section CSS */
-.photo {
-  height: 70px;
-  width: 70px;
-  margin: 5px;
+  width:fit-content;
 }
 
-.stylePhoto {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  margin-top: 5px;
+.question img {
+  padding: 10px;
 }
 
-.styleLable {
-  margin: 5px;
+.notetext {
+  font-size: small;
+  font-style: italic;
 }
+

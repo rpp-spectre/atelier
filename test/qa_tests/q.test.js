@@ -69,7 +69,7 @@ describe("Q Component" ,() => {
     test('question loaded', () =>{
       render(<Q question={questions[0]} />);
 
-      const sn = screen.getByRole("question");
+      const sn = screen.getByRole("document");
       expect(sn).toBeInTheDocument();
       const heading = screen.getAllByRole("heading", {level:3});
       expect(heading[0]).toBeInTheDocument();

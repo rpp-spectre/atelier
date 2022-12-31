@@ -8,7 +8,11 @@ import axios from 'axios';
 import Review from './review-components/Reviews.jsx';
 
 
-const App = () => {
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   };
+const App =()=>{
   const params = useParams();
   const pid = params.id || 71698;
   // console.log('pid', pid);
@@ -39,47 +43,17 @@ const App = () => {
     })()
   }, []);
 
-  function handleOptions(e) {
-    let sort = {
-      newest: 'newest',
-      helpful: 'helpful',
-      relevance: 'relevant'
-    };
-    axios({
-      method: 'post',
-      url: `http://localhost:3000/sortReviews/${pid}`,
-      data: {data: sort[e.target.value]},
-    })
-    .then((result) => {
-      let resultArray = [];
-      result.data.results.forEach((element) => {
-        resultArray.push(<Review data={element}/>);
-      });
-      setReviewsArray(resultArray);
-      setReviewsCopyArray(resultArray);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
+  console.log('pid', pid);
+  // render() {
+    return (<div>
+      <Link to='/71697'>home again</Link>
+      <ProductSection pid = {pid}/>
+      <ReviewSection />
+      <Qsection pid = {pid} />
+    </div>);
 
-  function handleFilter(e) {
-    console.log(e.target.className);
-    let resultArray = [];
-    totalReviewsArrayCopy.forEach((review) => {
-      if (review.props.data.rating === Number.parseInt(e.target.value)) {
-        resultArray.push(<Review data={review.props.data} />);
-      }
-    })
-    setReviewsArray(resultArray);
-  }
-
-  return (<div>
-    <Link to='/71697'>home again</Link>
-    <ProductSection />
-    <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions} handleFilter={handleFilter}/>
-    <Qsection pid = {pid} />
-  </div>);
+// others will also put their sections in here
+  // }
 };
 
 

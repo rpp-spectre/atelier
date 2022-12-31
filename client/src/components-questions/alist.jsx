@@ -12,10 +12,12 @@ var Alist = ({qid}) =>{
   const[NoA,setNoA]=useState(2);
 
   let load = ()=>{
-    if (NoA === answers.length) {
+    if(answers.length <= 2) {
       return null;
+    } else if (NoA === answers.length) {
+      return <h3 onClick={()=>{setNoA(2)}}><span className='underline'>COLLAPSE ANSWERS</span></h3>;
     } else {
-      return <h3 onClick={()=>{setNoA(answers.length)}}>LOAD MORE ANSWERS</h3>;
+      return <h3 onClick={()=>{setNoA(answers.length)}}><span className='underline'>LOAD MORE ANSWERS</span></h3>;
     }
   };
 
