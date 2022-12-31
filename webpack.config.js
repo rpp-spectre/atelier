@@ -2,7 +2,8 @@ var path = require("path");
 var webpack = require("webpack");
 var src_dir = path.join(__dirname, "/client/src");
 var dist_dir = path.join(__dirname, "/client/dist");
-const dotenv = require('dotenv').config({ path: __dirname + '/.env' })
+const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   mode:"development",
@@ -23,7 +24,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(dotenv.parsed),
     }),
-  ].filter(Boolean),
+    new CompressionPlugin(),
+  ]/*.filter(Boolean)*/,
   module: {
     rules: [
      {
