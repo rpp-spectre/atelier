@@ -117,7 +117,7 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
 
   var handleSubmit=()=>{
     console.log("submitted");
-    axios.post(`http://localhost:3000/questions/${qid}/answers?body=${body}&name=${name}&email=${email}&photos=${photos}`)
+    axios.post(`/questions/${qid}/answers?body=${body}&name=${name}&email=${email}&photos=${photos}`)
     .then((result) =>{
      console.log('in forms');
       console.log(result);

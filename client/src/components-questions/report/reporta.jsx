@@ -10,7 +10,7 @@ const Reporta = ({aid}) =>{
 
   const handleClick = () =>{
     if (showr) {
-      let apiRA = `http://localhost:3000/answers/${aid}/report`;
+      let apiRA = `/answers/${aid}/report`;
       axios.put(apiRA)
        .then((result)=>{
        console.log(result);

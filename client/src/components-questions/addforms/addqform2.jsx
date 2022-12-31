@@ -13,7 +13,7 @@ const Addqform2 = ({onClose, show,pid, product})=>{
     return null;
   }
   var handleSubmit=()=>{
-    axios.post(`http://localhost:3000/questions?body=${body}&name=${name}&email=${email}&product_id=${pid}`)
+    axios.post(`/questions?body=${body}&name=${name}&email=${email}&product_id=${pid}`)
     .then((result) =>{
      console.log('in forms');
       console.log(result);
