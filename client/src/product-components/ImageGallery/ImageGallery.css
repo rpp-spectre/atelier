@@ -46,6 +46,7 @@
   /* cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in; */
   cursor: zoom-in;
+  padding: 0px;
 }
 
 .slideImageFull {
@@ -221,8 +222,7 @@
   width:4vw;
   height: 7vh;
   object-fit: cover;
-  /* border-style: dashed;
-  border-color: black; */
+  padding: 0px;
 }
 
 
@@ -238,5 +238,5 @@
 
 img {
   vertical-align: middle;
-  padding: 0px;
+  /* padding: 0px; */
 }
