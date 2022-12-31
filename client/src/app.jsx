@@ -8,7 +8,7 @@ import { HashRouter as Router, Link, Switch, Routes, Route, useParams } from 're
 
 const App = () => {
   const params = useParams();
-  const pid = params.id || 71698;
+  const pid = params.id || 71699;
 
   console.log('pid', pid);
     return (<div>
