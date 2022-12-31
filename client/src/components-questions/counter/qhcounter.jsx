@@ -7,7 +7,7 @@ const Qhcounter = ({qcounter, qid}) =>{
   const [qh, setQh] = useState(true);
 
   const updateH = ()=>{
-    let apiCH = `http://localhost:3000/questions/${qid}/helpful`;
+    let apiCH = `/questions/${qid}/helpful`;
      axios.put(apiCH)
       .then((result)=>{
         setQh(false);

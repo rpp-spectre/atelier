@@ -8,7 +8,7 @@ const compression = require('compression');
 
 const app = express();
 
-
+app.use(compression());
 app.use(express.static('./client/dist'));
 app.use(express.json());
 app.use(cors());

@@ -8,7 +8,7 @@ const Ahcounter = ({acounter, aid}) =>{
 
   const updateA = ()=>{
     if(ah) {
-      let apiCH = `http://localhost:3000/answers/${aid}/helpful`;
+      let apiCH = `/answers/${aid}/helpful`;
       axios.put(apiCH)
        .then((result)=>{
        console.log(result);
