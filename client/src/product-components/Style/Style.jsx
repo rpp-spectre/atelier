@@ -17,7 +17,7 @@ class Style extends React.Component {
         styleName: style.name,
         checkedIndex: index
       })
-      this.props.changeStyle(style.photos, style.skus, style.original_price);
+      this.props.changeStyle(style.photos, style.skus, style.original_price, style.sale_price);
     }
   }
 
@@ -37,17 +37,17 @@ class Style extends React.Component {
     return (
       <div className="Style">
         <div className='StyleName'>
-          <label className='StyleLable'>Style ></label>&ensp;
+          <label className='StyleBold'>Style ></label>&ensp;
           <label>
           {this.state.styleName === '' ? this.props.styleList[0].name : this.state.styleName}
           </label>
         </div>
-        <div className='StyleImage'>
+        <div className='StyleList'>
           {this.props.styleList.map((style, index) => {
             return (
               <label key={style.style_id} className="styleLable">
                 <img className="stylePhoto" key={style.style_id} onClick={(e) => this.toggleCheckbox(e, style, index)} src={style.photos[0].thumbnail_url} alt={style.name} />
-                {this.state.checkedIndex === index ? <input type="checkbox" id={style.style_id} checked={true} onChange={() => {}}></input> : null}
+                {this.state.checkedIndex === index ? <label className='checkboxLable'><input className='checkbox' type="checkbox" id={style.style_id} checked={true} onChange={() => {}}></input></label> : null}
               </label>
             )
           })}
