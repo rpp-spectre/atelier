@@ -43,12 +43,47 @@ const App =()=>{
     })()
   }, []);
 
+  function handleOptions(e) {
+    let sort = {
+      newest: 'newest',
+      helpful: 'helpful',
+      relevance: 'relevant'
+    };
+    axios({
+      method: 'post',
+      url: `http://localhost:3000/sortReviews/${pid}`,
+      data: {data: sort[e.target.value]},
+    })
+    .then((result) => {
+      let resultArray = [];
+      result.data.results.forEach((element) => {
+        resultArray.push(<Review data={element}/>);
+      });
+      setReviewsArray(resultArray);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  function handleFilter(e) {
+    console.log(e.target.className);
+    let resultArray = [];
+    totalReviewsArrayCopy.forEach((review) => {
+      if (review.props.data.rating === Number.parseInt(e.target.value)) {
+        resultArray.push(<Review data={review.props.data} />);
+      }
+    })
+    setReviewsArray(resultArray);
+  }
+
+
   console.log('pid', pid);
   // render() {
     return (<div>
       <Link to='/71697'>home again</Link>
       <ProductSection pid = {pid}/>
-      <ReviewSection />
+      <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions} handleFilter={handleFilter}/>
       <Qsection pid = {pid} />
     </div>);
 };
