@@ -51,10 +51,10 @@ const App =()=>{
       <ReviewSection />
       <Qsection pid = {pid} />
     </div>);
+};
 
 // others will also put their sections in here
   // }
-};
 
 
 export default App;
