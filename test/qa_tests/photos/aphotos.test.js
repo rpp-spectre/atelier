@@ -24,7 +24,7 @@ describe("Search Component" ,() => {
 	  // render(<Qsearch />);
 	  // const sb = screen.getByTestId("searchForm");
     // expect(sb).toBeInTheDocument();
-    const sn = screen.getByRole("photos");
+    const sn = screen.getByRole("group");
     expect(sn).toBeInTheDocument();
   });
 

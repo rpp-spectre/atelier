@@ -11,7 +11,7 @@ describe("Answer helpfulness counter Component" ,() => {
   test('increments counter by one when helpful  is clicked', () => {
     let counter = 5;
     const {getByText} = render(<Ahcounter acounter={counter}/>);
-    fireEvent.click(getByText('Helpful'));
+    fireEvent.click(getByText('Yes'));
     counter++;
 
     expect(counter).toBe(6);

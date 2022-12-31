@@ -202,7 +202,20 @@ img {
 /* Question Section CSS */
 
 .question {
+  display: flex;
+  flex-direction: column;
+  /* border-style:solid;
+  border-color: black; */
+  align-items: left;
+  margin: 3%;
   padding: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width:fit-content;
 }
 
 .question-list {
@@ -219,5 +232,15 @@ img {
 
 .question button {
   margin: 20px;
+  width:fit-content;
+}
+
+.question img {
+  padding: 10px;
+}
+
+.notetext {
+  font-size: small;
+  font-style: italic;
 }
 

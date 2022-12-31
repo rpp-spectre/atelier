@@ -9,7 +9,7 @@ const Qadd = ({pid, product})=>{
     {/* <form>
   <button onClick={()=>{}}>ADD A QUESTION +</button>
 </form> */}
-    <button onClick={()=>{setShow(true)}}> ADD A QUESTION </button>
+    <button className="question" onClick={()=>{setShow(true)}}> ADD A QUESTION </button>
     <Addqform2 onClose={()=>{setShow(false)}} show={show} pid={pid} product={product} />
   </>);
 };

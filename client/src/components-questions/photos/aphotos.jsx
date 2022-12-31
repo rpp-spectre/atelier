@@ -4,7 +4,7 @@ import Aphoto from './aphoto.jsx';
 
 const Aphotos = ({photos}) =>{
   return (
-    <div role="photos">
+    <div role="group">
     {photos.map((photo) =>{
       return <Aphoto img={photo} key={photo.id}/>
     })

@@ -4,12 +4,14 @@ import axios from 'axios';
 
 const Qhcounter = ({qcounter, qid}) =>{
   const [qhcounter, setQhcounter] = useState(qcounter);
+  const [qh, setQh] = useState(true);
 
   const updateH = ()=>{
     let apiCH = `http://localhost:3000/questions/${qid}/helpful`;
      axios.put(apiCH)
       .then((result)=>{
-      console.log(result);
+        setQh(false);
+        console.log(result);
     // res.send('helpfulness updated');
       })
       .catch((error) =>{
@@ -20,7 +22,7 @@ const Qhcounter = ({qcounter, qid}) =>{
 
   return (
     <>
-    <span className ='underline' onClick={()=>{setQhcounter(qhcounter+1); updateH();}}>Yes </span>( {qhcounter})
+    <span className ='underline' onClick={()=>{if(qh){setQhcounter(qhcounter+1);} updateH();}}>Yes </span>( {qhcounter})
     </>
   );
 };
