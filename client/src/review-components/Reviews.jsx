@@ -17,7 +17,7 @@ function Reviews(props) {
       setClicked('true');
       axios({
         method: 'post',
-        url: 'http://localhost:3000/reviews/:review_id/helpful',
+        url: '/:review_id/helpful',
         data: {reviewId: props.data.review_id},
       })
       .then((result) => {
