@@ -7,8 +7,10 @@ class Price extends React.Component {
 
   render() {
     return (
-      <div className="Price">
-        $ {this.props.price}
+      <div className="price">
+        {this.props.salePrice ? <label className='sale_price'>${this.props.salePrice}</label> : null } 
+        {this.props.salePrice ? <label><strike>${this.props.price}</strike></label> : <label>${this.props.price}</label> }
+        {/* ${this.props.price} */}
       </div>
     )
   }
