@@ -8,7 +8,9 @@ class ImageGallery extends React.Component {
     this.state = {
       slideIndex: 0,
       startIndex: 0,
-      fullScreen: false
+      fullScreen: false,
+      zoomPosX: 0,
+      zoomPosY: 0
       // showNum: Math.min(this.props.photos.length, 7)
     }
   }
@@ -31,6 +33,8 @@ class ImageGallery extends React.Component {
         startIndex: newStartIndex
     })
 
+
+
   }
 
   currentSlide(index) {
@@ -51,16 +55,43 @@ class ImageGallery extends React.Component {
     });
   }
 
+  onZoom(e) {
+    if (!this.state.fullScreen) {
+      return;
+    }
+    const x = e.clientX - e.target.offsetLeft;
+    const y = e.clientY - e.target.offsetTop;
+    let img = document.getElementById("slideImage");
+    img.style.transformOrigin = `${x}px ${y}px`;
+    img.style.transform = "scale(2.5)";
+  }
+
+  offZoom(e) {
+    let img = document.getElementById("slideImage");
+    img.style.transformOrigin = `center center`;
+    img.style.transform = "scale(1)";
+  }
+
   componentDidMount() {
     addEventListener('fullscreenchange', (event) => {
-      let elem = document.getElementById('container');
       this.setState({fullScreen: document.fullscreenElement});
     })
+    //this.zoomImage();
   }
+
+  componentDidUpdate(prevState) {
+    if (this.state.slideIndex === prevState.slideIndex) {
+      return;
+    }
+    let container = document.getElementById("imageContainer");
+    container.addEventListener("mousemove", (e) => {this.onZoom(e)});
+    container.addEventListener("mouseover", (e) => {this.onZoom(e)});
+    container.addEventListener("mouseleave", (e) => {this.offZoom(e)});
+  }
+
 
   openFullScreen() {
     // document.getElementById('slideImage').requestFullscreen({ navigationUI: "show" });
-
     let elem = document.getElementById('container')
     if (!document.fullscreenElement) {
       elem.requestFullscreen({ navigationUI: "show" }).catch((err) => {
@@ -81,9 +112,11 @@ class ImageGallery extends React.Component {
               return
             }
             return (
-              <div className={this.state.fullScreen ? "mySlidesFull" : "mySlides"} key={index}>
+              <div id='mySlides' className={this.state.fullScreen ? "mySlidesFull" : "mySlides"} key={index} >
                 <div className="numbertext">{index+1} / {this.props.photos.length}</div>
-                <img className="slideImage" id="slideImage" onClick={this.openFullScreen.bind(this)} src={photo.url} />
+                <div id="imageContainer" className="imageContainer">
+                  <img className={this.state.fullScreen ? "slideImageFull" : "slideImage"}  id="slideImage" onClick={this.openFullScreen.bind(this)} src={photo.url} />
+                </div>
               </div>
             )
           })}
