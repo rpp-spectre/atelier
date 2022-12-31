@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PortalReactDOM from 'react-dom';
 import Simage from './simage.jsx';
 import axios from 'axios';
+
 // import { CSSTransition } from 'react-transition-group';
 
 
@@ -67,15 +68,15 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
 
 
   var uploadImage= async (img) => {
-    console.log('image',img);
+    // console.log('image',img);
     let urls = [];
     // for (var i in imgs) {
       console.log('img in uploader', img);
       let body = new FormData();
-      // body.set('key', process.env.IMGAPI_KEY);
-      body.set('key', 'a7720165380406132383b9f04ea88e54');
+      body.set('key', process.env.REACT_APP_API_KEY);
+      // body.set('key', 'a7720165380406132383b9f04ea88e54');
       body.append('image', img);
-      console.log('image', img);
+      // console.log('image', img);
       const response = await axios({
         method: 'post',
         url: 'https://api.imgbb.com/1/upload',

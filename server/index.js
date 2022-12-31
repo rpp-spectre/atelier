@@ -3,11 +3,12 @@ const controllerQ = require('./controllers/questions');
 const reviews = require('./controllers/review.js');
 const product = require('./controllers/product.js');
 const cors = require('cors');
+const compression = require('compression');
 
 
 const app = express();
 
-
+app.use(compression());
 app.use(express.static('./client/dist'));
 app.use(express.json());
 app.use(cors());
