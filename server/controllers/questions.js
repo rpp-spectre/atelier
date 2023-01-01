@@ -120,10 +120,14 @@ exports.addAnswer = (req, res) =>{
   let qid = req.params.qid;
   console.log("qid", qid);
   let apiAddA = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/'+qid+'/answers';
-  let body = req.query.body;
-  let name = req.query.name;
-  let email = req.query.email;
-  let photos = req.query.photos;
+  // let body = req.query.body;
+  // let name = req.query.name;
+  // let email = req.query.email;
+  // let photos = req.query.photos;
+  let body = req.body.body;
+  let name = req.body.name;
+  let email = req.body.email;
+  let photos = req.body.photos;
   axios.post(apiAddA, {
     "body": body,
     "name": name,

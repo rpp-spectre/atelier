@@ -25,106 +25,56 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
     }
   };
 
-  // var uploadImage= (img) => {
-  //   let body = new FormData();
-  //   // body.set('key', process.env.IMGAPI_KEY);
-  //   body.set('key', 'a7720165380406132383b9f04ea88e54');
-  //   body.append('image', img);
-  //   console.log('image', img);
-
-  //  axios({
-  //     method: 'post',
-  //     url: 'https://api.imgbb.com/1/upload',
-  //     data: body
-  //   })
-  //   .then((result)=>{
-  //     console.log('upload image', result.data.data.url);
-  //     // setPhotos([...photos, result.data.data.url]);
-  //     return result.data.data.url;
-  //   });
-  // };
-
-  // var uploadImages= async (imgs) => {
-  //   console.log('selectedImages',imgs);
-  //   let urls = [];
-  //   // for (var i in imgs) {
-  //     console.log('img in uploader', imgs[0]);
-  //     let body = new FormData();
-  //     // body.set('key', process.env.IMGAPI_KEY);
-  //     body.set('key', 'a7720165380406132383b9f04ea88e54');
-  //     body.append('image', imgs[0]);
-  //     console.log('image', imgs[0]);
-  //     const response = await axios({
-  //       method: 'post',
-  //       url: 'https://api.imgbb.com/1/upload',
-  //       data: body
-  //     });
-  //     urls.push(response.data.data.url);
-  //   // }
-
-  //   console.log('urls array', urls);
-  //   setPhotos([...urls]);
-  // };
-
 
   var uploadImage= async (img) => {
-    // console.log('image',img);
-    let urls = [];
-    // for (var i in imgs) {
       console.log('img in uploader', img);
+      console.log('qid', qid);
+      console.log('photos', photos);
       let body = new FormData();
       body.set('key', process.env.REACT_APP_API_KEY);
-      // body.set('key', 'a7720165380406132383b9f04ea88e54');
+
       body.append('image', img);
-      // console.log('image', img);
+
       const response = await axios({
         method: 'post',
         url: 'https://api.imgbb.com/1/upload',
         data: body
       });
-      urls.push(response.data.data.url);
+
+      let url = response.data.data.url;
     // }
 
-    console.log('urls array', urls);
-    setPhotos(urls);
+    console.log('urls array', url);
+    setPhotos([...photos, url]);
   };
 
-  // useEffect(()=>{
-  //   (async () => {
-  //     console.log('selectedImages',selectedImages);
-  //     let urls = [];
-  //     // for (var i in imgs) {
-  //       console.log('img in uploader', selectedImages[0]);
-  //       let body = new FormData();
-  //       // body.set('key', process.env.IMGAPI_KEY);
-  //       body.set('key', 'a7720165380406132383b9f04ea88e54');
-  //       body.append('image', selectedImages[0]);
-  //       console.log('image', selectedImages[0]);
-  //       const response = await axios({
-  //         method: 'post',
-  //         url: 'https://api.imgbb.com/1/upload',
-  //         data: body
-  //       });
-  //       urls.push(response.data.data.url);
-  //     // }
 
-  //     console.log('urls array', urls);
-  //     setPhotos([...urls]);
-  //   })()
-  // },[]);
-
-  // useEffect(()=>{setPhotos([...photos, ])},[]);
 
   var handleSubmit=()=>{
     console.log("submitted");
-    axios.post(`/questions/${qid}/answers?body=${body}&name=${name}&email=${email}&photos=${photos}`)
-    .then((result) =>{
-     console.log('in forms');
-      console.log(result);
-      })
-    .catch(err=>{
-      throw err;
-      });
+    console.log('photos', photos);
+    axios.post(`/questions/${qid}/answers`, {
+      "body": body,
+      "name": name,
+      "email": email,
+      "photos": Array.from(photos)
+      },
+      {
+      headers: {
+      'Authorization': process.env.API_KEY
+      }
+    }
+    )
+    .then((response) => {
+      console.log('in controller');
+      console.log('controller data',response.config.data);
+      res.send(response.data);
+    })
+    .catch((error) => {
+      // console.log(response.config.data);
+      console.log(error);
+      res.send(error);
+    });
   };
 
 
@@ -220,7 +170,7 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
         type="file"
         name="photos"
         onChange={(event) => {
-          console.log(event.target.files[0]);
+          // console.log(event.target.files[0]);
           if(selectedImages.length <5)  {
             setSelectedImages([...selectedImages,event.target.files[0]]);
             uploadImage(event.target.files[0]);
