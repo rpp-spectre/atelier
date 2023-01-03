@@ -18,6 +18,15 @@ function ReviewForm(props) {
     return [element, props.data.characteristics[element].id, charDetails[element]]
   })
 
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  let imagePreview = null;
+  if (selectedImages.length > 0) {
+    imagePreview = selectedImages.map((element, index) => {
+      return <img key={index} src={URL.createObjectURL(element)} height='100' width='100'/>
+    });
+  }
+
   const [formData, setFormData] = useState({
     product_id: props.data.product_id,
     rating: 0,
@@ -32,27 +41,62 @@ function ReviewForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    axios({
-      method: 'post',
-      url: '/reviews',
-      data: formData,
+    let imagePromiseArray = [];
+    if (selectedImages.length > 0) {
+      selectedImages.forEach((image) => {
+        let body = new FormData();
+        body.set('key', process.env.REACT_APP_IMG_API_KEY);
+        body.append('image', image);
+        imagePromiseArray.push(
+          axios({
+            method: 'post',
+            url: 'https://api.imgbb.com/1/upload',
+            data: body
+          })
+          .then((result) => {
+            console.log(result);
+            return result.data.data.url;
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+        )
+      });
+    }
+    Promise.all(imagePromiseArray)
+    .then((imageURLs) => {
+      console.log(imageURLs);
+      let data = formData;
+      data.photos = imageURLs
+      return data;
     })
-    .then((result) => {
-      console.log(result);
-      if (result.data === 'Created') {
-        alert('Thank you for your review!');
-        props.onClose();
-      } else {
-        alert('Something went wrong. Please try again later');
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    .then((body) => {
+      axios({
+        method: 'post',
+        url: '/reviews',
+        data: body,
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.data === 'Created') {
+          alert('Thank you for your review!');
+          props.onClose();
+        } else {
+          alert('Something went wrong. Please try again later');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    });
   }
 
   function handleUpload(e) {
-    console.log(e.target.files);
+    if (selectedImages.length < 5) {
+      setSelectedImages([...selectedImages, ...Object.values(e.target.files)].slice(0, 5));
+    } else {
+      alert('You may only upload a maximum of 5 photos');
+    }
   }
 
   function handleChange(e) {
@@ -132,6 +176,7 @@ function ReviewForm(props) {
         <label>
           Upload an image:
           <input type='file' accept='image/jpeg, image/png' multiple onChange={handleUpload}/>
+          {imagePreview}
         </label>
       </div>
       <div className='review-form'>

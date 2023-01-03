@@ -25,7 +25,7 @@ module.exports = {
       'process.env': JSON.stringify(dotenv.parsed),
     }),
     new CompressionPlugin(),
-  ]/*.filter(Boolean)*/,
+  ].filter(Boolean),
   module: {
     rules: [
      {
