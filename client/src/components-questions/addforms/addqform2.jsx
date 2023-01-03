@@ -5,14 +5,15 @@ import axios from 'axios';
 // import { CSSTransition } from 'react-transition-group';
 
 
-const Addqform2 = ({onClose, show,pid, product})=>{
+const Addqform2 = ({onClose, show,pid, product, handleClickTracking})=>{
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   if(!show) {
     return null;
   }
-  var handleSubmit=()=>{
+  var handleSubmit=(e)=>{
+    handleClickTracking(e);
     axios.post(`/questions?body=${body}&name=${name}&email=${email}&product_id=${pid}`)
     .then((result) =>{
      console.log('in forms');
@@ -81,7 +82,7 @@ const Addqform2 = ({onClose, show,pid, product})=>{
               required
               autoComplete="off"
               value ={email}
-              onChange = {(e)=>{ setEmail(e.target.value); }}
+              onChange = {(e)=>{ setEmail(e.target.value);}}
               />
               <br />
               For authentication reasons, you will not be emailed

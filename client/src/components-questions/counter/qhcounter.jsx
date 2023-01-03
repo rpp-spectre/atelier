@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReactDom from 'react-dom/client';
 import axios from 'axios';
 
-const Qhcounter = ({qcounter, qid}) =>{
+const Qhcounter = ({qcounter, qid, handleClickTracking}) =>{
   const [qhcounter, setQhcounter] = useState(qcounter);
   const [qh, setQh] = useState(true);
 
@@ -22,7 +22,7 @@ const Qhcounter = ({qcounter, qid}) =>{
 
   return (
     <>
-    <span className ='underline' onClick={()=>{if(qh){setQhcounter(qhcounter+1);} updateH();}}>Yes </span>( {qhcounter})
+    <span className ='underline' onClick={(e)=>{handleClickTracking(e); if(qh){setQhcounter(qhcounter+1);} updateH();}}>Yes </span>( {qhcounter})
     </>
   );
 };

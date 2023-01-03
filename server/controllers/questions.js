@@ -120,15 +120,47 @@ exports.addAnswer = (req, res) =>{
   let qid = req.params.qid;
   console.log("qid", qid);
   let apiAddA = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/'+qid+'/answers';
-  let body = req.query.body;
-  let name = req.query.name;
-  let email = req.query.email;
-  let photos = req.query.photos;
+  // let body = req.query.body;
+  // let name = req.query.name;
+  // let email = req.query.email;
+  // let photos = req.query.photos;
+  let body = req.body.body;
+  let name = req.body.name;
+  let email = req.body.email;
+  let photos = req.body.photos;
   axios.post(apiAddA, {
     "body": body,
     "name": name,
     "email": email,
     "photos": Array.from(photos)
+    },
+    {
+    headers: {
+    'Authorization': process.env.API_KEY
+    }
+  }
+  )
+  .then((response) => {
+    console.log('in controller');
+    console.log('controller data',response.config.data);
+    res.send(response.data);
+  })
+  .catch((error) => {
+    // console.log(response.config.data);
+    console.log(error);
+    res.send(error);
+  });
+};
+
+exports.log = (req, res) =>{
+  let apiLog = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions';
+  let element = req.body.element;
+  let widget = req.body.widget;
+  let time = req.body.time;
+  axios.post(apiLog, {
+    "element": element,
+    "widget": widget,
+    "time": time
     },
     {
     headers: {
