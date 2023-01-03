@@ -152,6 +152,34 @@ exports.addAnswer = (req, res) =>{
   });
 };
 
+exports.log = (req, res) =>{
+  let apiLog = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions';
+  let element = req.body.element;
+  let widget = req.body.widget;
+  let time = req.body.time;
+  axios.post(apiLog, {
+    "element": element,
+    "widget": widget,
+    "time": time
+    },
+    {
+    headers: {
+    'Authorization': process.env.API_KEY
+    }
+  }
+  )
+  .then((response) => {
+    console.log('in controller');
+    console.log('controller data',response.config.data);
+    res.send(response.data);
+  })
+  .catch((error) => {
+    // console.log(response.config.data);
+    console.log(error);
+    res.send(error);
+  });
+};
+
 exports.sum = (a, b) =>{
   return a + b;
 };

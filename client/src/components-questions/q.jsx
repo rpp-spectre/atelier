@@ -9,17 +9,17 @@ import Qhcounter from './counter/qhcounter.jsx';
 
 
 
-var Q = ({question, pid, product}) =>{
+var Q = ({question, pid, product, handleClickTracking}) =>{
   const qcounter = question.question_helpfulness;
   // const [qcounter, setQcounter] = useState([question.question_helpfulness]);
   return (<div role="document">
 
 
     {/* <h3>Q: {question.question_body}</h3> Helpful? Yes ( {qcounter}) | <Answeradd /> */}
-    <h3>Q: {question.question_body}</h3> Helpful? <Qhcounter qcounter={qcounter} qid={question.question_id} /> | <Answeradd pid={pid} qid={question.question_id} qbody={question.question_body} product={product} />
+    <h3>Q: {question.question_body}</h3> Helpful? <Qhcounter qcounter={qcounter} qid={question.question_id} handleClickTracking={handleClickTracking} /> | <Answeradd pid={pid} qid={question.question_id} qbody={question.question_body} product={product} handleClickTracking={handleClickTracking} />
     <br />
     <br />
-    <Alist qid={question.question_id} />
+    <Alist qid={question.question_id} handleClickTracking={handleClickTracking} />
 
 
   </div>);

@@ -32,7 +32,7 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
       console.log('photos', photos);
       let body = new FormData();
       body.set('key', process.env.REACT_APP_API_KEY);
-
+      console.log('image', img);
       body.append('image', img);
 
       const response = await axios({
@@ -144,19 +144,12 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
              Upload your photos:
              <br />
              <span className="notetext">{showWarning()}</span>
-
-              {/* {(selectedImages.length >0) && (
-
-                selectedImages.map((image) => {
-                  return (<Simage image={image} />);
-                });
-            )} */}
             <div>
             {(selectedImages.length>0)
-            // && (uploadImages(selectedImages))
+
             &&(
              selectedImages.map((image, i) => {
-              // uploadImage(image);
+
               console.log('image uploaded, get ready to load image');
               return (<Simage image={image} key={i} />)
             })

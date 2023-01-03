@@ -14,6 +14,8 @@ app.use(express.json());
 app.use(cors());
 app.use(compression());
 
+//Log Interactions
+app.post('/interactions', controllerQ.log);
 
 //Product Overview
 app.get('/products/:id', product.products);
@@ -35,5 +37,6 @@ app.post('/questions/:qid/answers', controllerQ.addAnswer);
 app.put('/questions/:qid/helpful', controllerQ.changeQHelpful);
 app.put('/answers/:aid/helpful', controllerQ.changeAHelpful);
 app.put('/answers/:aid/report', controllerQ.areport);
+
 
 app.listen(3000);

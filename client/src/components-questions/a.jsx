@@ -4,7 +4,7 @@ import Aphotos from './photos/aphotos.jsx';
 import Ahcounter from './counter/ahcounter.jsx';
 import Reporta from './report/reporta.jsx';
 
-const Answer = ({answer})=>{
+const Answer = ({answer, handleClickTracking})=>{
   // const [acounter, setAcounter] = useState(answer['helpfulness']);
   const acounter = answer['helpfulness'];
   var photo = ()=>{
@@ -12,7 +12,7 @@ const Answer = ({answer})=>{
 
       return null;
     } else {
-      return <Aphotos photos={answer.photos} />;
+      return <Aphotos photos={answer.photos} handleClickTracking={handleClickTracking} />;
     }
   };
   let options = {
@@ -29,11 +29,11 @@ const Answer = ({answer})=>{
   let date = pdate.toLocaleDateString("en-US", options);
 
   return (
-    <div role="document">
+    <div role="document questions">
       A: {answer.body}
       <br />
       {/* by {answer.answer_name} {answer.date} | Helpful ({acounter}) Report */}
-      by {answerer()} {date} | <Ahcounter acounter={acounter} aid={answer.answer_id} /> <Reporta aid={answer.answer_id} />
+      by {answerer()} {date} | <Ahcounter acounter={acounter} aid={answer.answer_id} handleClickTracking={handleClickTracking} /> <Reporta aid={answer.answer_id} handleClickTracking={handleClickTracking} />
       <br />
        {photo()}
        <br />
