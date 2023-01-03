@@ -26,8 +26,8 @@ class Overview extends React.Component {
       features: [{feature: 'default', value: 'default'}],
 
       photos: [{url: ''}],
-      rating: '2.5',
-      reviews: 0,
+      // rating: '2.5',
+      // reviews: 0,
 
       styleList: [{style_id: '', name: '', photos: [{thumbnail_url: ''}]}],
       // currentStyle: {skus: {}},
@@ -127,46 +127,33 @@ class Overview extends React.Component {
     });
   }
 
-  getReviews() {
-    axios.get(`/reviews/${this.props.pid}`)
-    .then(response => {
-      // console.log(response, '=======review response');
-      this.setState({
-        reviews: response.data.results.length
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+  getRating(reviewMeta) {
 
-  getRating() {
-    axios.get(`/reviewsMeta/${this.props.pid}`)
-    .then(response => {
-      // console.log(response, '=======review response');
-      let ratingsData = response.data.ratings;
-      let weightedTotal = Number.parseInt(ratingsData['1']) * 1 + Number.parseInt(ratingsData['2']) * 2 + Number.parseInt(ratingsData['3']) * 3 + Number.parseInt(ratingsData['4']) * 4 + Number.parseInt(ratingsData['5']) * 5;
-      let numberOfReviews = 0;
-      Object.values(ratingsData).forEach((element) => {
-        numberOfReviews += Number.parseInt(element);
-      })
+    if (reviewMeta === null) {
+      return 0;
+    }
 
-      let averageRating = Math.round(weightedTotal / numberOfReviews * 10) / 10;
+    var ratingsData = reviewMeta.ratings;
+    var weightedTotal = 0;
+    var numberOfReviews = 0;
 
-      this.setState({
-        rating: averageRating
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    for (var i = 1; i <= 5; i++) {
+      if (ratingsData[i] === undefined) {
+        ratingsData[i] = 0;
+      }
+      ratingsData[i] = Number.parseInt(ratingsData[i]);
+      weightedTotal += ratingsData[i] * i;
+      numberOfReviews += ratingsData[i];
+    }
+
+    var averageRating = Math.round(weightedTotal / numberOfReviews * 10) / 10;
+    return averageRating;
+
   }
 
   componentDidMount() {
     this.getProduct();
     this.getStyle();
-    this.getReviews();
-    this.getRating();
   }
 
   changeStyle(newPhotos, newSizeList, newPrice, newSalePrice) {
@@ -188,7 +175,7 @@ class Overview extends React.Component {
           <ImageGallery photos={this.state.photos} showNum={() => Math.min(this.state.photos.length, 7)}/><br/>
           </div><br/>
           <div className="Container-right">
-          <StarRating rating={this.state.rating} reviews={this.state.reviews}/><br/>
+          <StarRating rating={this.getRating(this.props.reviewMeta)} reviews={this.props.reviewCount}/><br/>
           <Category category={this.state.category}/>
           <Title name={this.state.name}/>
           <Price price={this.state.price} salePrice={this.state.salePrice}/><br/>

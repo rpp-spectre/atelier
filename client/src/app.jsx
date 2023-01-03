@@ -11,7 +11,7 @@ import Review from './review-components/Reviews.jsx';
 
 const App = () => {
   const params = useParams();
-  const pid = params.id || 71698;
+  const pid = params.id || 71699;
 
 //Review API calls
   const [reviewMeta, setReviewMeta] = useState(null);
@@ -97,7 +97,7 @@ const App = () => {
   // console.log('pid', pid);
     return (<div>
       <Link to='/71697'>home again</Link>
-      <ProductSection pid = {pid}/>
+      <ProductSection pid = {pid} reviewCount={reviewCount} reviewMeta={reviewMeta}/>
       <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions} handleFilter={handleFilter} handleClickTracking={handleClickTracking}/>
       <Qsection pid = {pid} handleClickTracking={handleClickTracking} />
     </div>);
