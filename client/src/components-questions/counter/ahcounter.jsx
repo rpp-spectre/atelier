@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReactDom from 'react-dom/client';
 import axios from 'axios';
 
-const Ahcounter = ({acounter, aid}) =>{
+const Ahcounter = ({acounter, aid, handleClickTracking}) =>{
   const [ahcounter, setAhcounter] = useState(acounter);
   const [ah, setAh] = useState(true);
 
@@ -25,7 +25,7 @@ const Ahcounter = ({acounter, aid}) =>{
 
   return (
     <>
-    Helpful? <span className ='underline' onClick={()=>{if(ah){setAhcounter(ahcounter+1)}; updateA()}}>Yes</span>({ahcounter})
+    Helpful? <span className ='underline' onClick={(e)=>{handleClickTracking(e);if(ah){setAhcounter(ahcounter+1)}; updateA()}}>Yes</span>({ahcounter})
     </>
   );
 };

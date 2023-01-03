@@ -7,7 +7,7 @@ import Answer from './a.jsx';
 
 
 
-var Alist = ({qid}) =>{
+var Alist = ({qid, handleClickTracking}) =>{
   const[answers,setAnswers]=useState([]);
   const[NoA,setNoA]=useState(2);
 
@@ -15,9 +15,9 @@ var Alist = ({qid}) =>{
     if(answers.length <= 2) {
       return null;
     } else if (NoA === answers.length) {
-      return <h3 onClick={()=>{setNoA(2)}}><span className='underline'>COLLAPSE ANSWERS</span></h3>;
+      return <h3 onClick={(e)=>{handleClickTracking(e); setNoA(2)}}><span className='underline'>COLLAPSE ANSWERS</span></h3>;
     } else {
-      return <h3 onClick={()=>{setNoA(answers.length)}}><span className='underline'>LOAD MORE ANSWERS</span></h3>;
+      return <h3 onClick={(e)=>{handleClickTracking(e); setNoA(answers.length)}} ><span className='underline'>LOAD MORE ANSWERS</span></h3>;
     }
   };
 
@@ -43,7 +43,7 @@ var Alist = ({qid}) =>{
 
        {answers.slice(0,NoA).map((answer)=>{
         // console.log('answers',answers);
-        return <Answer answer={answer} key = {answer.answer_id} />
+        return <Answer answer={answer} key = {answer.answer_id} handleClickTracking={handleClickTracking} />
       })}
       {/* <h3 onClick={()=>{setNoA(answers.length)}}>LOAD MORE ANSWERS</h3> */}
       {load()}

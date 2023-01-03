@@ -8,7 +8,7 @@ import 'regenerator-runtime/runtime.js';
 
 
 
-var Qsearch = ({pid}) =>{
+var Qsearch = ({pid,handleClickTracking}) =>{
   const [term, setTerm] = useState('');
   const[noQ,setNoQ]=useState(2);
   const[questions,setQuestions]=useState([]);
@@ -19,7 +19,7 @@ var Qsearch = ({pid}) =>{
     if (noQ >= questions.length) {
       return null;
     } else {
-      return <button data-testid="load" onClick={()=>{setNoQ(noQ+2)}}>LOAD MORE QUESTIONS</button>;
+      return <button data-testid="load" onClick={(e)=>{handleClickTracking(e); setNoQ(noQ+2)}}>LOAD MORE QUESTIONS</button>;
     }
   };
 
@@ -31,7 +31,7 @@ var Qsearch = ({pid}) =>{
   };
 
   let handleChange = (e) =>{
-
+      handleClickTracking(e);
       setTerm(e.target.value);
       if(e.target.value.length >= 3){
         search(e.target.value);
@@ -84,11 +84,11 @@ var Qsearch = ({pid}) =>{
 
     </form>
     <div className='question-list'>
-    <Qlist noQ={noQ} questions={questions} pid={pid} product={product} />
+    <Qlist noQ={noQ} questions={questions} pid={pid} product={product} handleClickTracking={handleClickTracking} />
     </div>
     <span className="buttons">
     {load(noQ, questions)}
-    <Qadd pid={pid} product={product} />
+    <Qadd pid={pid} product={product} handleClickTracking={handleClickTracking} />
     </span>
   </>);
 };

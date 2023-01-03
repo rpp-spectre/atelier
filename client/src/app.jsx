@@ -81,7 +81,7 @@ const App = () => {
       <Link to='/71697'>home again</Link>
       <ProductSection pid = {pid}/>
       <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions} handleFilter={handleFilter} handleClickTracking={handleClickTracking}/>
-      <Qsection pid = {pid} />
+      <Qsection pid = {pid} handleClickTracking={handleClickTracking} />
     </div>);
 };
 
