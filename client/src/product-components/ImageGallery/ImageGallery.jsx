@@ -33,10 +33,34 @@ class ImageGallery extends React.Component {
         slideIndex: newIndex,
         startIndex: newStartIndex
     })
+
+    if (n === 1) {
+      var clickData = {
+        element: 'ImageGallery-RightArrow',
+        time: new Date(),
+        module: 'Overview'
+      };
+      this.props.handleClickTracking(clickData);
+    }
+    if (n === -1) {
+      var clickData = {
+        element: 'ImageGallery-LeftArrow',
+        time: new Date(),
+        module: 'Overview'
+      };
+      this.props.handleClickTracking(clickData);
+    }
   }
 
   currentSlide(index) {
     this.setState({slideIndex: index});
+
+    var clickData = {
+      element: 'ImageGallery-thumbnail',
+      time: new Date(),
+      module: 'Overview'
+    };
+    this.props.handleClickTracking(clickData);
   }
 
   handleArrowUp() {
@@ -44,6 +68,13 @@ class ImageGallery extends React.Component {
     this.setState({
       startIndex: newstartIndex
     });
+
+    var clickData = {
+      element: 'ImageGallery-UpArrow',
+      time: new Date(),
+      module: 'Overview'
+    };
+    this.props.handleClickTracking(clickData);
   }
 
   handleArrowDown() {
@@ -51,6 +82,13 @@ class ImageGallery extends React.Component {
     this.setState({
       startIndex: newstartIndex
     });
+
+    var clickData = {
+      element: 'ImageGallery-DownArrow',
+      time: new Date(),
+      module: 'Overview'
+    };
+    this.props.handleClickTracking(clickData);
   }
 
   onZoom(e) {
@@ -89,6 +127,13 @@ class ImageGallery extends React.Component {
 
 
   openFullScreen() {
+    var clickData = {
+      element: 'ImageGallery-main',
+      time: new Date(),
+      module: 'Overview'
+    };
+    this.props.handleClickTracking(clickData);
+
     // document.getElementById('slideImage').requestFullscreen({ navigationUI: "show" });
     let elem = document.getElementById('container')
     if (!document.fullscreenElement) {
