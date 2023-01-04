@@ -163,6 +163,22 @@ class Overview extends React.Component {
     });
   }
 
+  resizeImage(url) {
+    var arr = url.split('&');
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i][0] === 'w' && arr[i][1] === '=') {
+        var width = Number(arr[i].slice(2));
+        arr[i] = "w=" + Math.floor(width * 0.6).toString();
+      }
+      if (arr[i][0] === 'q' && arr[i][1] === '=') {
+        var width = Number(arr[i].slice(2));
+        arr[i] = 'q=' + Math.floor(width * 0.6).toString();
+      }
+    }
+    var newRUL = arr.join('&');
+    return newRUL;
+  }
+
 
 
   render() {
@@ -170,14 +186,14 @@ class Overview extends React.Component {
       <div className="Overview" data-testid="overview">
         <div className="Container-top">
           <div className="Container-left">
-          <ImageGallery photos={this.state.photos} showNum={() => Math.min(this.state.photos.length, 7)}/><br/>
+          <ImageGallery photos={this.state.photos} resizeImage={this.resizeImage.bind(this)} showNum={() => Math.min(this.state.photos.length, 7)}/><br/>
           </div><br/>
           <div className="Container-right">
           <StarRating rating={this.getRating(this.props.reviewMeta)} reviews={this.props.reviewCount}/><br/>
           <Category category={this.state.category}/>
           <Title name={this.state.name}/>
           <Price price={this.state.price} salePrice={this.state.salePrice}/><br/>
-          <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)}/><br/>
+          <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)} resizeImage={this.resizeImage.bind(this)}/><br/>
           <AddToCart sizeList={this.state.sizeList} sizeOutOfStock={this.state.sizeOutOfStock}/><br/>
           {/* <Star /> */}
           </div><br/>

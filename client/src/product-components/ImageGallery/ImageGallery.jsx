@@ -33,9 +33,6 @@ class ImageGallery extends React.Component {
         slideIndex: newIndex,
         startIndex: newStartIndex
     })
-
-
-
   }
 
   currentSlide(index) {
@@ -103,7 +100,6 @@ class ImageGallery extends React.Component {
     }
   }
 
-
   render() {
     // console.log('this.props', this.props.photos.length)
     return (
@@ -114,8 +110,8 @@ class ImageGallery extends React.Component {
             }
 
             var imageUrl = defaultURL;
-            if (photo.url !== null) {
-              imageUrl = photo.url;
+            if (photo.url) {
+              imageUrl = this.props.resizeImage(photo.url);
             }
 
             return (
@@ -139,8 +135,8 @@ class ImageGallery extends React.Component {
               }
 
               var thumbnailUrl = defaultURL;
-              if (photo.thumbnail_url !== null) {
-                thumbnailUrl = photo.thumbnail_url;
+              if (photo.thumbnail_url) {
+                thumbnailUrl = this.props.resizeImage(photo.thumbnail_url);
               }
 
               return (

@@ -48,7 +48,7 @@ class Style extends React.Component {
 
             var styleImage = defaultURL;
             if (style.photos[0].thumbnail_url !== null) {
-              styleImage = style.photos[0].thumbnail_url;
+              styleImage = this.props.resizeImage(style.photos[0].thumbnail_url);
             }
 
             return (
