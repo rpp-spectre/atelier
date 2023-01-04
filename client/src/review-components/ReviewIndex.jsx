@@ -30,7 +30,7 @@ function ReviewSection(props) {
     reviewTiles = <div>There are no reviews yet.</div>;
   }
 
-  let ratingSection = <Ratings data={props.reviewMeta} handleFilter={props.handleFilter}/>
+  let ratingSection = <Ratings data={props.reviewMeta} handleFilter={props.handleFilter} filterApplied={props.filterApplied} removeFilter={props.removeFilter} ratingFilter={props.ratingFilter}/>
   if (!props.reviewMeta) {
     ratingSection = null;
   }
@@ -45,6 +45,7 @@ function ReviewSection(props) {
     <h2>Reviews and Ratings</h2>
     <div className='rating-product-breakdown'>
     {ratingSection}
+    <h3>Product Breakdown</h3>
     {productBreakdownSection}
     </div>
     <div className='review'>

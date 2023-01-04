@@ -29,18 +29,37 @@ let Ratings = (props) => {
 
   let ratingBars = Object.values(ratingsData).reverse().map((element, index) => {
     return <div key={index}>
-      <RatingBreakdown star={Math.abs(index - 5)} ratings={element} totalRatings={numberOfReviews} handleFilter={props.handleFilter}/>
+      <RatingBreakdown star={Math.abs(index - 5)} ratings={element} totalRatings={numberOfReviews} handleFilter={props.handleFilter} filterApplied={props.filterApplied}/>
       </div>
   })
 
   let recommendations = Number.parseInt(recommendData.true)/ (Number.parseInt(recommendData.false) + Number.parseInt(recommendData.true));
   let recommendPercent = Math.round(recommendations * 100);
 
+  let ratingFilters = '';
+  props.ratingFilter.forEach((rating) => {
+    ratingFilters += (rating + '-star ');
+  })
+
+  let filterApplied = null;
+  if (props.filterApplied === 'true') {
+    filterApplied = <div className='rating-filter'>Rating filters applied: {ratingFilters}</div>;
+  }
+
+  let removeFilter = null;
+  if (props.filterApplied === 'true') {
+    removeFilter = <button className='remove-filter' onClick={props.removeFilter}>Remove Filters</button>
+  }
+
   return (
   <div className='ratings'>
     <h1>{averageRating} <Stars rating={averageRating}/></h1>
     <div>{recommendPercent}% of reviews recommend this product</div>
+    <br></br>
+    <h3 className='ratings'>Rating Breakdown</h3>
+    {filterApplied}
     {ratingBars}
+    {removeFilter}
   </div>
   )
 }

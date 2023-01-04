@@ -101,9 +101,38 @@
 }
 
 button.true.filter {
-  background-color: blue;
+  background: none;
+  border: none;
+  color: black;
+}
+
+button.true.filter:hover {
+  background: none;
+  border: none;
+  color: grey;
 }
 
 button.false.filter {
-  background-color: red;
+  background: none;
+  border: none;
+  font-weight: bolder;
+  color: black;
+}
+
+button.false.filter:hover {
+  background: none;
+  border: none;
+  font-weight: bolder;
+  color:grey;
+}
+
+.rating-filter {
+  color: grey;
+  font-size: x-small;
+}
+
+button.remove-filter {
+  background: none;
+  border: none;
+  color: grey;
 }
