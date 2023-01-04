@@ -13,6 +13,24 @@ const App = () => {
   const params = useParams();
   const pid = params.id || 71699;
 
+
+//Product API calls
+  const [productInfo, setProductInfo] = useState({
+    id: "id",
+    name: "name",
+    category: "category",
+    slogan: "slogan",
+    description: "description",
+    features: [{feature: 'feature', value: ''}]
+  });
+
+  useEffect(() => {
+    (async() => {
+      let result = await axios.get(`/products/${pid}`);
+      setProductInfo(result.data);
+    })()
+  }, []);
+
 //Review API calls
   const [reviewMeta, setReviewMeta] = useState(null);
   const [totalReviewsArray, setReviewsArray] = useState([]);
@@ -111,7 +129,12 @@ const App = () => {
   // console.log('pid', pid);
     return (<div>
       <Link to='/71697'>home again</Link>
-      <ProductSection pid = {pid} reviewCount={reviewCount} reviewMeta={reviewMeta}/>
+      <ProductSection
+        pid={pid}
+        productInfo={productInfo}
+        reviewCount={reviewCount}
+        reviewMeta={reviewMeta}
+        handleClickTracking={handleClickTracking}/>
       <ReviewSection
         reviewMeta={reviewMeta}
         totalReviewsArray={totalReviewsArray}

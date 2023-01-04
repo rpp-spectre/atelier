@@ -5,9 +5,9 @@ import Category from "./Information/Category.jsx";
 import Title from "./Information/Title.jsx";
 import Price from "./Information/Price.jsx";
 import Detail from "./Information/Detail.jsx";
-import Star from "./Information/Star.jsx";
 import Style from "./Style/Style.jsx";
 import AddToCart from "./AddToCart/AddToCart.jsx";
+import defaultURL from "./ImageGallery/defaultImage/default.jpg";
 import './product.css';
 const axios = require('axios');
 
@@ -16,20 +16,12 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      name: 'default',
-      category: 'default',
       price: 0,
       salePrice: 0,
-      slogan: 'default',
-      description: 'default',
-      features: [{feature: 'default', value: 'default'}],
-
-      photos: [{url: ''}],
-
-      styleList: [{style_id: '', name: '', photos: [{thumbnail_url: ''}]}],
+      photos: [{url: defaultURL}],
+      styleList: [{style_id: '', name: '', photos: [{thumbnail_url: defaultURL}]}],
       sizeList: [{quantity: 0}],
-      sizeOutOfStock: true
+      sizeOutOfStock: false
     };
   }
 
@@ -37,14 +29,12 @@ class Overview extends React.Component {
     var sizeArr = Object.keys(sizeObj).sort();
     var sizeList = [];
     for (let i = 0; i < sizeArr.length; i++) {
-      // console.log(sizeArr[i], sizeObj[sizeArr[i]], '===========mark');
       var obj =  sizeObj[sizeArr[i]];
       obj['sku'] =  sizeArr[i];
       if (obj.quantity !== 0) {
         sizeList.push(obj);
       }
     }
-    // console.log(sizeObj, sizeList, '=============sizeList');
     return sizeList;
   }
 
@@ -59,49 +49,19 @@ class Overview extends React.Component {
     return false;
   }
 
-
-  getProduct() {
-
-    axios.get(`/products/${this.props.pid}`)
-    .then((response) => {
-      // console.log(response.data, '===========getProduct response data')
-      var productData = {
-        id: response.data.id,
-        name: response.data.name,
-        category: response.data.category,
-        // price: response.data.default_price,
-        slogan: response.data.slogan,
-        description: response.data.description,
-        features: response.data.features
-      }
-      this.setState(productData);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
-
-
   getStyle() {
 
     axios.get(`/products/${this.props.pid}/styles`)
     .then((response) => {
-      // console.log(response.data.results, '===========getStyle response data')
-
       this.setState({
         styleList: response.data.results,
-        // currentStyle: response.data.results[0],
         price: response.data.results[0].original_price,
         salePrice: response.data.results[0].sale_price,
         photos: response.data.results[0].photos
       });
 
       var stock = this.getSizeStock(response.data.results[0].skus);
-      // var stock = true;
-      // var testData = {
-      //   '123': {size: 'XS', quantity: 0},
-      //   '124': {size: 'S', quantity: 0}
-      // };
+
       if (stock) {
         this.setState({
           sizeOutOfStock: true,
@@ -111,14 +71,8 @@ class Overview extends React.Component {
         this.setState({
           sizeOutOfStock: false,
           sizeList: this.getSizeList(response.data.results[0].skus)
-          // sizeList: this.getSizeList(testData)
         });
       }
-      // this.setState({currentStyle: response.data.results[0]});
-      // this.setState({price: response.data.results[0].original_price});
-      // this.setState({photos: response.data.results[0].photos});
-
-      // this.setState({sizeList: this.getSizeList(response.data.results[0].skus)});
     })
     .catch((error) => {
       console.log(error);
@@ -146,12 +100,16 @@ class Overview extends React.Component {
 
     var averageRating = Math.round(weightedTotal / numberOfReviews * 10) / 10;
     return averageRating;
-
   }
 
   componentDidMount() {
-    this.getProduct();
     this.getStyle();
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.state.slideIndex === prevState.slideIndex) {
+      return;
+    }
   }
 
   changeStyle(newPhotos, newSizeList, newPrice, newSalePrice) {
@@ -180,7 +138,6 @@ class Overview extends React.Component {
   }
 
 
-
   render() {
     return (
       <div className="Overview" data-testid="overview">
@@ -190,16 +147,15 @@ class Overview extends React.Component {
           </div><br/>
           <div className="Container-right">
           <StarRating rating={this.getRating(this.props.reviewMeta)} reviews={this.props.reviewCount}/><br/>
-          <Category category={this.state.category}/>
-          <Title name={this.state.name}/>
+          <Category category={this.props.productInfo.category}/>
+          <Title name={this.props.productInfo.name}/>
           <Price price={this.state.price} salePrice={this.state.salePrice}/><br/>
           <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)} resizeImage={this.resizeImage.bind(this)}/><br/>
           <AddToCart sizeList={this.state.sizeList} sizeOutOfStock={this.state.sizeOutOfStock}/><br/>
-          {/* <Star /> */}
           </div><br/>
         </div>
         <div className="Container-bottom">
-        <Detail slogan={this.state.slogan} description={this.state.description} features={this.state.features}/>
+        <Detail slogan={this.props.productInfo.slogan} description={this.props.productInfo.description} features={this.props.productInfo.features}/>
         </div><br/>
       </div>
     )
