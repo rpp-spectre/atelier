@@ -1,4 +1,5 @@
 import React from "react";
+import defaultURL from "../ImageGallery/defaultImage/default.jpg";
 
 class Style extends React.Component {
   constructor(props) {
@@ -44,9 +45,15 @@ class Style extends React.Component {
         </div>
         <div className='StyleList'>
           {this.props.styleList.map((style, index) => {
+
+            var styleImage = defaultURL;
+            if (style.photos[0].thumbnail_url !== null) {
+              styleImage = style.photos[0].thumbnail_url;
+            }
+
             return (
               <label key={style.style_id} className="styleLable">
-                <img className="stylePhoto" key={style.style_id} onClick={(e) => this.toggleCheckbox(e, style, index)} src={style.photos[0].thumbnail_url} alt={style.name} />
+                <img className="stylePhoto" key={style.style_id} onClick={(e) => this.toggleCheckbox(e, style, index)} src={styleImage} alt={style.name} />
                 {this.state.checkedIndex === index ? <label className='checkboxLable'><input className='checkbox' type="checkbox" id={style.style_id} checked={true} onChange={() => {}}></input></label> : null}
               </label>
             )

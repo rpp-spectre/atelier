@@ -26,11 +26,8 @@ class Overview extends React.Component {
       features: [{feature: 'default', value: 'default'}],
 
       photos: [{url: ''}],
-      // rating: '2.5',
-      // reviews: 0,
 
       styleList: [{style_id: '', name: '', photos: [{thumbnail_url: ''}]}],
-      // currentStyle: {skus: {}},
       sizeList: [{quantity: 0}],
       sizeOutOfStock: true
     };
@@ -90,6 +87,7 @@ class Overview extends React.Component {
     axios.get(`/products/${this.props.pid}/styles`)
     .then((response) => {
       // console.log(response.data.results, '===========getStyle response data')
+
       this.setState({
         styleList: response.data.results,
         // currentStyle: response.data.results[0],
