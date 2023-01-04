@@ -18,6 +18,8 @@ const App = () => {
   const [totalReviewsArray, setReviewsArray] = useState([]);
   const [totalReviewsArrayCopy, setReviewsCopyArray] = useState([]);
   const [filteredArray, setFilteredArray] = useState([]);
+  const [filterApplied, setFilter] = useState('false');
+  const [ratingFilter, setRatingFilter] = useState([]);
   const [reviewCount, setReviewCount] = useState(totalReviewsArray.length);
 
   useEffect(() => {
@@ -64,30 +66,42 @@ const App = () => {
   }
 
   function handleFilter(e) {
-    console.log(filteredArray);
     let filterReview = {};
-    console.log(e.target.className);
     totalReviewsArrayCopy.forEach((review) => {
       if (filterReview[review.props.data.rating] === undefined) {
         filterReview[review.props.data.rating] = [review];
       } else {
         filterReview[review.props.data.rating].push(review);
       }
-    })
-    if (e.target.className === 'true') {
+    });
+
+    setFilter('true');
+    if (e.target.className === 'true filter') {
       let resultArray = filteredArray.concat(filterReview[Number.parseInt(e.target.value)]);
+      setRatingFilter(ratingFilter.concat([e.target.value]));
       setFilteredArray(resultArray);
       setReviewsArray(resultArray);
     } else {
       let resultArray = filteredArray.filter(review => review.props.data.rating !== Number.parseInt(e.target.value));
       if (resultArray.length === 0) {
+        setRatingFilter([]);
         setFilteredArray(resultArray);
         setReviewsArray(totalReviewsArrayCopy);
+        setFilter('false');
       } else {
+        let appliedRatingFilter = ratingFilter.filter(rating => rating !== e.target.value);
+        setRatingFilter(appliedRatingFilter);
         setFilteredArray(resultArray);
         setReviewsArray(resultArray);
       }
     }
+  }
+
+  function removeFilter(e) {
+    setRatingFilter([]);
+    setFilteredArray([]);
+    setReviewsArray(totalReviewsArrayCopy);
+    setFilter('false');
   }
 
   function handleClickTracking(e) {
@@ -98,7 +112,15 @@ const App = () => {
     return (<div>
       <Link to='/71697'>home again</Link>
       <ProductSection pid = {pid} reviewCount={reviewCount} reviewMeta={reviewMeta}/>
-      <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions} handleFilter={handleFilter} handleClickTracking={handleClickTracking}/>
+      <ReviewSection
+        reviewMeta={reviewMeta}
+        totalReviewsArray={totalReviewsArray}
+        reviewCount={reviewCount} onSort={handleOptions}
+        handleFilter={handleFilter}
+        filterApplied={filterApplied}
+        removeFilter={removeFilter}
+        ratingFilter={ratingFilter}
+        handleClickTracking={handleClickTracking}/>
       <Qsection pid = {pid} handleClickTracking={handleClickTracking} />
     </div>);
 };
