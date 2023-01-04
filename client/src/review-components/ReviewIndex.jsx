@@ -15,12 +15,12 @@ function ReviewSection(props) {
   let shownReviewsArray = props.totalReviewsArray.slice(0, showReviewCount);
   const [addReviews, setAddReviews]  = useState(false);
 
-  let addReviewButton = <button onClick={() => {setAddReviews(true)}}>Add A Review +</button>;
+  let addReviewButton = <button className='review-button' onClick={() => {setAddReviews(true)}}>Add A Review +</button>;
   if (addReviews === true) {
     addReviewButton = <ReviewForm data={props.reviewMeta} onClose={() => {setAddReviews(false)}}/>
   }
 
-  let moreReviewButton = <button onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;
+  let moreReviewButton = <button className='review-button' onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;
   if (shownReviewsArray.length === props.totalReviewsArray.length) {
     moreReviewButton = null;
   }
@@ -42,7 +42,7 @@ function ReviewSection(props) {
 
   return (
   <div>
-    <h2>Reviews and Ratings</h2>
+    <h2 className='review-section'>Reviews and Ratings</h2>
     <div className='rating-product-breakdown'>
     {ratingSection}
     <h3>Product Breakdown</h3>
@@ -50,7 +50,7 @@ function ReviewSection(props) {
     </div>
     <div className='review'>
       <h3>{props.reviewCount} reviews, sorted by
-        <select onClick={props.handleClickTracking} onChange={props.onSort}>
+        <select className='review-select' onClick={props.handleClickTracking} onChange={props.onSort}>
           <option value='relevance'>relevance</option>
           <option value='newest'>newest</option>
           <option value='helpful'>helpful</option>

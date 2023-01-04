@@ -12,12 +12,12 @@ function Reviews(props) {
   const [clicked, setClicked] = useState('false');
 
   function handleHelpfulClick(e) {
-    if (e.target.className === 'false') {
+    if (e.target.className === 'false helpful') {
       props.data.helpfulness++;
       setClicked('true');
       axios({
         method: 'post',
-        url: '/:review_id/helpful',
+        url: '/reviews/:review_id/helpful',
         data: {reviewId: props.data.review_id},
       })
       .then((result) => {
@@ -75,10 +75,10 @@ function Reviews(props) {
     {images}
     {modal}
     {sellerResponse}
-    <div>
+    <div className='helpfulness'>
       <label>
         Helpful?
-        <button className={clicked} onClick={handleHelpfulClick}>Yes</button>
+        <button className={clicked + ' helpful'} onClick={handleHelpfulClick}>Yes</button>
         <span>({props.data.helpfulness})</span>
       </label>
     </div>
