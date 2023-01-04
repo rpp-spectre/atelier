@@ -1,5 +1,6 @@
 import React from "react";
 import './ImageGallery.css';
+import defaultURL from "./defaultImage/default.jpg";
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -32,9 +33,6 @@ class ImageGallery extends React.Component {
         slideIndex: newIndex,
         startIndex: newStartIndex
     })
-
-
-
   }
 
   currentSlide(index) {
@@ -102,7 +100,6 @@ class ImageGallery extends React.Component {
     }
   }
 
-
   render() {
     // console.log('this.props', this.props.photos.length)
     return (
@@ -111,11 +108,17 @@ class ImageGallery extends React.Component {
             if (index !== this.state.slideIndex) {
               return
             }
+
+            var imageUrl = defaultURL;
+            if (photo.url) {
+              imageUrl = this.props.resizeImage(photo.url);
+            }
+
             return (
               <div id='mySlides' className={this.state.fullScreen ? "mySlidesFull" : "mySlides"} key={index} >
                 <div className="numbertext">{index+1} / {this.props.photos.length}</div>
                 <div id="imageContainer" className="imageContainer">
-                  <img className={this.state.fullScreen ? "slideImageFull" : "slideImage"}  id="slideImage" onClick={this.openFullScreen.bind(this)} src={photo.url} />
+                  <img className={this.state.fullScreen ? "slideImageFull" : "slideImage"}  id="slideImage" onClick={this.openFullScreen.bind(this)} src={imageUrl} alt="image"/>
                 </div>
               </div>
             )
@@ -130,9 +133,15 @@ class ImageGallery extends React.Component {
               if (index < this.state.startIndex || index >= this.state.startIndex+this.props.showNum()) {
                 return;
               }
+
+              var thumbnailUrl = defaultURL;
+              if (photo.thumbnail_url) {
+                thumbnailUrl = this.props.resizeImage(photo.thumbnail_url);
+              }
+
               return (
                 <div className={this.state.fullScreen ? "columnFull" : "column"} key={index} >
-                  <img src={photo.thumbnail_url} className={(this.state.slideIndex === index)? "demo cursor active" : "demo cursor"} onClick={() => this.currentSlide(index)} alt="Default"/>
+                  <img src={thumbnailUrl} className={(this.state.slideIndex === index)? "demo cursor active" : "demo cursor"} onClick={() => this.currentSlide(index)} alt="thumbnail"/>
                 </div>
               )
             })}

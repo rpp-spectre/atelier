@@ -26,11 +26,8 @@ class Overview extends React.Component {
       features: [{feature: 'default', value: 'default'}],
 
       photos: [{url: ''}],
-      rating: '2.5',
-      reviews: 0,
 
       styleList: [{style_id: '', name: '', photos: [{thumbnail_url: ''}]}],
-      // currentStyle: {skus: {}},
       sizeList: [{quantity: 0}],
       sizeOutOfStock: true
     };
@@ -90,6 +87,7 @@ class Overview extends React.Component {
     axios.get(`/products/${this.props.pid}/styles`)
     .then((response) => {
       // console.log(response.data.results, '===========getStyle response data')
+
       this.setState({
         styleList: response.data.results,
         // currentStyle: response.data.results[0],
@@ -127,46 +125,33 @@ class Overview extends React.Component {
     });
   }
 
-  getReviews() {
-    axios.get(`/reviews/${this.props.pid}`)
-    .then(response => {
-      // console.log(response, '=======review response');
-      this.setState({
-        reviews: response.data.results.length
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+  getRating(reviewMeta) {
 
-  getRating() {
-    axios.get(`/reviewsMeta/${this.props.pid}`)
-    .then(response => {
-      // console.log(response, '=======review response');
-      let ratingsData = response.data.ratings;
-      let weightedTotal = Number.parseInt(ratingsData['1']) * 1 + Number.parseInt(ratingsData['2']) * 2 + Number.parseInt(ratingsData['3']) * 3 + Number.parseInt(ratingsData['4']) * 4 + Number.parseInt(ratingsData['5']) * 5;
-      let numberOfReviews = 0;
-      Object.values(ratingsData).forEach((element) => {
-        numberOfReviews += Number.parseInt(element);
-      })
+    if (reviewMeta === null) {
+      return 0;
+    }
 
-      let averageRating = Math.round(weightedTotal / numberOfReviews * 10) / 10;
+    var ratingsData = reviewMeta.ratings;
+    var weightedTotal = 0;
+    var numberOfReviews = 0;
 
-      this.setState({
-        rating: averageRating
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    for (var i = 1; i <= 5; i++) {
+      if (ratingsData[i] === undefined) {
+        ratingsData[i] = 0;
+      }
+      ratingsData[i] = Number.parseInt(ratingsData[i]);
+      weightedTotal += ratingsData[i] * i;
+      numberOfReviews += ratingsData[i];
+    }
+
+    var averageRating = Math.round(weightedTotal / numberOfReviews * 10) / 10;
+    return averageRating;
+
   }
 
   componentDidMount() {
     this.getProduct();
     this.getStyle();
-    this.getReviews();
-    this.getRating();
   }
 
   changeStyle(newPhotos, newSizeList, newPrice, newSalePrice) {
@@ -178,6 +163,22 @@ class Overview extends React.Component {
     });
   }
 
+  resizeImage(url) {
+    var arr = url.split('&');
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i][0] === 'w' && arr[i][1] === '=') {
+        var width = Number(arr[i].slice(2));
+        arr[i] = "w=" + Math.floor(width * 0.6).toString();
+      }
+      if (arr[i][0] === 'q' && arr[i][1] === '=') {
+        var width = Number(arr[i].slice(2));
+        arr[i] = 'q=' + Math.floor(width * 0.6).toString();
+      }
+    }
+    var newRUL = arr.join('&');
+    return newRUL;
+  }
+
 
 
   render() {
@@ -185,14 +186,14 @@ class Overview extends React.Component {
       <div className="Overview" data-testid="overview">
         <div className="Container-top">
           <div className="Container-left">
-          <ImageGallery photos={this.state.photos} showNum={() => Math.min(this.state.photos.length, 7)}/><br/>
+          <ImageGallery photos={this.state.photos} resizeImage={this.resizeImage.bind(this)} showNum={() => Math.min(this.state.photos.length, 7)}/><br/>
           </div><br/>
           <div className="Container-right">
-          <StarRating rating={this.state.rating} reviews={this.state.reviews}/><br/>
+          <StarRating rating={this.getRating(this.props.reviewMeta)} reviews={this.props.reviewCount}/><br/>
           <Category category={this.state.category}/>
           <Title name={this.state.name}/>
           <Price price={this.state.price} salePrice={this.state.salePrice}/><br/>
-          <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)}/><br/>
+          <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)} resizeImage={this.resizeImage.bind(this)}/><br/>
           <AddToCart sizeList={this.state.sizeList} sizeOutOfStock={this.state.sizeOutOfStock}/><br/>
           {/* <Star /> */}
           </div><br/>
