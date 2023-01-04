@@ -11,12 +11,13 @@ import Review from './review-components/Reviews.jsx';
 
 const App = () => {
   const params = useParams();
-  const pid = params.id || 71698;
+  const pid = params.id || 71699;
 
 //Review API calls
   const [reviewMeta, setReviewMeta] = useState(null);
   const [totalReviewsArray, setReviewsArray] = useState([]);
   const [totalReviewsArrayCopy, setReviewsCopyArray] = useState([]);
+  const [filteredArray, setFilteredArray] = useState([]);
   const [reviewCount, setReviewCount] = useState(totalReviewsArray.length);
 
   useEffect(() => {
@@ -63,23 +64,40 @@ const App = () => {
   }
 
   function handleFilter(e) {
-    let resultArray = [];
+    console.log(filteredArray);
+    let filterReview = {};
+    console.log(e.target.className);
     totalReviewsArrayCopy.forEach((review) => {
-      if (review.props.data.rating === Number.parseInt(e.target.value)) {
-        resultArray.push(<Review data={review.props.data} />);
+      if (filterReview[review.props.data.rating] === undefined) {
+        filterReview[review.props.data.rating] = [review];
+      } else {
+        filterReview[review.props.data.rating].push(review);
       }
     })
-    setReviewsArray(resultArray);
+    if (e.target.className === 'true') {
+      let resultArray = filteredArray.concat(filterReview[Number.parseInt(e.target.value)]);
+      setFilteredArray(resultArray);
+      setReviewsArray(resultArray);
+    } else {
+      let resultArray = filteredArray.filter(review => review.props.data.rating !== Number.parseInt(e.target.value));
+      if (resultArray.length === 0) {
+        setFilteredArray(resultArray);
+        setReviewsArray(totalReviewsArrayCopy);
+      } else {
+        setFilteredArray(resultArray);
+        setReviewsArray(resultArray);
+      }
+    }
   }
 
   function handleClickTracking(e) {
     console.log(e);
   }
 
-  console.log('pid', pid);
+  // console.log('pid', pid);
     return (<div>
       <Link to='/71697'>home again</Link>
-      <ProductSection pid = {pid}/>
+      <ProductSection pid = {pid} reviewCount={reviewCount} reviewMeta={reviewMeta}/>
       <ReviewSection reviewMeta={reviewMeta} totalReviewsArray={totalReviewsArray} reviewCount={reviewCount} onSort={handleOptions} handleFilter={handleFilter} handleClickTracking={handleClickTracking}/>
       <Qsection pid = {pid} handleClickTracking={handleClickTracking} />
     </div>);
