@@ -99,3 +99,11 @@
   padding: 5px;
   margin-left: 10px;
 }
+
+button.true.filter {
+  background-color: blue;
+}
+
+button.false.filter {
+  background-color: red;
+}
