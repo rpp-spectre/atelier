@@ -6,3 +6,5 @@ qlist-test.jsx
 qmore*.jsx
 *bundle.js.map
 coverage
+*bundle.js.gz
+*bundle.js.map.gz

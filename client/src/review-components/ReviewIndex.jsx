@@ -8,6 +8,7 @@ import Ratings from './Ratings.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import ProductBreakdownList from './ProductBreakdownList.jsx';
 import HoverStars from './HoverStars.jsx';
+import './review.css';
 
 function ReviewSection(props) {
   const [showReviewCount, sliceReviewArray] = useState(2);

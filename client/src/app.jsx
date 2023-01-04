@@ -17,6 +17,7 @@ const App = () => {
   const [reviewMeta, setReviewMeta] = useState(null);
   const [totalReviewsArray, setReviewsArray] = useState([]);
   const [totalReviewsArrayCopy, setReviewsCopyArray] = useState([]);
+  const [filteredArray, setFilteredArray] = useState([]);
   const [reviewCount, setReviewCount] = useState(totalReviewsArray.length);
 
   useEffect(() => {
@@ -63,20 +64,37 @@ const App = () => {
   }
 
   function handleFilter(e) {
-    let resultArray = [];
+    console.log(filteredArray);
+    let filterReview = {};
+    console.log(e.target.className);
     totalReviewsArrayCopy.forEach((review) => {
-      if (review.props.data.rating === Number.parseInt(e.target.value)) {
-        resultArray.push(<Review data={review.props.data} />);
+      if (filterReview[review.props.data.rating] === undefined) {
+        filterReview[review.props.data.rating] = [review];
+      } else {
+        filterReview[review.props.data.rating].push(review);
       }
     })
-    setReviewsArray(resultArray);
+    if (e.target.className === 'true') {
+      let resultArray = filteredArray.concat(filterReview[Number.parseInt(e.target.value)]);
+      setFilteredArray(resultArray);
+      setReviewsArray(resultArray);
+    } else {
+      let resultArray = filteredArray.filter(review => review.props.data.rating !== Number.parseInt(e.target.value));
+      if (resultArray.length === 0) {
+        setFilteredArray(resultArray);
+        setReviewsArray(totalReviewsArrayCopy);
+      } else {
+        setFilteredArray(resultArray);
+        setReviewsArray(resultArray);
+      }
+    }
   }
 
   function handleClickTracking(e) {
     console.log(e);
   }
 
-  console.log('pid', pid);
+  // console.log('pid', pid);
     return (<div>
       <Link to='/71697'>home again</Link>
       <ProductSection pid = {pid}/>
