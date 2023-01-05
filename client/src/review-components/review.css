@@ -81,6 +81,7 @@
 .review-list {
   padding: 10px;
   height: 600px;
+  margin-right: 10px;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-snap-align: start;

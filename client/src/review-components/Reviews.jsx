@@ -12,7 +12,7 @@ function Reviews(props) {
   const [clicked, setClicked] = useState('false');
 
   function handleHelpfulClick(e) {
-    if (e.target.className === 'false helpful') {
+    if (e.target.className === 'false helpful reviews') {
       props.data.helpfulness++;
       setClicked('true');
       axios({
@@ -32,7 +32,7 @@ function Reviews(props) {
   let paragraphText = props.data.body;
 
   let shownText = paragraphText.substring(0, paragraphLimit);
-  let seeMoreButton = <span>...<button onClick={() => {setLimit(paragraphText.length); setShowSeeMore(false)}}>Show More</button></span>;
+  let seeMoreButton = <span>...<button className='reviews' onClick={(e) => {setLimit(paragraphText.length); setShowSeeMore(false); props.handleClickTracking(e);}}>Show More</button></span>;
 
   if (!showSeeMore || paragraphText.length <= 250) {
     seeMoreButton = null;
@@ -48,7 +48,7 @@ function Reviews(props) {
   }
 
   let images = props.data.photos.map((element, index) => {
-    return <img key={index} onClick={() => {setShowModal(true); setImage(element.url)}} className='thumbnail' src={element.url} alt='outfit image'/>
+    return <img key={index} onClick={(e) => {setShowModal(true); setImage(element.url); props.handleClickTracking(e);}} className='thumbnail reviews' src={element.url} alt='outfit image'/>
   })
 
   let modal = <ImageModal onClose={() => {setShowModal(false)}} img={modalImage}/>;
@@ -78,7 +78,7 @@ function Reviews(props) {
     <div className='helpfulness'>
       <label>
         Helpful?
-        <button className={clicked + ' helpful'} onClick={handleHelpfulClick}>Yes</button>
+        <button className={clicked + ' helpful reviews'} onClick={(e) => {handleHelpfulClick(e); props.handleClickTracking(e);}}>Yes</button>
         <span>({props.data.helpfulness})</span>
       </label>
     </div>
