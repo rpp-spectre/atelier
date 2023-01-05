@@ -123,14 +123,33 @@ const App = () => {
   }
 
   function handleClickTracking(e) {
-    let data = {
-      element: e.target,
-      time: e.timeStamp,
-    }
-    if (e.target.className.includes('review')) {
-      data.module = 'Reviews and Ratings';
-    }
-    console.log(data);
+    // console.log(e);
+    // console.log(e.target);
+    let s = new XMLSerializer();
+    let ele = s.serializeToString(e.target);
+    // console.log(e.target.className.split(' ').pop());
+    let date=new Date();
+    // console.log(date.toDateString());
+    let wname=e.target.className.split(' ').pop();
+    axios.post('http://localhost:3000/interactions', {
+      "element": ele,
+      // "element": "element",
+      "widget": wname,
+      "time": date.toDateString()
+      // "time":"5394.899999976158"
+      })
+    .then((result) => {
+      console.log('in controller', result);
+      // console.log('controller data',result.data);
+
+    })
+    .catch((error) => {
+      // console.log(response.config.data);
+      // JSON.stringify(error);
+      // throw(JSON.stringify(error));
+      throw (error);
+
+    });
   }
 
   // console.log('pid', pid);

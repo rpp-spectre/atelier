@@ -19,7 +19,7 @@ var Qsearch = ({pid,handleClickTracking}) =>{
     if (noQ >= questions.length) {
       return null;
     } else {
-      return <button data-testid="load" onClick={(e)=>{handleClickTracking(e); setNoQ(noQ+2)}}>LOAD MORE QUESTIONS</button>;
+      return <button data-testid="load" className = "questions" onClick={(e)=>{handleClickTracking(e); setNoQ(noQ+2)}}>LOAD MORE QUESTIONS</button>;
     }
   };
 
@@ -31,7 +31,7 @@ var Qsearch = ({pid,handleClickTracking}) =>{
   };
 
   let handleChange = (e) =>{
-      handleClickTracking(e);
+      // handleClickTracking(e);
       setTerm(e.target.value);
       if(e.target.value.length >= 3){
         search(e.target.value);
@@ -86,7 +86,7 @@ var Qsearch = ({pid,handleClickTracking}) =>{
     <div className='question-list'>
     <Qlist noQ={noQ} questions={questions} pid={pid} product={product} handleClickTracking={handleClickTracking} />
     </div>
-    <span className="buttons">
+    <span className="buttons questions">
     {load(noQ, questions)}
     <Qadd pid={pid} product={product} handleClickTracking={handleClickTracking} />
     </span>

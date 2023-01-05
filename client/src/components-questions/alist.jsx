@@ -15,9 +15,9 @@ var Alist = ({qid, handleClickTracking}) =>{
     if(answers.length <= 2) {
       return null;
     } else if (NoA === answers.length) {
-      return <h3 onClick={(e)=>{handleClickTracking(e); setNoA(2)}}><span className='underline'>COLLAPSE ANSWERS</span></h3>;
+      return <h3 onClick={(e)=>{handleClickTracking(e); setNoA(2)}}><span className='underline questions'>COLLAPSE ANSWERS</span></h3>;
     } else {
-      return <h3 onClick={(e)=>{handleClickTracking(e); setNoA(answers.length)}} ><span className='underline'>LOAD MORE ANSWERS</span></h3>;
+      return <h3 onClick={(e)=>{handleClickTracking(e); setNoA(answers.length)}} ><span className='underline questions'>LOAD MORE ANSWERS</span></h3>;
     }
   };
 
