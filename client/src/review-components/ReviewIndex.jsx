@@ -15,12 +15,12 @@ function ReviewSection(props) {
   let shownReviewsArray = props.totalReviewsArray.slice(0, showReviewCount);
   const [addReviews, setAddReviews]  = useState(false);
 
-  let addReviewButton = <button className='review-button' onClick={() => {setAddReviews(true)}}>Add A Review +</button>;
+  let addReviewButton = <button className='review-button' onClick={(e) => {setAddReviews(true); props.handleClickTracking(e);}}>Add A Review +</button>;
   if (addReviews === true) {
-    addReviewButton = <ReviewForm data={props.reviewMeta} onClose={() => {setAddReviews(false)}}/>
+    addReviewButton = <ReviewForm productName={props.productName} data={props.reviewMeta} onClose={() => {setAddReviews(false)}}/>
   }
 
-  let moreReviewButton = <button className='review-button' onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;
+  let moreReviewButton = <button className='review-button' onClick={(e) => {sliceReviewArray(showReviewCount + 2); props.handleClickTracking(e);}}>More Reviews</button>;
   if (shownReviewsArray.length === props.totalReviewsArray.length) {
     moreReviewButton = null;
   }
@@ -30,7 +30,13 @@ function ReviewSection(props) {
     reviewTiles = <div>There are no reviews yet.</div>;
   }
 
-  let ratingSection = <Ratings data={props.reviewMeta} handleFilter={props.handleFilter} filterApplied={props.filterApplied} removeFilter={props.removeFilter} ratingFilter={props.ratingFilter}/>
+  let ratingSection = <Ratings
+    data={props.reviewMeta}
+    handleFilter={props.handleFilter}
+    filterApplied={props.filterApplied}
+    removeFilter={props.removeFilter}
+    handleClickTracking={props.handleClickTracking}
+    ratingFilter={props.ratingFilter}/>
   if (!props.reviewMeta) {
     ratingSection = null;
   }

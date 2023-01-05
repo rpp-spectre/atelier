@@ -123,7 +123,14 @@ const App = () => {
   }
 
   function handleClickTracking(e) {
-    console.log(e);
+    let data = {
+      element: e.target,
+      time: e.timeStamp,
+    }
+    if (e.target.className.includes('review')) {
+      data.module = 'Reviews and Ratings';
+    }
+    console.log(data);
   }
 
   // console.log('pid', pid);
@@ -136,6 +143,7 @@ const App = () => {
         reviewMeta={reviewMeta}
         handleClickTracking={handleClickTracking}/>
       <ReviewSection
+        productName={productInfo.name}
         reviewMeta={reviewMeta}
         totalReviewsArray={totalReviewsArray}
         reviewCount={reviewCount} onSort={handleOptions}

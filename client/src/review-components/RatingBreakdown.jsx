@@ -14,7 +14,7 @@ function RatingBreakdown(props) {
   let percentage=Number.parseFloat(props.ratings)/props.totalRatings * 100;
   return (
     <div className='rating'>
-      <button className={toggleState + ' filter'} value={props.star} onClick={(e) => {props.handleFilter(e); toggleRating(e)}}>{props.star} stars</button>
+      <button className={toggleState + ' filter'} value={props.star} onClick={(e) => {props.handleFilter(e); toggleRating(e); props.handleClickTracking(e);}}>{props.star} stars</button>
     <span className='rating-bar'>
       <hr className='grey-bar'/>
       <hr className='green-bar' style={{width: percentage + '%'}}/>
