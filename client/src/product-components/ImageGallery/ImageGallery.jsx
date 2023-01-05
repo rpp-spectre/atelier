@@ -111,6 +111,9 @@ class ImageGallery extends React.Component {
   componentDidMount() {
     addEventListener('fullscreenchange', (event) => {
       this.setState({fullScreen: document.fullscreenElement});
+      let img = document.getElementById("slideImage");
+      img.style.transformOrigin = `center center`;
+      img.style.transform = "scale(1)";
     })
     //this.zoomImage();
   }
