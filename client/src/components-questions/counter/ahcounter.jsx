@@ -25,7 +25,7 @@ const Ahcounter = ({acounter, aid, handleClickTracking}) =>{
 
   return (
     <>
-    Helpful? <span className ='underline' onClick={(e)=>{handleClickTracking(e);if(ah){setAhcounter(ahcounter+1)}; updateA()}}>Yes</span>({ahcounter})
+    Helpful? <span className ='underline questions' onClick={(e)=>{handleClickTracking(e);if(ah){setAhcounter(ahcounter+1)}; updateA()}}>Yes</span>({ahcounter})
     </>
   );
 };
