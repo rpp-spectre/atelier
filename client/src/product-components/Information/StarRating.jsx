@@ -21,7 +21,8 @@ class StarRating extends React.Component {
     return (
       <div className="StarRating">
         <Stars rating={this.props.rating}/>&ensp;
-        <label className='Reviews' onClick={this.handleReviewClick.bind(this)}>Read all {this.props.reviews} Reviews</label>
+        {this.props.reviews? <label className='Reviews' onClick={this.handleReviewClick.bind(this)}>Read all {this.props.reviews} Reviews</label> : null}
+
       </div>
     )
   }
