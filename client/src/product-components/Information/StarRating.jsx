@@ -7,6 +7,8 @@ class StarRating extends React.Component {
   }
 
   handleReviewClick() {
+    document.getElementById("review-section").scrollIntoView();
+
     var clickData = {
       element: 'ReadAllReviews',
       time: new Date(),
