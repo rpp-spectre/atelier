@@ -8,3 +8,5 @@ qmore*.jsx
 coverage
 *bundle.js.gz
 *bundle.js.map.gz
+client/dist/*.jpg.gz
+client/dist/*.jpg
