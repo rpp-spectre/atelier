@@ -22,7 +22,7 @@ const Qhcounter = ({qcounter, qid, handleClickTracking}) =>{
 
   return (
     <>
-    <span className ='underline' onClick={(e)=>{handleClickTracking(e); if(qh){setQhcounter(qhcounter+1);} updateH();}}>Yes </span>( {qhcounter})
+    <span className ='underline questions' onClick={(e)=>{handleClickTracking(e); if(qh){setQhcounter(qhcounter+1);} updateH();}}>Yes </span>( {qhcounter})
     </>
   );
 };
