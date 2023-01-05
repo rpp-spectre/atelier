@@ -48,7 +48,7 @@ let Ratings = (props) => {
 
   let removeFilter = null;
   if (props.filterApplied === 'true') {
-    removeFilter = <button className='remove-filter' onClick={props.removeFilter}>Remove Filters</button>
+    removeFilter = <button className='remove-filter reviews' onClick={(e) => {props.removeFilter(e); props.handleClickTracking(e);}}>Remove Filters</button>
   }
 
   return (

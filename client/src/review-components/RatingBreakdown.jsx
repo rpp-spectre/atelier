@@ -8,13 +8,13 @@ function RatingBreakdown(props) {
     setToggleState('true');
   }
   function toggleRating(e) {
-    setToggleState(JSON.stringify(!(e.target.className === 'true filter')));
+    setToggleState(!(e.target.className === 'true filter reviews'));
   }
 
   let percentage=Number.parseFloat(props.ratings)/props.totalRatings * 100;
   return (
     <div className='rating'>
-      <button className={toggleState + ' filter'} value={props.star} onClick={(e) => {props.handleFilter(e); toggleRating(e); props.handleClickTracking(e);}}>{props.star} stars</button>
+      <button className={toggleState + ' filter reviews'} value={props.star} onClick={(e) => {props.handleFilter(e); toggleRating(e); props.handleClickTracking(e);}}>{props.star} stars</button>
     <span className='rating-bar'>
       <hr className='grey-bar'/>
       <hr className='green-bar' style={{width: percentage + '%'}}/>
