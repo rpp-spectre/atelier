@@ -29,7 +29,7 @@ let Ratings = (props) => {
 
   let ratingBars = Object.values(ratingsData).reverse().map((element, index) => {
     return <div key={index}>
-      <RatingBreakdown star={Math.abs(index - 5)} ratings={element} totalRatings={numberOfReviews} handleFilter={props.handleFilter} filterApplied={props.filterApplied}/>
+      <RatingBreakdown star={Math.abs(index - 5)} ratings={element} totalRatings={numberOfReviews} handleFilter={props.handleFilter} filterApplied={props.filterApplied} handleClickTracking={props.handleClickTracking}/>
       </div>
   })
 
@@ -48,7 +48,7 @@ let Ratings = (props) => {
 
   let removeFilter = null;
   if (props.filterApplied === 'true') {
-    removeFilter = <button className='remove-filter' onClick={props.removeFilter}>Remove Filters</button>
+    removeFilter = <button className='remove-filter reviews' onClick={(e) => {props.removeFilter(e); props.handleClickTracking(e);}}>Remove Filters</button>
   }
 
   return (

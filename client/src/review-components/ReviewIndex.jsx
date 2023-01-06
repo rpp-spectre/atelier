@@ -15,12 +15,12 @@ function ReviewSection(props) {
   let shownReviewsArray = props.totalReviewsArray.slice(0, showReviewCount);
   const [addReviews, setAddReviews]  = useState(false);
 
-  let addReviewButton = <button className='review-button' onClick={() => {setAddReviews(true)}}>Add A Review +</button>;
+  let addReviewButton = <button className='review-button reviews' onClick={(e) => {setAddReviews(true); props.handleClickTracking(e);}}>Add A Review +</button>;
   if (addReviews === true) {
-    addReviewButton = <ReviewForm data={props.reviewMeta} onClose={() => {setAddReviews(false)}}/>
+    addReviewButton = <ReviewForm productName={props.productName} data={props.reviewMeta} onClose={() => {setAddReviews(false)}} handleClickTracking={props.handleClickTracking}/>
   }
 
-  let moreReviewButton = <button className='review-button' onClick={() => {sliceReviewArray(showReviewCount + 2)}}>More Reviews</button>;
+  let moreReviewButton = <button className='review-button reviews' onClick={(e) => {sliceReviewArray(showReviewCount + 2); props.handleClickTracking(e);}}>More Reviews</button>;
   if (shownReviewsArray.length === props.totalReviewsArray.length) {
     moreReviewButton = null;
   }
@@ -30,7 +30,13 @@ function ReviewSection(props) {
     reviewTiles = <div>There are no reviews yet.</div>;
   }
 
-  let ratingSection = <Ratings data={props.reviewMeta} handleFilter={props.handleFilter} filterApplied={props.filterApplied} removeFilter={props.removeFilter} ratingFilter={props.ratingFilter}/>
+  let ratingSection = <Ratings
+    data={props.reviewMeta}
+    handleFilter={props.handleFilter}
+    filterApplied={props.filterApplied}
+    removeFilter={props.removeFilter}
+    handleClickTracking={props.handleClickTracking}
+    ratingFilter={props.ratingFilter}/>
   if (!props.reviewMeta) {
     ratingSection = null;
   }
@@ -42,7 +48,7 @@ function ReviewSection(props) {
 
   return (
   <div>
-    <h2 className='review-section'>Reviews and Ratings</h2>
+    <h2 className='review-section' id='review-section'>Reviews and Ratings</h2>
     <div className='rating-product-breakdown'>
     {ratingSection}
     <h3>Product Breakdown</h3>
@@ -50,7 +56,7 @@ function ReviewSection(props) {
     </div>
     <div className='review'>
       <h3>{props.reviewCount} reviews, sorted by
-        <select className='review-select' onClick={props.handleClickTracking} onChange={props.onSort}>
+        <select className='review-select reviews' onClick={props.handleClickTracking} onChange={props.onSort}>
           <option value='relevance'>relevance</option>
           <option value='newest'>newest</option>
           <option value='helpful'>helpful</option>

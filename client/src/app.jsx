@@ -53,7 +53,7 @@ const App = () => {
       setReviewCount(result.data.results.length);
       let resultArray = [];
       result.data.results.forEach((element) => {
-        resultArray.push(<Review data={element}/>);
+        resultArray.push(<Review data={element} handleClickTracking={handleClickTracking}/>);
       });
       setReviewsArray(resultArray);
       setReviewsCopyArray(resultArray);
@@ -74,7 +74,7 @@ const App = () => {
     .then((result) => {
       let resultArray = [];
       result.data.results.forEach((element) => {
-        resultArray.push(<Review data={element}/>);
+        resultArray.push(<Review data={element} handleClickTracking={handleClickTracking}/>);
       });
       setReviewsArray(resultArray);
     })
@@ -94,7 +94,7 @@ const App = () => {
     });
 
     setFilter('true');
-    if (e.target.className === 'true filter') {
+    if (e.target.className === 'true filter reviews') {
       let resultArray = filteredArray.concat(filterReview[Number.parseInt(e.target.value)]);
       setRatingFilter(ratingFilter.concat([e.target.value]));
       setFilteredArray(resultArray);
@@ -139,7 +139,6 @@ const App = () => {
     .catch((error) => {
 
       throw (error);
-
     });
   }
 
@@ -153,6 +152,7 @@ const App = () => {
         reviewMeta={reviewMeta}
         handleClickTracking={handleClickTracking}/>
       <ReviewSection
+        productName={productInfo.name}
         reviewMeta={reviewMeta}
         totalReviewsArray={totalReviewsArray}
         reviewCount={reviewCount} onSort={handleOptions}

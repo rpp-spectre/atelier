@@ -144,7 +144,7 @@ function ReviewForm(props) {
       <label>
       Write Your Review:
       </label>
-      <h5>About the [Product Name]</h5>
+      <h5>About the {props.productName}</h5>
       <div className='review-form'>
         <label>
           Overall Rating*
