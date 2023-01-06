@@ -21,12 +21,12 @@ class Style extends React.Component {
       this.props.changeStyle(style.photos, style.skus, style.original_price, style.sale_price);
     }
 
-    var clickData = {
-      element: 'StyleImage',
-      time: new Date(),
-      module: 'Overview'
-    };
-    this.props.handleClickTracking(clickData);
+    // var clickData = {
+    //   element: 'StyleImage',
+    //   time: new Date(),
+    //   module: 'Overview'
+    // };
+    this.props.handleClickTracking(e);
   }
 
   // componentDidUpdate() {
@@ -37,7 +37,6 @@ class Style extends React.Component {
   //     })
   //   }
   // }
-
 
 
   render() {
