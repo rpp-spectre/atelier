@@ -154,12 +154,12 @@ const App = () => {
   // console.log('pid', pid);
     return (<div>
       <Link to='/71697'>home again</Link>
-      {/* <ProductSection
+      <ProductSection
         pid={pid}
         productInfo={productInfo}
         reviewCount={reviewCount}
         reviewMeta={reviewMeta}
-        handleClickTracking={handleClickTracking}/> */}
+        handleClickTracking={handleClickTracking}/>
       <ReviewSection
         productName={productInfo.name}
         reviewMeta={reviewMeta}
@@ -170,7 +170,7 @@ const App = () => {
         removeFilter={removeFilter}
         ratingFilter={ratingFilter}
         handleClickTracking={handleClickTracking}/>
-      {/* <Qsection pid = {pid} handleClickTracking={handleClickTracking} /> */}
+      <Qsection pid = {pid} handleClickTracking={handleClickTracking} />
     </div>);
 };
 
