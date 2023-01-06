@@ -130,8 +130,18 @@ img {
 }
 
 .question button {
-  margin: 20px;
+  margin: 10px;
   width:fit-content;
+  border: solid grey 2px;
+  font-size: medium;
+  color: rgb(54, 52, 52);
+  padding: 10px 30px;
+  justify-content: space-around;
+}
+
+.user {
+  color: grey;
+  font-size: small;
 }
 
 .question img {

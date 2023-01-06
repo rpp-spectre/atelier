@@ -16,7 +16,7 @@ const Photo = ({onClose, show, image})=>{
       <div className='modal-content'>
 
         <div className='modal-body'>
-           <img src={image} />
+           <img src={image}  width="500px" />
 
         </div>
         <div className='model-footer'>

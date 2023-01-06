@@ -3,7 +3,7 @@ import ReactDom from 'react-dom/client';
 
 const Simage = ({image}) =>{
   return (<>
-    <img className= "question" alt="answer photo" width={"100px"} src={URL.createObjectURL(image)} />
+    <img className= "question" alt="answer photo" width="100px" height="100px" src={URL.createObjectURL(image)} />
 
     {/* <button onClick={()=>setSelectedImage(null)}>Remove</button> */}
   </>);
