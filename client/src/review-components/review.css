@@ -145,19 +145,19 @@ button.remove-filter {
 }
 
 .username {
-  color: grey;
+  color:rgb(78, 78, 78);
   font-size: small;
 }
 
 button.helpful {
   background: none;
   border: none;
-  color: grey;
+  color:rgb(78, 78, 78);
 }
 
 .helpfulness {
   font-size: small;
-  color: grey;
+  color:rgb(78, 78, 78);
 }
 
 button.review-button {
@@ -177,4 +177,8 @@ button.review-button {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   text-decoration: underline;
+}
+
+.star-rating-title {
+  font-size: xx-large;
 }

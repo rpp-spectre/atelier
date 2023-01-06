@@ -51,8 +51,8 @@ img {
 
 /* Modal */
 .thumbnail {
-  max-height: 100px;
-  max-width: 100px;
+  object-fit: cover;
+  image-resolution:inherit;
 }
 
 .expandedImage {
