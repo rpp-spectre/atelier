@@ -48,7 +48,7 @@ function ReviewSection(props) {
 
   return (
   <div>
-    <h2 className='review-section'>Reviews and Ratings</h2>
+    <h2 className='review-section' id='review-section'>Reviews and Ratings</h2>
     <div className='rating-product-breakdown'>
     {ratingSection}
     <h3>Product Breakdown</h3>
