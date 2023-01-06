@@ -33,7 +33,7 @@ const Answer = ({answer, handleClickTracking})=>{
       A: {answer.body}
       <br />
       {/* by {answer.answer_name} {answer.date} | Helpful ({acounter}) Report */}
-      by {answerer()} {date} | <Ahcounter acounter={acounter} aid={answer.answer_id} handleClickTracking={handleClickTracking} /> <Reporta aid={answer.answer_id} handleClickTracking={handleClickTracking} />
+      <span className="user">by {answerer()} {date} | <Ahcounter acounter={acounter} aid={answer.answer_id} handleClickTracking={handleClickTracking} /> <Reporta aid={answer.answer_id} handleClickTracking={handleClickTracking} /></span>
       <br />
        {photo()}
        <br />

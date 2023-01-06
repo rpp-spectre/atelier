@@ -9,7 +9,7 @@ const Qadd = ({pid, product, handleClickTracking})=>{
     {/* <form>
   <button onClick={()=>{}}>ADD A QUESTION +</button>
 </form> */}
-    <button className="question" onClick={(e)=>{handleClickTracking(e); setShow(true); }}> ADD A QUESTION </button>
+    <button className="question" onClick={(e)=>{handleClickTracking(e); setShow(true); }}> Add A Question + </button>
     <Addqform2 onClose={()=>{setShow(false); }} show={show} pid={pid} product={product} handleClickTracking={handleClickTracking} />
   </>);
 };
