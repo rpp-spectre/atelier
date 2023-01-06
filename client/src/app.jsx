@@ -127,7 +127,7 @@ const App = () => {
     let ele = s.serializeToString(e.target);
     let date=new Date();
     let wname=e.target.className.split(' ').pop();
-    axios.post('http://localhost:3000/interactions', {
+    axios.post('/interactions', {
       "element": ele,
       "widget": wname,
       "time": date.toDateString()
