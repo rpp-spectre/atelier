@@ -48,7 +48,14 @@ function Reviews(props) {
   }
 
   let images = props.data.photos.map((element, index) => {
-    return <img key={index} onClick={(e) => {setShowModal(true); setImage(element.url); props.handleClickTracking(e);}} className='thumbnail reviews' src={element.url} alt='outfit image'/>
+    return <img
+      key={index}
+      onClick={(e) => {setShowModal(true); setImage(element.url); props.handleClickTracking(e);}}
+      className='thumbnail reviews'
+      width='100px'
+      height='100px'
+      src={element.url}
+      alt='outfit image'/>
   })
 
   let modal = <ImageModal onClose={() => {setShowModal(false)}} img={modalImage}/>;

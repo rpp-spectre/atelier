@@ -94,7 +94,7 @@ describe('Word Limits in Review', () => {
       reviewer_name: 'testreviewer',
       summary: 'It\'s so fetch!'
     }
-    const {queryByText} = render(<Reviews data={testData}/>);
+    const {queryByText} = render(<Reviews data={testData} handleClickTracking={(e)=>{console.log(e)}}/>);
     let button = queryByText('Show More');
     expect(button).not.toBeInTheDocument();
   });

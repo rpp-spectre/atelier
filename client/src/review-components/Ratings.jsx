@@ -53,7 +53,7 @@ let Ratings = (props) => {
 
   return (
   <div className='ratings'>
-    <h1>{averageRating} <Stars rating={averageRating}/></h1>
+    <h2 className='star-rating-title'>{averageRating} <Stars rating={averageRating}/></h2>
     <div>{recommendPercent}% of reviews recommend this product</div>
     <br></br>
     <h3 className='ratings'>Rating Breakdown</h3>
