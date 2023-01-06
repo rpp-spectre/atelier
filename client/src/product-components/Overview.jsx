@@ -137,21 +137,20 @@ class Overview extends React.Component {
     return newRUL;
   }
 
-
   render() {
     return (
       <div className="Overview" data-testid="overview">
         <div className="Container-top">
           <div className="Container-left">
-          <ImageGallery photos={this.state.photos} resizeImage={this.resizeImage.bind(this)} showNum={() => Math.min(this.state.photos.length, 7)}/><br/>
+          <ImageGallery photos={this.state.photos} resizeImage={this.resizeImage.bind(this)} showNum={() => Math.min(this.state.photos.length, 7)} handleClickTracking={this.props.handleClickTracking}/><br/>
           </div><br/>
           <div className="Container-right">
-          <StarRating rating={this.getRating(this.props.reviewMeta)} reviews={this.props.reviewCount}/><br/>
+          <StarRating rating={this.getRating(this.props.reviewMeta)} reviews={this.props.reviewCount} handleClickTracking={this.props.handleClickTracking}/><br/>
           <Category category={this.props.productInfo.category}/>
           <Title name={this.props.productInfo.name}/>
           <Price price={this.state.price} salePrice={this.state.salePrice}/><br/>
-          <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)} resizeImage={this.resizeImage.bind(this)}/><br/>
-          <AddToCart sizeList={this.state.sizeList} sizeOutOfStock={this.state.sizeOutOfStock}/><br/>
+          <Style styleList={this.state.styleList} changeStyle={this.changeStyle.bind(this)} resizeImage={this.resizeImage.bind(this)} handleClickTracking={this.props.handleClickTracking}/><br/>
+          <AddToCart sizeList={this.state.sizeList} sizeOutOfStock={this.state.sizeOutOfStock} handleClickTracking={this.props.handleClickTracking}/><br/>
           </div><br/>
         </div>
         <div className="Container-bottom">

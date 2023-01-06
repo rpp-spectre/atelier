@@ -49,15 +49,35 @@ class AddToCart extends React.Component {
       });
     }
 
+    var clickData = {
+      element: 'SizeSelector',
+      time: new Date(),
+      module: 'Overview'
+    };
+    this.props.handleClickTracking(clickData);
   }
 
   handleQuantityChange(event) {
     this.setState({
       quantityValue: event.target.value
     });
+
+    var clickData = {
+      element: 'QuantitySelector',
+      time: new Date(),
+      module: 'Overview'
+    };
+    this.props.handleClickTracking(clickData);
   }
 
   handleAddToCart() {
+    var clickData = {
+      element: 'AddToCart',
+      time: new Date(),
+      module: 'Overview'
+    };
+    this.props.handleClickTracking(clickData);
+
     axios.post('/cart', {
       sku_id: this.props.sizeList[this.state.selectedIndex].sku,
     })
@@ -67,7 +87,15 @@ class AddToCart extends React.Component {
     .catch(function (error) {
       console.log(error);
     });
+  }
 
+  handleStarClick() {
+    var clickData = {
+      element: 'LikeStar',
+      time: new Date(),
+      module: 'Overview'
+    };
+    this.props.handleClickTracking(clickData);
   }
 
   render() {
@@ -104,7 +132,7 @@ class AddToCart extends React.Component {
 
         <div className="Cart">
           {!this.props.sizeOutOfStock ? (<button className='AddToCart' onClick={this.handleAddToCart.bind(this)}> Add To Cart </button>) : null}
-          <div className="Star">
+          <div className="Star" onClick={this.handleStarClick.bind(this)}>
             {'\u2606'}
           </div>
         </div>
