@@ -27,7 +27,10 @@ const App = () => {
   useEffect(() => {
     (async() => {
       let result = await axios.get(`/products/${pid}`);
-      setProductInfo(result.data);
+      // console.log(result, '=========products result data');
+      if (result.data.status !== 404) {
+        setProductInfo(result.data);
+      }
     })()
   }, []);
 

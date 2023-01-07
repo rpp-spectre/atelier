@@ -27,10 +27,18 @@
     { url: 'imageEight.jpg', thumbnail_url: 'imageEightURL.jpg'}
   ]
 
+  var resizeImageMock = function(url) {
+    return url;
+  }
+
+  var handleClickTrackingMock = function(e) {
+
+  }
+
 	// Test 1
 	test("ImageGallery Rendering", () => {
     act(() => {
-      render(<ImageGallery photos={photoTestData} showNum={() => Math.min(photoTestData.length, 7)}/>);
+      render(<ImageGallery photos={photoTestData} showNum={() => Math.min(photoTestData.length, 7)} resizeImage={resizeImageMock} handleClickTracking={handleClickTrackingMock}/>);
     });
     var images = screen.getAllByRole("img");
 
@@ -41,7 +49,7 @@
   	// Test 2
 	test("Previous and next arrow Rendering and click event", () => {
     act(() => {
-      render(<ImageGallery photos={photoTestData} showNum={() => Math.min(photoTestData.length, 7)}/>);
+      render(<ImageGallery photos={photoTestData} showNum={() => Math.min(photoTestData.length, 7)} resizeImage={resizeImageMock} handleClickTracking={handleClickTrackingMock}/>);
     });
 
     var images = screen.getAllByRole("img");
@@ -89,7 +97,7 @@
   // Test 3
 	test("Down and up arrow click event, image column click event", () => {
     act(() => {
-      render(<ImageGallery photos={photoTestData} showNum={() => Math.min(photoTestData.length, 7)}/>);
+      render(<ImageGallery photos={photoTestData} showNum={() => Math.min(photoTestData.length, 7)} resizeImage={resizeImageMock} handleClickTracking={handleClickTrackingMock}/>);
     });
 
     var downArrow = screen.getByTestId("downArrow");
@@ -116,9 +124,3 @@
 
 })
 
-// act(() => {
-//   imageOne.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-// });
-{/* <a className="next" onClick={() => this.plusSlides(1)}>❯</a> */}
-
-// expect(checkbox[0]).toHaveAttribute('id', '124');
