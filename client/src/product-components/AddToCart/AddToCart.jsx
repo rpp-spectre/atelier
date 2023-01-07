@@ -49,12 +49,12 @@ class AddToCart extends React.Component {
       });
     }
 
-    var clickData = {
-      element: 'SizeSelector',
-      time: new Date(),
-      module: 'Overview'
-    };
-    this.props.handleClickTracking(clickData);
+    // var clickData = {
+    //   element: 'SizeSelector',
+    //   time: new Date(),
+    //   module: 'Overview'
+    // };
+    this.props.handleClickTracking(event);
   }
 
   handleQuantityChange(event) {
@@ -62,21 +62,21 @@ class AddToCart extends React.Component {
       quantityValue: event.target.value
     });
 
-    var clickData = {
-      element: 'QuantitySelector',
-      time: new Date(),
-      module: 'Overview'
-    };
-    this.props.handleClickTracking(clickData);
+    // var clickData = {
+    //   element: 'QuantitySelector',
+    //   time: new Date(),
+    //   module: 'Overview'
+    // };
+    this.props.handleClickTracking(event);
   }
 
-  handleAddToCart() {
-    var clickData = {
-      element: 'AddToCart',
-      time: new Date(),
-      module: 'Overview'
-    };
-    this.props.handleClickTracking(clickData);
+  handleAddToCart(e) {
+    // var clickData = {
+    //   element: 'AddToCart',
+    //   time: new Date(),
+    //   module: 'Overview'
+    // };
+    this.props.handleClickTracking(e);
 
     axios.post('/cart', {
       sku_id: this.props.sizeList[this.state.selectedIndex].sku,
@@ -89,13 +89,13 @@ class AddToCart extends React.Component {
     });
   }
 
-  handleStarClick() {
-    var clickData = {
-      element: 'LikeStar',
-      time: new Date(),
-      module: 'Overview'
-    };
-    this.props.handleClickTracking(clickData);
+  handleStarClick(e) {
+    // var clickData = {
+    //   element: 'LikeStar',
+    //   time: new Date(),
+    //   module: 'Overview'
+    // };
+    this.props.handleClickTracking(e);
   }
 
   render() {

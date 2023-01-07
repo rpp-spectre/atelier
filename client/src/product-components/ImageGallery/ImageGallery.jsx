@@ -16,7 +16,7 @@ class ImageGallery extends React.Component {
     }
   }
 
-  plusSlides(n) {
+  plusSlides(n, e) {
     var newIndex = this.state.slideIndex + n;
     // if (newIndex >= this.props.photos.length) {
     //   newIndex =  this.props.photos.length - 1;
@@ -35,60 +35,60 @@ class ImageGallery extends React.Component {
     })
 
     if (n === 1) {
-      var clickData = {
-        element: 'ImageGallery-RightArrow',
-        time: new Date(),
-        module: 'Overview'
-      };
-      this.props.handleClickTracking(clickData);
+      // var clickData = {
+      //   element: 'ImageGallery-RightArrow',
+      //   time: new Date(),
+      //   module: 'Overview'
+      // };
+      this.props.handleClickTracking(e);
     }
     if (n === -1) {
-      var clickData = {
-        element: 'ImageGallery-LeftArrow',
-        time: new Date(),
-        module: 'Overview'
-      };
-      this.props.handleClickTracking(clickData);
+      // var clickData = {
+      //   element: 'ImageGallery-LeftArrow',
+      //   time: new Date(),
+      //   module: 'Overview'
+      // };
+      this.props.handleClickTracking(e);
     }
   }
 
-  currentSlide(index) {
+  currentSlide(index, e) {
     this.setState({slideIndex: index});
 
-    var clickData = {
-      element: 'ImageGallery-thumbnail',
-      time: new Date(),
-      module: 'Overview'
-    };
-    this.props.handleClickTracking(clickData);
+    // var clickData = {
+    //   element: 'ImageGallery-thumbnail',
+    //   time: new Date(),
+    //   module: 'Overview'
+    // };
+    this.props.handleClickTracking(e);
   }
 
-  handleArrowUp() {
+  handleArrowUp(e) {
     var newstartIndex = Math.max(this.state.startIndex-3, 0);
     this.setState({
       startIndex: newstartIndex
     });
 
-    var clickData = {
-      element: 'ImageGallery-UpArrow',
-      time: new Date(),
-      module: 'Overview'
-    };
-    this.props.handleClickTracking(clickData);
+    // var clickData = {
+    //   element: 'ImageGallery-UpArrow',
+    //   time: new Date(),
+    //   module: 'Overview'
+    // };
+    this.props.handleClickTracking(e);
   }
 
-  handleArrowDown() {
+  handleArrowDown(e) {
     var newstartIndex = Math.min(this.state.startIndex+3, this.props.photos.length-1);
     this.setState({
       startIndex: newstartIndex
     });
 
-    var clickData = {
-      element: 'ImageGallery-DownArrow',
-      time: new Date(),
-      module: 'Overview'
-    };
-    this.props.handleClickTracking(clickData);
+    // var clickData = {
+    //   element: 'ImageGallery-DownArrow',
+    //   time: new Date(),
+    //   module: 'Overview'
+    // };
+    this.props.handleClickTracking(e);
   }
 
   onZoom(e) {
@@ -129,13 +129,13 @@ class ImageGallery extends React.Component {
   }
 
 
-  openFullScreen() {
-    var clickData = {
-      element: 'ImageGallery-main',
-      time: new Date(),
-      module: 'Overview'
-    };
-    this.props.handleClickTracking(clickData);
+  openFullScreen(e) {
+    // var clickData = {
+    //   element: 'ImageGallery-main',
+    //   time: new Date(),
+    //   module: 'Overview'
+    // };
+    this.props.handleClickTracking(e);
 
     // document.getElementById('slideImage').requestFullscreen({ navigationUI: "show" });
     let elem = document.getElementById('container')
@@ -172,8 +172,8 @@ class ImageGallery extends React.Component {
             )
           })}
 
-          {this.state.slideIndex === 0 ? null : <a className="prev" onClick={() => this.plusSlides(-1)}>❮</a>}
-          {this.state.slideIndex === this.props.photos.length - 1 ? null : <a className={this.state.fullScreen ? "nextFull" : "next"} onClick={() => this.plusSlides(1)}>❯</a>}
+          {this.state.slideIndex === 0 ? null : <a className="prev" onClick={(e) => this.plusSlides(-1, e)}>❮</a>}
+          {this.state.slideIndex === this.props.photos.length - 1 ? null : <a className={this.state.fullScreen ? "nextFull" : "next"} onClick={(e) => this.plusSlides(1, e)}>❯</a>}
 
           <div className={this.state.fullScreen ? "rowFull" : "row"}>
             {this.state.startIndex !== 0 ? <div data-testid="upArrow" className={this.state.fullScreen ? "columnFull upArrow" : "column upArrow"} onClick={this.handleArrowUp.bind(this)}><i className={this.state.fullScreen ? "arrow upFull" : "arrow up"}></i></div> : <div className={this.state.fullScreen ? "columnFull" : "column"}></div>}
@@ -189,7 +189,7 @@ class ImageGallery extends React.Component {
 
               return (
                 <div className={this.state.fullScreen ? "columnFull" : "column"} key={index} >
-                  <img src={thumbnailUrl} className={(this.state.slideIndex === index)? "demo cursor active" : "demo cursor"} onClick={() => this.currentSlide(index)} alt="thumbnail"/>
+                  <img src={thumbnailUrl} className={(this.state.slideIndex === index)? "cursor active thumbnailImage" : "cursor thumbnailImage"} onClick={(e) => this.currentSlide(index, e)} alt="thumbnail"/>
                 </div>
               )
             })}
