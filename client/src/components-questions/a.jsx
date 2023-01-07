@@ -29,7 +29,7 @@ const Answer = ({answer, handleClickTracking})=>{
   let date = pdate.toLocaleDateString("en-US", options);
 
   return (
-    <div role="document questions">
+    <div role="document">
       A: {answer.body}
       <br />
       {/* by {answer.answer_name} {answer.date} | Helpful ({acounter}) Report */}

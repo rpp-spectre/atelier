@@ -4,6 +4,7 @@ import axios from 'axios';
 import Qlist from './qlist.jsx';
 import Qadd from './addforms/qadd.jsx';
 import 'regenerator-runtime/runtime.js';
+import './questions.css';
 // require("dotenv").config();
 
 

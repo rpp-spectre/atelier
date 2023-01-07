@@ -7,7 +7,7 @@ const Aphoto = ({img, handleClickTracking}) =>{
 
   var image = img.url;
   return (< >
-   <img className='thumbnail questions' src={image} onClick={(e)=>{handleClickTracking(e);setShow(true)}} />
+   <img className='thumbnail questions' alt="thumbnail" src={image} onClick={(e)=>{handleClickTracking(e);setShow(true)}} width="100px"/>
    <Photo onClose={(e)=>{handleClickTracking(e);setShow(false)}} show={show} image={image} />
   </>);
 

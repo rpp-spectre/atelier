@@ -27,12 +27,12 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
 
 
   var uploadImage= async (img) => {
-      console.log('img in uploader', img);
-      console.log('qid', qid);
-      console.log('photos', photos);
+      // console.log('img in uploader', img);
+      // console.log('qid', qid);
+      // console.log('photos', photos);
       let body = new FormData();
       body.set('key', process.env.REACT_APP_API_KEY);
-      console.log('image', img);
+      // console.log('image', img);
       body.append('image', img);
 
       const response = await axios({
@@ -80,7 +80,7 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
 
   return (
 
-    <div className='modal'>
+    <div className='modal form'>
       <div className='modal-content'>
         <div className='modal-header'>
           <h4 className='modal-title'>
@@ -94,10 +94,10 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
             handleSubmit();
             }}>
              <label>
-               Your Answer:
+               Your Answer:<br />
                <textarea
-               cols="50"
-               rows="20"
+               cols="80"
+               rows="13"
                maxLength="1000"
                name="body"
                placeholder="..."
@@ -109,7 +109,7 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
              </label>
              <br />
              <label>
-              What is Your Nickname:
+              What is Your Nickname:<br />
               <input
               type="text"
               name="name"
@@ -125,7 +125,7 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
              </label>
              <br />
              <label>
-              Your Email:
+              Your Email:<br />
               <input
               type="email"
               name="email"
@@ -142,7 +142,7 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
              <br />
              <label>
              Upload your photos:
-             <br />
+
              <span className="notetext">{showWarning()}</span>
             <div>
             {(selectedImages.length>0)
