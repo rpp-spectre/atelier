@@ -154,7 +154,7 @@ const App = () => {
         reviewCount={reviewCount}
         reviewMeta={reviewMeta}
         handleClickTracking={handleClickTracking}/>
-      {/* <ReviewSection
+      <ReviewSection
         productName={productInfo.name}
         reviewMeta={reviewMeta}
         totalReviewsArray={totalReviewsArray}
@@ -164,7 +164,7 @@ const App = () => {
         removeFilter={removeFilter}
         ratingFilter={ratingFilter}
         handleClickTracking={handleClickTracking}/>
-      <Qsection pid = {pid} handleClickTracking={handleClickTracking} /> */}
+      <Qsection pid = {pid} handleClickTracking={handleClickTracking} />
     </div>);
 };
 
