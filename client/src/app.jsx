@@ -27,7 +27,10 @@ const App = () => {
   useEffect(() => {
     (async() => {
       let result = await axios.get(`/products/${pid}`);
-      setProductInfo(result.data);
+      // console.log(result, '=========products result data');
+      if (result.data.status !== 404) {
+        setProductInfo(result.data);
+      }
     })()
   }, []);
 
@@ -151,7 +154,7 @@ const App = () => {
         reviewCount={reviewCount}
         reviewMeta={reviewMeta}
         handleClickTracking={handleClickTracking}/>
-      <ReviewSection
+      {/* <ReviewSection
         productName={productInfo.name}
         reviewMeta={reviewMeta}
         totalReviewsArray={totalReviewsArray}
@@ -161,7 +164,7 @@ const App = () => {
         removeFilter={removeFilter}
         ratingFilter={ratingFilter}
         handleClickTracking={handleClickTracking}/>
-      <Qsection pid = {pid} handleClickTracking={handleClickTracking} />
+      <Qsection pid = {pid} handleClickTracking={handleClickTracking} /> */}
     </div>);
 };
 
