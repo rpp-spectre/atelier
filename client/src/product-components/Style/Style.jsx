@@ -53,15 +53,15 @@ class Style extends React.Component {
           {this.props.styleList.map((style, index) => {
 
             var styleImage = defaultURL;
-            if (style.photos[0].thumbnail_url !== null) {
+            if (style.photos[0].thumbnail_url !== null && style.photos[0].thumbnail_url !== '') {
               styleImage = this.props.resizeImage(style.photos[0].thumbnail_url);
             }
 
             return (
-              <label key={style.style_id} className="styleLable">
+              <div key={style.style_id} className="styleLable">
                 <img className="stylePhoto" key={style.style_id} onClick={(e) => this.toggleCheckbox(e, style, index)} src={styleImage} alt={style.name} />
                 {this.state.checkedIndex === index ? <label className='checkboxLable'><input className='checkbox' type="checkbox" id={style.style_id} checked={true} onChange={() => {}}></input></label> : null}
-              </label>
+              </div>
             )
           })}
         </div>
