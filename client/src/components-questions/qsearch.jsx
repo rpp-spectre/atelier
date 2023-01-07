@@ -19,7 +19,7 @@ var Qsearch = ({pid,handleClickTracking}) =>{
     if (noQ >= questions.length) {
       return null;
     } else {
-      return <button data-testid="load" className = "questions" onClick={(e)=>{handleClickTracking(e); setNoQ(noQ+2)}}>LOAD MORE QUESTIONS</button>;
+      return <button data-testid="load" className = "questions" onClick={(e)=>{handleClickTracking(e); setNoQ(noQ+2)}}>Load More Questions</button>;
     }
   };
 

@@ -16,7 +16,7 @@ var Q = ({question, pid, product, handleClickTracking}) =>{
 
 
     {/* <h3>Q: {question.question_body}</h3> Helpful? Yes ( {qcounter}) | <Answeradd /> */}
-    <h3>Q: {question.question_body}</h3> Helpful? <Qhcounter qcounter={qcounter} qid={question.question_id} handleClickTracking={handleClickTracking} /> | <Answeradd pid={pid} qid={question.question_id} qbody={question.question_body} product={product} handleClickTracking={handleClickTracking} />
+    <span className = "qbody">Q: {question.question_body}</span><span className="qsub" style={{textAlign: "right"}}> Helpful?&nbsp;&nbsp;<Qhcounter qcounter={qcounter} qid={question.question_id} handleClickTracking={handleClickTracking} /> &nbsp;|&nbsp;&nbsp; <Answeradd pid={pid} qid={question.question_id} qbody={question.question_body} product={product} handleClickTracking={handleClickTracking} />&nbsp;&nbsp;</span>
     <br />
     <br />
     <Alist qid={question.question_id} handleClickTracking={handleClickTracking} />
