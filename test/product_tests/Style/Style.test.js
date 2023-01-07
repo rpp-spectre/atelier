@@ -16,21 +16,6 @@
    cleanup(); // Resets the DOM after each test suite
  });
 
-// let container = null;
-// beforeEach(() => {
-//   // setup a DOM element as a render target
-//   container = document.createElement("div");
-//   document.body.appendChild(container);
-// });
-
-// afterEach(() => {
-//   // cleanup on exiting
-//   unmountComponentAtNode(container);
-//   container.remove();
-//   container = null;
-// });
-
-
 describe("Style Component" ,() => {
 
   var styleListData = [
@@ -38,10 +23,18 @@ describe("Style Component" ,() => {
     {style_id: '124', name: 'nameTwo', photos: [{url: 'nameTwoURL.jpg', thumbnail_url: 'nameTwo.jpg'}]},
   ]
 
+  var resizeImageMock = function(url) {
+    return url;
+  }
+
+  var handleClickTrackingMock = function(e) {
+
+  }
+
   it("Style Rendering, including style images and checkbox", () => {
 
     act(() => {
-      render(<Style styleList={styleListData} changeStyle={() => {}}/>);
+      render(<Style styleList={styleListData} changeStyle={() => {}} resizeImage={resizeImageMock} handleClickTracking={handleClickTrackingMock}/>);
     });
 
     var images = screen.getAllByRole("img");
@@ -62,7 +55,7 @@ describe("Style Component" ,() => {
   it("click event on style image", () => {
 
     act(() => {
-      render(<Style styleList={styleListData} changeStyle={() => {}}/>);
+      render(<Style styleList={styleListData} changeStyle={() => {}} resizeImage={resizeImageMock} handleClickTracking={handleClickTrackingMock}/>);
     });
 
     var checkbox = screen.getAllByRole("checkbox");
