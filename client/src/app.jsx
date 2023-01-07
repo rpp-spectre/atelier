@@ -145,7 +145,7 @@ const App = () => {
   // console.log('pid', pid);
     return (<div>
       {/* <Link to='/71697'>home again</Link> */}
-      {/* <ProductSection
+      <ProductSection
         pid={pid}
         productInfo={productInfo}
         reviewCount={reviewCount}
@@ -160,7 +160,7 @@ const App = () => {
         filterApplied={filterApplied}
         removeFilter={removeFilter}
         ratingFilter={ratingFilter}
-        handleClickTracking={handleClickTracking}/> */}
+        handleClickTracking={handleClickTracking}/>
       <Qsection pid = {pid} handleClickTracking={handleClickTracking} />
     </div>);
 };
