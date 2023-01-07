@@ -40,10 +40,14 @@ afterEach(() => {
     { quantity: 8, size: 'S', sku: '123457'},
   ]
 
+  var handleClickTrackingMock = function(e) {
+
+  }
+
 	// Test 1
 	test("AddToCart Rendering, including size and quantity dropdown option, addToCart button", () => {
     act(() => {
-      render(<AddToCart sizeList={sizeListData} sizeOutOfStock={false}/>);
+      render(<AddToCart sizeList={sizeListData} sizeOutOfStock={false} handleClickTracking={handleClickTrackingMock}/>);
     });
 
     var sizeList = screen.getAllByRole("option");
@@ -62,7 +66,7 @@ afterEach(() => {
 
   test("handle size change event", async () => {
     act(() => {
-      render(<AddToCart sizeList={sizeListData} sizeOutOfStock={false}/>);
+      render(<AddToCart sizeList={sizeListData} sizeOutOfStock={false} handleClickTracking={handleClickTrackingMock}/>);
     });
 
     expect(screen.getAllByRole("combobox")[0]).toHaveDisplayValue("Select Size");
@@ -88,7 +92,7 @@ afterEach(() => {
 
   test("handle quantity change event", async () => {
     act(() => {
-      render(<AddToCart sizeList={sizeListData} sizeOutOfStock={false}/>);
+      render(<AddToCart sizeList={sizeListData} sizeOutOfStock={false} handleClickTracking={handleClickTrackingMock}/>);
     });
 
     var selectedSizeOption = screen.getByTestId("SizeSelector");
@@ -107,46 +111,7 @@ afterEach(() => {
     expect(screen.getByRole("option", { name: '3'}).selected).toBe(true);
 	})
 
-  // test("addToCart button event", async () => {
-
-  //   const fakeData = {
-  //     data: "Created"
-  //   };
-  //   jest.spyOn(global, "fetch").mockImplementation(() =>
-  //     Promise.resolve({
-  //       json: () => Promise.resolve(fakeData)
-  //     })
-  //   );
-
-  //   act(() => {
-  //     render(<AddToCart sizeList={sizeListData} sizeOutOfStock={false}/>);
-  //   });
-
-  //   var cartButton = screen.getByRole("button", { name: "Add To Cart" });
-
-  //   act(() => {
-  //     var event = cartButton.dispatchEvent(new MouseEvent("click", { bubbles: true }))
-  //   })
-
-  //   expect(screen.textContent).toContain('Created');
-
-  //   global.fetch.mockRestore();
-
-  // });
-
 })
 
-
-// describe('<AddToCart /> functions', () => {
-//   test('test the only function', () => {
-//     var sizeListData = [
-//       { quantity: 7, size: 'XS', sku: '123456'},
-//       { quantity: 8, size: 'S', sku: '123457'},
-//     ]
-//     const wrapper = renderer.create(<AddToCart sizeList={sizeListData}/>);
-//     const inst = wrapper.getInstance();
-//     expect(inst.handleAddToCart()).toMatchSnapshot();
-//   });
-// })
 
 
