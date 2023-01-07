@@ -16,16 +16,25 @@ exports.products = (req, res) => {
   axios(productConfig)
   .then((response) => {
     // console.log(response.data, '===========getProduct response data')
-    var featureName = response.data.features.feature? response.data.features.feature: '';
-    var featureValue = response.data.features.value? response.data.features.value: '';
+    var data = response.data;
+    var featureName = data.features.feature? data.features.feature: '';
+    var featureValue = data.features.value? data.features.value: '';
     var productInfo = {
-      id: response.data.id? response.data.id: '',
-      name: response.data.name? response.data.name: '',
-      category: response.data.category? response.data.category: '',
-      slogan: response.data.slogan? response.data.slogan: '',
-      description: response.data.description? response.data.description: '',
-      features: response.data.features? response.data.features: [{feature: featureName, value: featureValue}]
+      id: data.id? data.id: '',
+      name: data.name? data.name: '',
+      category: data.category? data.category: '',
+      slogan: data.slogan? data.slogan: '',
+      description: data.description? data.description: '',
+      features: data.features? data.features: [{feature: featureName, value: featureValue}]
     };
+    for (let i = 0; i < productInfo.features.length; i++) {
+      if (!productInfo.features[i].feature) {
+        productInfo.features[i].feature = '';
+      }
+      if (!productInfo.features[i].value) {
+        productInfo.features[i].value = '';
+      }
+    }
     // console.log(productInfo, '===========getProduct response productInfo')
     res.json(productInfo);
   })
@@ -49,8 +58,12 @@ exports.styles = (req, res) => {
 
   axios(styleConfig)
   .then((response) => {
-    console.log(response.data.results, '===========getStyle response data')
-    var data = response.data.results? response.data.results: [];
+    // console.log(response.data, '===========getStyle response data')
+    if (response.data.results === undefined || response.data.results.length === 0) {
+      var data = [{}];
+    } else {
+      data = response.data.results;
+    }
     var styleInfo = [];
     for (let i = 0; i < data.length; i++) {
       var currentStyle = {
@@ -63,7 +76,7 @@ exports.styles = (req, res) => {
       };
       styleInfo.push(currentStyle);
     }
-    console.log(styleInfo, '===========getStyle response styleInfo')
+    // console.log(styleInfo, '===========getStyle response styleInfo')
     res.json({results: styleInfo});
   })
   .catch((error) => {
