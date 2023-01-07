@@ -27,7 +27,7 @@ const Addqform2 = ({onClose, show,pid, product, handleClickTracking})=>{
 
   return (
 
-    <div className='modal'>
+    <div className='modal form'>
       <div className='modal-content'>
         <div className='modal-header'>
           <h4 className='modal-title'>
@@ -41,6 +41,7 @@ const Addqform2 = ({onClose, show,pid, product, handleClickTracking})=>{
            }}>
              <label>
              &#42; Your Question:
+             <br />
                <textarea
                cols="50"
                rows="20"
@@ -55,7 +56,7 @@ const Addqform2 = ({onClose, show,pid, product, handleClickTracking})=>{
              </label>
              <br />
              <label>
-             &#42; Your Nickname:
+             &#42; Your Nickname:<br />
 
               <input
               type="text"
@@ -68,11 +69,11 @@ const Addqform2 = ({onClose, show,pid, product, handleClickTracking})=>{
               onChange = {(e)=>{ setName(e.target.value); }}
               />
               <br />
-              For privacy reasons, do not use your full name or email address
+              <span className ="notetext">For privacy reasons, do not use your full name or email address</span>
              </label>
              <br />
              <label>
-             &#42; Your Email:
+             &#42; Your Email:<br />
 
               <input
               type="email"
@@ -85,7 +86,7 @@ const Addqform2 = ({onClose, show,pid, product, handleClickTracking})=>{
               onChange = {(e)=>{ setEmail(e.target.value);}}
               />
               <br />
-              For authentication reasons, you will not be emailed
+              <span className="notetext">For authentication reasons, you will not be emailed</span>
              </label>
              <div className='model-footer'>
                <button onClick={()=>{onClose()}}> Cancel</button>

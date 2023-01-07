@@ -10,9 +10,6 @@ img {
   padding: 10px;
 }
 
-.underline {
-  border-bottom: 3px solid grey;
-}
 
 /* Review Section CSS */
 
@@ -97,59 +94,5 @@ img {
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-snap-align: start;
-}
-/* Question Section CSS */
-
-.question {
-  display: flex;
-  flex-direction: column;
-  /* border-style:solid;
-  border-color: black; */
-  align-items: left;
-  margin: 3%;
-  padding: 10px;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width:fit-content;
-}
-
-.question-list {
-  padding: 10px;
-  max-height: 500px;
-  overflow-y: scroll;
-  scroll-snap-type: y auto;
-  scroll-snap-align: start;
-}
-
-.searchbox {
-  width: 400px;
-}
-
-.question button {
-  margin: 10px;
-  width:fit-content;
-  border: solid grey 2px;
-  font-size: medium;
-  color: rgb(54, 52, 52);
-  padding: 10px 30px;
-  justify-content: space-around;
-}
-
-.user {
-  color: grey;
-  font-size: small;
-}
-
-.question img {
-  padding: 10px;
-}
-
-.notetext {
-  font-size: small;
-  font-style: italic;
 }
 

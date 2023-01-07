@@ -31,7 +31,7 @@ const Reporta = ({aid,handleClickTracking}) =>{
    <span className='underline questions' onClick = {
     (e) => {handleClickTracking(e); handleClick()}
    } >
-   {rep}
+    {rep}
    </span>
    </>
   );

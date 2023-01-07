@@ -4,6 +4,7 @@ import axios from 'axios';
 import Qlist from './qlist.jsx';
 import Qadd from './addforms/qadd.jsx';
 import 'regenerator-runtime/runtime.js';
+import './questions.css';
 // require("dotenv").config();
 
 
@@ -19,7 +20,7 @@ var Qsearch = ({pid,handleClickTracking}) =>{
     if (noQ >= questions.length) {
       return null;
     } else {
-      return <button data-testid="load" className = "questions" onClick={(e)=>{handleClickTracking(e); setNoQ(noQ+2)}}>LOAD MORE QUESTIONS</button>;
+      return <button data-testid="load" className = "questions" onClick={(e)=>{handleClickTracking(e); setNoQ(noQ+2)}}>Load More Questions</button>;
     }
   };
 
