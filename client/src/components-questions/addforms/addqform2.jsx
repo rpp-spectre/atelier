@@ -37,7 +37,7 @@ const Addqform2 = ({onClose, show,pid, product, handleClickTracking})=>{
         </div>
         <div className='modal-body'>
            <form onSubmit={(e)=>{
-
+              handleSubmit(e);
            }}>
              <label>
              &#42; Your Question:

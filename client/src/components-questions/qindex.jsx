@@ -3,7 +3,7 @@ import ReacDom from 'react-dom/client';
 import Qlist from './qlist.jsx';
 import Qsearch from './qsearch.jsx';
 import Alist from './alist.jsx';
-import axios from 'axios';
+// import axios from 'axios';
 import { HashRouter as Router, Switch, Link, Routes, Route, useParams } from 'react-router-dom'; // for handling passing route of product ID
 import 'regenerator-runtime/runtime.js';
 

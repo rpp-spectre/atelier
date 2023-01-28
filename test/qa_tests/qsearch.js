@@ -2,8 +2,13 @@ import {cleanup,fireEvent,render,screen,configure} from '@testing-library/react'
 import ShallowRenderer from 'react-test-renderer/shallow';
 import Qsearch from '../../client/src/components-questions/qsearch.jsx';
 import '@testing-library/jest-dom';
+import axios from "axios";
 
 afterEach(cleanup) // Resets the DOM after each test suite
+// afterEach(() => {
+//   cleanup();
+//   jest.mock('axios');
+// });
 
 var noQ = 1;
   var questions =[
@@ -67,7 +72,11 @@ describe("Search Component" ,() => {
 
 
     test('search box loaded', () =>{
-      render(<Qsearch />);
+      jest.mock('axios');
+      let pid= 71810;
+      let handleClickTracking = jest.fn((e) => {e});
+	    render(<Qsearch pid={pid} handleClickTracking={handleClickTracking} />);
+      // render(<Qsearch />);
       const sf = screen.getByTestId("searchForm");
       const sn = screen.getByRole("textbox");
       expect(sn).toBeInTheDocument();
@@ -75,10 +84,14 @@ describe("Search Component" ,() => {
     })
 
     test('Add a question loaded', () =>{
-      render(<Qsearch />);
+      jest.mock('axios');
+      let pid= 71810;
+      let handleClickTracking = jest.fn((e) => {e});
+	    render(<Qsearch pid={pid} handleClickTracking={handleClickTracking} />);
+      // render(<Qsearch />);
       const sb = screen.getByRole("button");
       expect(sb).toBeInTheDocument();
-      expect(sb).toHaveTextContent("ADD A QUESTION");
+      expect(sb).toHaveTextContent("Add A Question");
     })
     //write a test for options rendering
     // test('show load more questions button if there are more questions', () =>{

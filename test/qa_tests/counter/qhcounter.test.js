@@ -9,8 +9,9 @@ afterEach(cleanup); // Resets the DOM after each test suite
 describe("question helpfulness counter Component" ,() => {
 
   test('increments counter by one when helpful  is clicked', () => {
+    let handleClickTracking = jest.fn((e) => {e});
     let counter = 5;
-    const {getByText} = render(<Qhcounter qcounter={counter}/>);
+    const {getByText} = render(<Qhcounter qcounter={counter} handleClickTracking = {handleClickTracking} />);
     fireEvent.click(getByText('Yes'));
     counter++;
 

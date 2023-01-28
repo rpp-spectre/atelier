@@ -88,6 +88,7 @@ exports.areport = (req, res) =>{
 
 exports.addQuestion = (req, res) =>{
   let apiAddQ = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/';
+  console.log(req);
   let body = req.query.body;
   let name = req.query.name;
   let email = req.query.email;

@@ -176,7 +176,7 @@ const Addaform = ({pid, qid, qbody, onClose, show, product})=>{
              </label>
              <div className='model-footer'>
           <button onClick={onClose} className='button'>Cancel</button>
-          <button type="submit">Submit</button>
+          <button type="submit" className='button'>Submit</button>
         </div>
            </form>
         </div>

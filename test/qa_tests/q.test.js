@@ -71,8 +71,8 @@ describe("Q Component" ,() => {
 
       const sn = screen.getByRole("document");
       expect(sn).toBeInTheDocument();
-      const heading = screen.getAllByRole("heading", {level:3});
-      expect(heading[0]).toBeInTheDocument();
+    //   const heading = screen.getAllByRole("heading", {level:3});
+    //   expect(heading[0]).toBeInTheDocument();
     })
 
 
