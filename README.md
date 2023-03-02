@@ -14,7 +14,7 @@ The product overview includes an image gallery of the currently selected product
 
 The reviews and ratings shows the current product's overall ratings as well as any written reviews. The rating breakdown provides information on how many stars reviewers gave the product and the product breakdown further provides details on characteristics like the quality, fit, and size of the product. Customers can filter reviews for certain star ratings, and can also sort the reviews based on newest, relevant or helpful reviews. Customers can mark reviews as helpful or even submit their own review.
 
-The questions and answers portion allows customers to view other customer questions about the product, as well as customer answers. Customers can submit their own questions or answers as well as search through the list of questions to find if related questions have already been submitted.
+The questions and answers portion allows customers to view other customer questions about the product, as well as customer answers; customers will be able to use search function to find questions/answers that suit their needs; they can also submit their own questions or answers, vote for their helpfulness and report specific question/answer if there's inappropriate content.
 
 ## Installation:
 To download this project, you will need node.js and git. You can fork and clone this repo, then run npm install to install all required dependancies in your code editor. Scripts in the package.json file are available to run webpack as well as start the server.
